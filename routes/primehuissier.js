@@ -10,7 +10,7 @@ const pool = require("../db");
 //create prime
 //req heya requete client res heya res li bch ymchi lclient
 //async taati wa9t lel data bch tekhdem les fctions teeha
-root8.post("/primehuissieradd", async(req, res) => {
+root8.post("localhost:5000/primehuissieradd", async(req, res) => {
     try {
         const { libelle, montant, dessociable, impot, mensuel } = req.body;
         const newprimes = await pool.query(
@@ -23,7 +23,7 @@ root8.post("/primehuissieradd", async(req, res) => {
     }
 });
 //get all primes
-root8.get("/primehuissier", async(req, res) => {
+root8.get("localhost:5000/primehuissier", async(req, res) => {
     try {
         const allprimes = await pool.query("SELECT * FROM primehuissier");
         res.json(allprimes.rows);
@@ -32,7 +32,7 @@ root8.get("/primehuissier", async(req, res) => {
     }
 });
 //get a prime
-root8.get("/primehuissier/:id", async(req, res) => {
+root8.get("localhost:5000/primehuissier/:id", async(req, res) => {
     try {
         const { id } = req.params;
         const prime = await pool.query("SELECT * FROM primehuissier WHERE id=$1", [
@@ -44,7 +44,7 @@ root8.get("/primehuissier/:id", async(req, res) => {
     }
 });
 //update a prime
-root8.post("/primehuissier/update", async(req, res) => {
+root8.post("localhost:5000/primehuissier/update", async(req, res) => {
     try {
         const { id } = req.body;
         const { libelle, montant, dessociable, impot, mensuel } = req.body;
@@ -57,7 +57,7 @@ root8.post("/primehuissier/update", async(req, res) => {
     }
 });
 //delete a prime
-root8.post("/primehuissiereff", async(req, res) => {
+root8.post("localhost:5000/primehuissiereff", async(req, res) => {
     try {
         const { id } = req.body;
         const deletePrime = await pool.query(
