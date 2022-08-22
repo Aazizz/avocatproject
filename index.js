@@ -36,7 +36,7 @@ app.use(cookie());
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-/*app.use(express.static(path.join(__dirname, "front/build")));
+app.use(express.static(path.join(__dirname, "front/build")));
 if (process.env.NODE_ENV === "production") {
     //server static content
     app.use(express.static(path.join(__dirname, "front/build")));
@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === "production") {
 
 }
 console.log(__dirname);
-console.log(path.join(__dirname, "front/build"));*/
+console.log(path.join(__dirname, "front/build"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(root1); //parametreglobale
