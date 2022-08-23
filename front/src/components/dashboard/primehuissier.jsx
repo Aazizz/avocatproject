@@ -62,7 +62,7 @@ const PrimeHuissier = () => {
   //select primehuissier
   const getprimerequest = async () => {
     try {
-     // const response = await axios.get("/primehuissier");
+      const response = await axios.get("/primehuissier");
       setlisteservice(response.data);
     } catch (error) {
       console.log(error.message);
