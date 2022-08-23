@@ -35,11 +35,11 @@ app.use(cookie());
 //middleware
 app.use(bodyParser.json());
 app.use(express.json());
-//app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-app.use(express.static(path.join(__dirname, "front/build")));
+app.use(cors({ credentials: true, origin: "https://webavocat.herokuapp.com/" }));
+//app.use(express.static(path.join(__dirname, "front/build")));
 if (process.env.NODE_ENV === "production") {
     //server static content
-    app.use(express.static(path.join(__dirname, "front/build")));
+    app.use(express.static(path.join(__dirname, "front/public")));
     /* app.get("*", (req, res) => {
          req.sendFile(path.resolve(__dirname, "front/build", "index.html"));
 

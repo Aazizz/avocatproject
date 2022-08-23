@@ -53,3 +53,27 @@ ville TEXT,
     methodepaiment TEXT,
      MONTANT INTEGER,
      nbredossier INTEGER);
+CREATE TABLE recherchedossier
+(
+    id_dossier integer NOT NULL PRIMARY KEY,
+    num_affaire BIGINT,
+    emplacement TEXT ,
+    client TEXT ,
+    tel BIGINT,
+    mission TEXT ,
+    adversaire TEXT ,
+    reste BIGINT,
+    code_dossier TEXT ,
+    annee TEXT ,
+    lieu TEXT ,
+    service TEXT ,
+    observation TEXT ,
+    date_creation TEXT ,
+    type_dossier TEXT ,
+    CONSTRAINT recherchedossier_pkey PRIMARY KEY (id_dossier)
+);
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.recherchedossier
+    OWNER to postgres;
