@@ -10,18 +10,21 @@ const pool = require("../db");
 //create adversaire
 //req heya requete client res heya res li bch ymchi lclient
 //async taati wa9t lel data bch tekhdem les fctions teeha
-root12.post("/adversaireadd", async(req, res) => {
-    try {
-        const { nom, registre, adresse, adressedesigne, avocat, adresseavocat } = req.body;
-        const newadversaires = await pool.query(
-            "INSERT INTO adversaire (nom, registre, adresse, adressedesigne, avocat,adresseavocat) VALUES($1,$2,$3,$4,$5,$6)", [nom, registre, adresse, adressedesigne, avocat, adresseavocat]
-            //res.json("succes"),
-        );
-        res.json(newadversaires.rows[0]);
-    } catch (err) {
-        console.error(err.message);
+root12.post("/adversaireadd",
+    async(req, res) => {
+        try {
+            const { nom, registre, adresse, adressedesigne, avocat, adresseavocat } =
+            req.body;
+            const newadversaires = await pool.query(
+                "INSERT INTO adversaire (nom, registre, adresse, adressedesigne, avocat,adresseavocat) VALUES($1,$2,$3,$4,$5,$6)", [nom, registre, adresse, adressedesigne, avocat, adresseavocat]
+                //res.json("succes"),
+            );
+            res.json(newadversaires.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+        }
     }
-});
+);
 //get all adversaires
 root12.get("/adversaire", async(req, res) => {
     try {
