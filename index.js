@@ -37,14 +37,14 @@ app.use(bodyParser.json());
 app.use(express.json());
 //app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.static(path.join(__dirname, "front/build")));
-if (process.env.NODE_ENV === "production") {
+/*if (process.env.NODE_ENV === "production") {
     //server static content
     app.use(express.static(path.join(__dirname, "front/build")));
     /* app.get("*", (req, res) => {
          req.sendFile(path.resolve(__dirname, "front/build", "index.html"));
 
      })*/
-}
+//}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(root1); //parametreglobale
@@ -69,9 +69,9 @@ app.use(user);
 app.use(tribunaleroute);
 app.use(logout);
 
-app.get("*", (req, res) => {
+/*app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "front/build/index.html"));
-})
+})*/
 app.listen(PORT, () => {
     console.log(`running server on ${PORT}`);
 });
