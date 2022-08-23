@@ -39,7 +39,7 @@ app.use(cors({ credentials: true, origin: "https://webavocat.herokuapp.com/" }))
 //app.use(express.static(path.join(__dirname, "front/build")));
 if (process.env.NODE_ENV === "production") {
     //server static content
-    app.use(express.static(path.join(__dirname, "front/public")));
+    app.use(express.static(path.join(__dirname, "front/build")));
     /* app.get("*", (req, res) => {
          req.sendFile(path.resolve(__dirname, "front/build", "index.html"));
 
@@ -69,9 +69,9 @@ app.use(user);
 app.use(tribunaleroute);
 app.use(logout);
 
-/*app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "front/build/index.html"));
-})*/
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "front/build"));
+})
 app.listen(PORT, () => {
     console.log(`running server on ${PORT}`);
 });
