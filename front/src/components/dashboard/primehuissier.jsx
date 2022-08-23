@@ -63,7 +63,8 @@ const PrimeHuissier = () => {
   const getprimerequest = async () => {
     try {
       const response = await axios.get("/primehuissier");
-      setlisteservice(response.data);
+      setlisteservice( response.data );
+      console.log(listeservice);
     } catch (error) {
       console.log(error.message);
     }
@@ -71,7 +72,7 @@ const PrimeHuissier = () => {
   useEffect(() => {
     getprimerequest();
   });
-  console.log(listeservice);
+  
 
   //supprimer primehuissier
   const deleteprime = (record) => {
