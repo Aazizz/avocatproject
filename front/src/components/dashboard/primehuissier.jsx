@@ -60,7 +60,7 @@ const PrimeHuissier = () => {
   ];
 
   //select primehuissier
- /* const getprimerequest = async () => {
+  const getprimerequest = async () => {
     try {
      // const response = await axios.get("/primehuissier");
       setlisteservice(response.data);
@@ -72,7 +72,7 @@ const PrimeHuissier = () => {
     getprimerequest();
   });
   console.log(listeservice);
-*/
+
   //supprimer primehuissier
   const deleteprime = (record) => {
     Modal.confirm({
