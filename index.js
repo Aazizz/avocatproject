@@ -30,16 +30,16 @@ const user = require("./routes/user");
 const logout = require("./routes/logout")
     //const verifyroute = require("./routes/verifytokenroute")
 require("dotenv").config();
-
+app.use(cors());
 app.use(cookie());
 //middleware
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "https://webavocat.herokuapp.com/" }));
-app.use(express.static(path.join(__dirname, "front/public")));
+//app.use(cors({ credentials: true, origin: "https://webavocat.herokuapp.com/" }));
+//app.use(express.static(path.join(__dirname, "front/public")));
 if (process.env.NODE_ENV === "production") {
     //server static content
-    app.use(express.static(path.join(__dirname, "front/public")));
+    app.use(express.static(path.join(__dirname, "front/build")));
     /* app.get("*", (req, res) => {
          req.sendFile(path.resolve(__dirname, "front/build", "index.html"));
 
@@ -70,7 +70,7 @@ app.use(tribunaleroute);
 app.use(logout);
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "front/public"));
+    res.sendFile(path.join(__dirname, "front/build/index.html"));
 })
 app.listen(PORT, () => {
     console.log(`running server on ${PORT}`);
