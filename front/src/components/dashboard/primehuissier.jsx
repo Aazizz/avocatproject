@@ -71,9 +71,9 @@ const PrimeHuissier = () => {
   };
   useEffect(() => {
     getprimerequest();
+    console.log(listeservice);
   } );
-   console.log(listeservice);
-  
+   
 
   //supprimer primehuissier
   const deleteprime = (record) => {
