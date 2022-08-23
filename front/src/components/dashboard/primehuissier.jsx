@@ -64,14 +64,15 @@ const PrimeHuissier = () => {
     try {
       const response = await axios.get("/primehuissier");
       setlisteservice( response.data );
-      console.log(listeservice);
+     
     } catch (error) {
       console.log(error.message);
     }
   };
   useEffect(() => {
     getprimerequest();
-  });
+  } );
+   console.log(listeservice);
   
 
   //supprimer primehuissier
