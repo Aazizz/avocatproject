@@ -11,7 +11,7 @@ root10.post("/gestionclient", async(req, res) => {
         const { id, raison, matricule, ville, rue, num, code_postale, activité, situation_fiscale, categorie, fax, email } = req.body;
 
 
-        const newTodo2 = await pool.query("INSERT INTO gestionclient (id,raison,matricule,ville,rue,num,code_postale,activité,situation_fiscale,categorie,fax,email) VALUES ($1, $2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)  ", //nahit on conflict khater ken yajouti meme id maykblsh haka wala haka
+        const newTodo2 = await pool.query("INSERT INTO gestionclient (id,raison,matricule,ville,rue,num,code_postale,activite,situation_fiscale,categorie,fax,email) VALUES ($1, $2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)  ", //nahit on conflict khater ken yajouti meme id maykblsh haka wala haka
             [id, raison, matricule, ville, rue, num, code_postale, activité, situation_fiscale, categorie, fax, email]);
         res.json(newTodo2);
 
