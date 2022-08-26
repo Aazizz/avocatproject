@@ -7,6 +7,11 @@ CREATE TABLE primehuissier(
     impot TEXT NOT NULL ,
     mensuel TEXT NOT NULL
 );
+CREATE TABLE parametreglobale
+(
+    timbrefiscale DOUBLE PRECISION,
+    tauxtva DOUBLE PRECISION,
+)
 
 CREATE TABLE timbre
 (

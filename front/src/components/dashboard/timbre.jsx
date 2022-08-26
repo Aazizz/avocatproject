@@ -37,7 +37,7 @@ const Timbre = () => {
                   editTimbre(record);
                 }}
               ></AiFillEdit>
-            <pre><p>modifier</p></pre> 
+            <pre> <p>  modifier  </p>  </pre> 
             </div>
             <div className="divdelete">
               <MdDeleteForever
