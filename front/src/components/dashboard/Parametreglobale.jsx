@@ -20,8 +20,8 @@ const Parametreglobale = () => {
   });
 
   const columns = [
-    { key: "1", title: "timbre fiscale", dataIndex: "timbrefiscale" },
-    { key: "2", title: "taux tva", dataIndex: "tauxtva" },
+    { key: "1", title: "Timbre fiscale", dataIndex: "timbrefiscale" },
+    { key: "2", title: "Taux TVA", dataIndex: "tauxtva" },
 
     {
       key: "3",
