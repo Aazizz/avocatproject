@@ -183,7 +183,7 @@ const deleteParametrerequest = async (timbrefiscale) => {
             }}
           ></Input>
           <Input
-            placeholder="taux_tva"
+            placeholder="Taux TVA"
             value={edditingParametre?.tauxtva}
             onChange={(e) => {
               setEdditingParametre({
@@ -195,7 +195,7 @@ const deleteParametrerequest = async (timbrefiscale) => {
 
           {/*AJOUT*/}
         </Modal>
-        {/* <Modal
+        { <Modal
           title="ajouter "
           visible={isAdd}
           okText="Enregistrer"
@@ -230,7 +230,7 @@ const deleteParametrerequest = async (timbrefiscale) => {
             }}
           ></Input>
            
-          </Modal>*/}
+          </Modal>}
       </header>
     </div>
   );
