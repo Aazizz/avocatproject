@@ -284,8 +284,7 @@ const Tribunale = () => {
         className="ajouter"
         onClick={() => {
           setIsAddtrib(true);
-        }}
-      >
+        }}>
         <div className="ajoutertrib">
           <GoDiffAdded className="addingtrib"></GoDiffAdded>
           <pre>
@@ -293,9 +292,12 @@ const Tribunale = () => {
           </pre>
         </div>
       </button>
-      <Tabs tabPosition={tabPosition} style={{ marginTop: 40 }} className="tabsdesign">
+      <Tabs
+        tabPosition={tabPosition}
+        style={{marginTop: 40}}
+        className="tabsdesign">
         {listeTrib.map((trib) => {
-          const { id, lieu } = trib;
+          const {id, lieu} = trib;
           const newListeService = listeservice.filter(
             (service) => service.tribunale_id == trib.id
           );
@@ -312,22 +314,19 @@ const Tribunale = () => {
                         className="edit"
                         onClick={() => {
                           edittrib(trib.id, trib.lieu);
-                        }}
-                      ></AiFillEdit>
+                        }}></AiFillEdit>
                     </button>
                     <button>
                       <MdDeleteForever
                         className="delete"
                         onClick={() => {
                           deletetrib(trib.id);
-                        }}
-                      ></MdDeleteForever>
+                        }}></MdDeleteForever>
                     </button>
                   </div>
                 </div>
               }
-              key={trib.id}
-            >
+              key={trib.id}>
               <div className="App">
                 <header className="App-header">
                   <button
@@ -338,12 +337,11 @@ const Tribunale = () => {
                         tribunale_id: trib.id,
                       });
                       setIsAddservice(true);
-                    }}
-                  >
+                    }}>
                     Ajouter un service
                   </button>
                   <div className="tab">
-                    <Table 
+                    <Table
                       columns={column}
                       dataSource={newListeService}
                       bottomHeight={0}
@@ -356,8 +354,7 @@ const Tribunale = () => {
                           setPageSize(pageSize);
                         },
                       }}
-                      scroll={{ x: "max-content" }}
-                    ></Table>
+                      scroll={{x: "max-content"}}></Table>
                   </div>
 
                   <Modal
@@ -392,8 +389,7 @@ const Tribunale = () => {
                       setListeservice(newListeservice);
                       resetEditing();
                       toast.success("service modifié avec succès");
-                    }}
-                  >
+                    }}>
                     <Input
                       placeholder="Tapez le nom"
                       value={edditingservice?.nom}
@@ -402,8 +398,7 @@ const Tribunale = () => {
                           ...edditingservice,
                           nom: e.target.value,
                         });
-                      }}
-                    ></Input>
+                      }}></Input>
 
                     <div className="audcourse">
                       <div className="jours">
@@ -423,8 +418,7 @@ const Tribunale = () => {
                             edditingservice.samedi == "audience"
                               ? "samedi"
                               : "",
-                          ]}
-                        >
+                          ]}>
                           <Row>
                             <Col span={6}>
                               <Checkbox
@@ -441,8 +435,7 @@ const Tribunale = () => {
                                       lundi: "audience",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Lundi
                               </Checkbox>
                             </Col>
@@ -461,8 +454,7 @@ const Tribunale = () => {
                                       mardi: "audience",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Mardi
                               </Checkbox>
                             </Col>
@@ -481,8 +473,7 @@ const Tribunale = () => {
                                       mercredi: "audience",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Mercredi
                               </Checkbox>
                             </Col>
@@ -501,8 +492,7 @@ const Tribunale = () => {
                                       jeudi: "audience",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Jeudi
                               </Checkbox>
                             </Col>
@@ -521,8 +511,7 @@ const Tribunale = () => {
                                       vendredi: "audience",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Vendredi
                               </Checkbox>
                             </Col>
@@ -541,8 +530,7 @@ const Tribunale = () => {
                                       samedi: "audience",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Samedi
                               </Checkbox>
                             </Col>
@@ -573,8 +561,7 @@ const Tribunale = () => {
                             edditingservice?.samedi == "course"
                               ? "samedi"
                               : "none",
-                          ]}
-                        >
+                          ]}>
                           <Row>
                             <Col span={6}>
                               <Checkbox
@@ -591,8 +578,7 @@ const Tribunale = () => {
                                       lundi: "course",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Lundi
                               </Checkbox>
                             </Col>
@@ -611,8 +597,7 @@ const Tribunale = () => {
                                       mardi: "course",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Mardi
                               </Checkbox>
                             </Col>
@@ -631,8 +616,7 @@ const Tribunale = () => {
                                       mercredi: "course",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Mercredi
                               </Checkbox>
                             </Col>
@@ -651,8 +635,7 @@ const Tribunale = () => {
                                       jeudi: "course",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Jeudi
                               </Checkbox>
                             </Col>
@@ -671,8 +654,7 @@ const Tribunale = () => {
                                       vendredi: "course",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Vendredi
                               </Checkbox>
                             </Col>
@@ -691,8 +673,7 @@ const Tribunale = () => {
                                       jeudi: "course",
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Samedi
                               </Checkbox>
                             </Col>
@@ -736,9 +717,7 @@ const Tribunale = () => {
                       });
                       setDisabled(false, false, false, false, false, false);
                       setDisabled2(false, false, false, false, false, false);
-                    }}
-                  >
-                    
+                    }}>
                     <Input
                       placeholder="tapez le nom du service"
                       value={addingservice.nom}
@@ -747,8 +726,7 @@ const Tribunale = () => {
                           ...addingservice,
                           nom: e.target.value,
                         });
-                      }}
-                    ></Input>
+                      }}></Input>
                     <div className="audcourse">
                       <div className="jours">
                         <h1>Jours de l'audience</h1>
@@ -764,12 +742,11 @@ const Tribunale = () => {
                                       ...addingservice,
                                       lundi: "audience",
                                     });
-                                    setDisabled({ ...disabled, check1: true });
+                                    setDisabled({...disabled, check1: true});
                                   } else {
-                                    setDisabled({ ...disabled, check1: false });
+                                    setDisabled({...disabled, check1: false});
                                   }
-                                }}
-                              >
+                                }}>
                                 Lundi
                               </Checkbox>
                             </Col>
@@ -784,12 +761,11 @@ const Tribunale = () => {
                                       mardi: "audience",
                                     });
 
-                                    setDisabled({ ...disabled, check2: true });
+                                    setDisabled({...disabled, check2: true});
                                   } else {
-                                    setDisabled({ ...disabled, check2: false });
+                                    setDisabled({...disabled, check2: false});
                                   }
-                                }}
-                              >
+                                }}>
                                 Mardi
                               </Checkbox>
                             </Col>
@@ -804,12 +780,11 @@ const Tribunale = () => {
                                       mercredi: "audience",
                                     });
 
-                                    setDisabled({ ...disabled, check3: true });
+                                    setDisabled({...disabled, check3: true});
                                   } else {
-                                    setDisabled({ ...disabled, check3: false });
+                                    setDisabled({...disabled, check3: false});
                                   }
-                                }}
-                              >
+                                }}>
                                 Mercredi
                               </Checkbox>
                             </Col>
@@ -823,12 +798,11 @@ const Tribunale = () => {
                                       ...addingservice,
                                       jeudi: "audience",
                                     });
-                                    setDisabled({ ...disabled, check4: true });
+                                    setDisabled({...disabled, check4: true});
                                   } else {
-                                    setDisabled({ ...disabled, check4: false });
+                                    setDisabled({...disabled, check4: false});
                                   }
-                                }}
-                              >
+                                }}>
                                 Jeudi
                               </Checkbox>
                             </Col>
@@ -842,12 +816,11 @@ const Tribunale = () => {
                                       ...addingservice,
                                       vendredi: "audience",
                                     });
-                                    setDisabled({ ...disabled, check5: true });
+                                    setDisabled({...disabled, check5: true});
                                   } else {
-                                    setDisabled({ ...disabled, check5: false });
+                                    setDisabled({...disabled, check5: false});
                                   }
-                                }}
-                              >
+                                }}>
                                 Vendredi
                               </Checkbox>
                             </Col>
@@ -861,12 +834,11 @@ const Tribunale = () => {
                                       ...addingservice,
                                       samedi: "audience",
                                     });
-                                    setDisabled({ ...disabled, check6: true });
+                                    setDisabled({...disabled, check6: true});
                                   } else {
-                                    setDisabled({ ...disabled, check6: false });
+                                    setDisabled({...disabled, check6: false});
                                   }
-                                }}
-                              >
+                                }}>
                                 Samedi
                               </Checkbox>
                             </Col>
@@ -899,8 +871,7 @@ const Tribunale = () => {
                                       check1: false,
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Lundi
                               </Checkbox>
                             </Col>
@@ -925,8 +896,7 @@ const Tribunale = () => {
                                       check2: false,
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Mardi
                               </Checkbox>
                             </Col>
@@ -951,8 +921,7 @@ const Tribunale = () => {
                                       check3: false,
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Mercredi
                               </Checkbox>
                             </Col>
@@ -977,8 +946,7 @@ const Tribunale = () => {
                                       check4: false,
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Jeudi
                               </Checkbox>
                             </Col>
@@ -1003,8 +971,7 @@ const Tribunale = () => {
                                       check5: false,
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Vendredi
                               </Checkbox>
                             </Col>
@@ -1029,8 +996,7 @@ const Tribunale = () => {
                                       check6: false,
                                     });
                                   }
-                                }}
-                              >
+                                }}>
                                 Samedi
                               </Checkbox>
                             </Col>
@@ -1069,8 +1035,7 @@ const Tribunale = () => {
                       setListeTrib(newListe);
                       resetEditingtrib();
                       toast.success("Tribunale modifiée avec succès");
-                    }}
-                  >
+                    }}>
                     <Input
                       placeholder="Tapez le lieu"
                       value={edditingtrib?.lieu}
@@ -1079,33 +1044,7 @@ const Tribunale = () => {
                           ...edditingtrib,
                           lieu: e.target.value,
                         });
-                      }}
-                    ></Input>
-                  </Modal>
-                  <Modal
-                    title="ajouter une tribunale"
-                    visible={isAddtrib}
-                    okText="Enregistrer"
-                    cancelText="Annuler"
-                    destroyOnClose={true}
-                    onCancel={() => {
-                      setIsAddtrib(false);
-                    }}
-                    onOk={() => {
-                      addtrib();
-                      setIsAddtrib(false);
-                      toast.success("tribunale ajoutée avec succès");
-                    }}
-                  >
-                    <Input
-                      placeholder="tapez le lieu du tribunale"
-                      value={addingtrib.lieu}
-                      onChange={(e) => {
-                        setAddingtrib({
-                          lieu: e.target.value,
-                        });
-                      }}
-                    ></Input>
+                      }}></Input>
                   </Modal>
                 </header>
               </div>
@@ -1113,6 +1052,29 @@ const Tribunale = () => {
           );
         })}
       </Tabs>
+      <Modal
+        title="ajouter une tribunale"
+        visible={isAddtrib}
+        okText="Enregistrer"
+        cancelText="Annuler"
+        destroyOnClose={true}
+        onCancel={() => {
+          setIsAddtrib(false);
+        }}
+        onOk={() => {
+          addtrib();
+          setIsAddtrib(false);
+          toast.success("tribunale ajoutée avec succès");
+        }}>
+        <Input
+          placeholder="tapez le lieu du tribunale"
+          value={addingtrib.lieu}
+          onChange={(e) => {
+            setAddingtrib({
+              lieu: e.target.value,
+            });
+          }}></Input>
+      </Modal>
     </>
   );
 };

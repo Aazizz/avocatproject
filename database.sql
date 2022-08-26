@@ -104,3 +104,5 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.recherchedossier
     OWNER to postgres;
+CONSTRAINT service_tribunale_id_fkey FOREIGN KEY (tribunale_id)
+        REFERENCES tribunaletable (id) 
