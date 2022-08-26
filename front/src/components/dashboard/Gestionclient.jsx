@@ -36,11 +36,13 @@ const Gestionclient = () => {
   const [check, setCheck] = useState(false);
   const [check1, setCheck1] = useState(true);
   const [listeservice, setlisteservice] = useState([]);
+  const [persons, setPersons] = useState(0);
   const [gridData, setGridData] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingGestionclient, setEdditingGestionclient] = useState(null);
   const [addingGestionclient, setAddingGestionclient] = useState({
-    id: "",
+    codecollaborateur:"",
+    codeclient:"",
     raison: "",
     matricule: "",
     ville: "",
@@ -125,7 +127,9 @@ const Gestionclient = () => {
   const getGestionclientrequest = async () => {
     try {
       const response = await axios.get("/gestionclient");
-      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
+      setlisteservice(response.data);
+      for (let i = 0; i<response.data.length; i++) {if (response.data[i].id>persons){setPersons( response.data[i].id+1)}}
+      console.log('ahayaliste',(persons)) // aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
@@ -285,6 +289,7 @@ const Gestionclient = () => {
     setGridData(filteredData)
     console.log('filtered', filteredData)
     console.log('length', filteredData.length)
+    console.log('person', persons)
   }
 
 
@@ -373,12 +378,19 @@ const Gestionclient = () => {
               filter,
             }}
             onSearch={(value) => console.log(value)}
+            value={edditingGestionclient?.codecollaborateur}
           />
 
           <Input
             placeholder="code client"
 
-            value={val}
+            value={edditingGestionclient?.codeclient}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                codeclient: e.target.value,
+              });
+            }}
           ></Input>
           <Input
             placeholder="id"
@@ -558,13 +570,18 @@ const Gestionclient = () => {
           onOk={() => {
             addGestionclient();
             setIsAdd(false);
-            toast.success("client_ajouté avec succès");
+            toast.success("client_ajouté avec succès");console.log('vaaaaaaa',val)
           }}
         >
           <Cascader
             className="cascader2"
             options={liste}
-            onChange={onChange}
+            onChange={(e) => {
+              setAddingGestionclient({
+                ...addingGestionclient,
+                codecollaborateur: e.target.value,
+              });
+            }}
             placeholder="Selectionner code collaborateur "
             showSearch={{
               filter,
@@ -582,9 +599,14 @@ const Gestionclient = () => {
                 value={val}
                 onChange={(e) => {
                   setVal(e.target.value)
-                }
+                  setAddingGestionclient({
+                    ...addingGestionclient,
+                    codeclient: val,
+                  });
+                }}
+                
 
-                }
+                
               ></Input>
             </div>}
 
@@ -593,26 +615,19 @@ const Gestionclient = () => {
             <div id='2'>
               <Input disabled
                 placeholder="code client"
-                value={addingGestionclient.id + '/' + addingGestionclient.raison[0]}
-
+                value={persons + '/' + addingGestionclient.raison[0]}
+                onChange={(e) => {
+  
+                  setAddingGestionclient({
+                    ...addingGestionclient,
+                    codeclient:e.target.value ,
+                  });
+                }}
               //amltha win lmatricule lval ghadi win yiwali yaml feha
 
               ></Input>
             </div>
           }
-
-
-          <Input
-            placeholder="id"
-            value={addingGestionclient.id}
-            onChange={(e) => {
-              setAddingGestionclient({
-                ...addingGestionclient,
-                id: e.target.value,
-              });
-            }}
-
-          ></Input>
           <Input
             placeholder="raison"
             value={addingGestionclient.raison}
@@ -631,6 +646,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 matricule: e.target.value,
               });
+              
             }}
           ></Input>
           <Input
@@ -676,7 +692,11 @@ const Gestionclient = () => {
           <Input
             placeholder="activité"
             value={addingGestionclient.activite}
-            onChange={(e) => {
+            onChange={(e) => {setVal(persons + '/' + addingGestionclient.raison[0]);
+            setAddingGestionclient({
+              ...addingGestionclient,
+              codeclient:val ,
+            });
               setAddingGestionclient({
                 ...addingGestionclient,
                 activite: e.target.value,
@@ -719,6 +739,7 @@ const Gestionclient = () => {
                   >Assujeti</Radio>
 
                   <Radio
+                  
 
                     placeholder="situation_fiscale"
                     value={3}
