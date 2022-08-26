@@ -7,6 +7,28 @@ CREATE TABLE primehuissier(
     impot TEXT NOT NULL ,
     mensuel TEXT NOT NULL
 );
+
+CREATE TABLE timbre
+(
+    id SERIAL PRIMARY KEY,
+    libelle TEXT,
+    montant DOUBLE PRECISION,
+)
+CREATE TABLE transport
+(
+    montanttransportparjours int,
+)
+CREATE TABLE recettedufinance
+(id SERIAL PRIMARY KEY,
+    libelle text ,
+    montant DOUBLE PRECISION,
+    
+)
+CREATE TABLE photocopie
+(
+    prixphotocopie DOUBLE PRECISION,
+)
+
 CREATE TABLE tachetable(
     id_tache SERIAL PRIMARY KEY,
     tache TEXT NOT NULL ,
