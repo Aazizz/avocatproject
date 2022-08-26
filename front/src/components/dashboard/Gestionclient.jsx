@@ -47,7 +47,7 @@ const Gestionclient = () => {
     rue: "",
     num: "",
     code_postale: "",
-    activité: "",
+    activite: "",
     situation_fiscale: "",
     categorie: "",
     fax: "",
@@ -85,7 +85,7 @@ const Gestionclient = () => {
     { key: "5", title: "rue", dataIndex: "rue" },
     { key: "6", title: "num", dataIndex: "num" },
     { key: "7", title: "code_postale", dataIndex: "code_postale" },
-    { key: "8", title: "activité", dataIndex: "activité" },
+    { key: "8", title: "activité", dataIndex: "activite" },
     { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale" },
     { key: "10", title: "categorie", dataIndex: "categorie" },
     { key: "11", title: "fax", dataIndex: "fax" },
@@ -182,7 +182,7 @@ const Gestionclient = () => {
     rue,
     num,
     code_postale,
-    activité,
+    activite,
     situation_fiscale,
     categorie,
     fax,
@@ -197,7 +197,7 @@ const Gestionclient = () => {
         rue: rue,
         num: num,
         code_postale: code_postale,
-        activité: activité,
+        activite: activite,
         situation_fiscale: situation_fiscale,
         categorie: categorie,
         fax: fax,
@@ -273,7 +273,7 @@ const Gestionclient = () => {
         value.ville.toLowerCase().includes(searchText.toLowerCase()) ||
         value.rue.toLowerCase().includes(searchText.toLowerCase()) ||
         value.code_postale.toLowerCase().includes(searchText.toLowerCase()) ||
-        value.activité.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.activite.toLowerCase().includes(searchText.toLowerCase()) ||
         value.situation_fiscale.toLowerCase().includes(searchText.toLowerCase()) ||
         value.categorie.toLowerCase().includes(searchText.toLowerCase()) ||
         value.fax.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -353,7 +353,7 @@ const Gestionclient = () => {
               edditingGestionclient.rue,
               edditingGestionclient.num,
               edditingGestionclient.code_postale,
-              edditingGestionclient.activité,
+              edditingGestionclient.activite,
               edditingGestionclient.situation_fiscale,
               edditingGestionclient.categorie,
               edditingGestionclient.fax,
@@ -453,11 +453,11 @@ const Gestionclient = () => {
           ></Input>
           <Input
             placeholder=""
-            value={edditingGestionclient?.activité}
+            value={edditingGestionclient?.activite}
             onChange={(e) => {
               setEdditingGestionclient({
                 ...edditingGestionclient,
-                activité: e.target.value,
+                activite: e.target.value,
               });
             }}
           ></Input>
@@ -675,11 +675,11 @@ const Gestionclient = () => {
           ></Input>
           <Input
             placeholder="activité"
-            value={addingGestionclient.activité}
+            value={addingGestionclient.activite}
             onChange={(e) => {
               setAddingGestionclient({
                 ...addingGestionclient,
-                activité: e.target.value,
+                activite: e.target.value,
               });
             }}
           ></Input>
