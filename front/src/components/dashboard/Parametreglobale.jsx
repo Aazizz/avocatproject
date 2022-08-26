@@ -10,6 +10,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const Parametreglobale = () => {
+  const [check, setCheck] = useState(false);
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingParametre, setEdditingParametre] = useState(null);
@@ -57,7 +58,9 @@ const Parametreglobale = () => {
   const getParametrerequest = async () => {
     try {
       const response = await axios.get("/Parametreglobale");
-      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
+      setlisteservice(response.data); 
+      if (response.data.length==0)
+      setCheck(true); else setCheck(false);// aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
@@ -131,9 +134,9 @@ const deleteParametrerequest = async (timbrefiscale) => {
     <div className="App">
       <header className="App-header">
       <h1>Parametres globales</h1>
-        {/*<Button className="btnadd"  onClick={() => {
+        {check && <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
-          } }> Ajouter</Button>*/}
+          } }> Ajouter</Button>}
         <div classname="tab">
           <Table
             columns={columns}
