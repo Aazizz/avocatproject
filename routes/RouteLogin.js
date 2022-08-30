@@ -8,7 +8,7 @@ const pool = require("../db");
 require("dotenv").config();
 //bch nasnaa token
 
-const { validateToken } = require("../middlewares/AuthMiddleWare");
+
 route.use(cookie());
 var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
 
