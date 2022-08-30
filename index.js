@@ -28,7 +28,13 @@ const cookie = require("cookie-parser");
 
 //const verifyroute = require("./routes/verifytokenroute")
 require("dotenv").config();
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+  })
+);
 app.use(cookie());
 //middleware
 app.use(bodyParser.json());
