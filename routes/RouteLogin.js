@@ -11,7 +11,7 @@ require("dotenv").config();
 const { validateToken } = require("../middlewares/AuthMiddleWare");
 
 var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
-var keyrefreshtoken = process.env.REFRESH_TOKEN_SECRET;
+
 route.post("/login", (req, res) => {
   const { username, password } = req.body;
   pool.query(
@@ -43,7 +43,7 @@ route.post("/login", (req, res) => {
               .cookie("token", accessToken, {
                 httpOnly: true,
                 //secure: true,
-                sameSite: "none",
+                sameSite: "lax",
               })
               .send();
 
@@ -64,7 +64,7 @@ route.get("/logout", (req, res) => {
       httpOnly: true,
       expires: new Date(0),
       //secure: true,
-      sameSite: "none",
+      sameSite: "lax",
     })
     .send();
 });

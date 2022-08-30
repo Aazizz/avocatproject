@@ -1,3 +1,4 @@
+
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
@@ -6,6 +7,8 @@ function auth(req, res, next) {
     const token = req.cookies.token;
     if (!token) return res.status(401).json({ errorMessage: "Unauthorized1" });
     else {
+      console.log("success");
+
       const verified = jwt.verify(token, keyaccesstoken);
       req.id = verified.id;
       next();
