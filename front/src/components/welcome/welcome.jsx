@@ -22,7 +22,7 @@ const Welcome = () => {
       })
       .catch((err) => console.log(err));
     const data = await res.data;
-    console.log(data)
+    //console.log(data)
     return data;
   };
   useEffect(() => {
@@ -36,7 +36,7 @@ const Welcome = () => {
       refreshToken().then((data) => setUser(data.user));
     }, 1000 * 29);
     return () => clearInterval(interval);
-  }, []);
+  },[]);
 
   return <div><h2>hello </h2>{user && <h1>{user.rows[0].username}</h1>}</div>;
 };
