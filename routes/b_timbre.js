@@ -47,7 +47,7 @@ root3.post("/timbre/modif", async (req, res) => {
 root3.get("/timbre", async (req, res) => {
     try {
 
-        const newTodo = await pool.query("SELECT * FROM timbre")
+        const newTodo = await pool.query("SELECT * FROM timbre ORDER by id asc")
         res.json(newTodo.rows);
         
 

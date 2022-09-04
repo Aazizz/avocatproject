@@ -13,7 +13,10 @@ import {
   DatePicker,
   Radio,
   Cascader,
+<<<<<<< HEAD
   Drawer
+=======
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 } from "antd";
 import "../../App.css";
 
@@ -23,6 +26,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import { SearchOutlined } from "@ant-design/icons";
 import { Marginer } from "../marginer/marginfile";
+<<<<<<< HEAD
 import { DocumentSearchIcon } from "@heroicons/react/outline";
 import {
   HiClipboardDocumentCheck,
@@ -30,6 +34,8 @@ import {
   
 } from "react-icons/hi";
 import {FaCalendarCheck} from "react-icons/fa"
+=======
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 const options = [
   {
     value: "zhejiang",
@@ -48,7 +54,10 @@ const options = [
     ],
   },
 ];
+<<<<<<< HEAD
 
+=======
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 
 const RechercheDossier = () => {
   const [visible, setVisible] = useState(false);
@@ -83,7 +92,10 @@ const RechercheDossier = () => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
+<<<<<<< HEAD
   const [listeadversaire, setListeadversaire] = useState([]);
+=======
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 
   const [addingdossier, setAddingdossier] = useState({
     num_affaire: "",
@@ -381,10 +393,27 @@ const RechercheDossier = () => {
                 >
                   Ajouter Tache
                 </button>
+<<<<<<< HEAD
                 </td>*/}
               
               <button
                 className="btndossier"
+=======
+              </td>
+              <td>
+                <button
+                  className="btnadd"
+                  onClick={() => {
+                    setIsAdd(true);
+                  }}
+                >
+
+                  Reclasser Dossier
+                </button>
+              </td>
+              <button
+                className="btnadd"
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
                 onClick={() => {
                   setIsAdd(true);
                 }}
@@ -791,7 +820,11 @@ const RechercheDossier = () => {
             <label>Date de Déchéance:</label>
             <DatePicker onChange={onChange} placeholder="date de déchéance" />
           </div>
+<<<<<<< HEAD
           </Modal>*/}
+=======
+        </Modal>
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
       </header>
     </div>
   );

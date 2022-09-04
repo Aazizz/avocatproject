@@ -332,6 +332,7 @@ legend {
 }
 
 @media only screen and (max-width: 500px) {
+<<<<<<< HEAD
   .div {
     width: 15rem;
     flex-direction: column;
@@ -362,3 +363,19 @@ legend {
   color:white !important;
   border: 2px solid #0583f2!important;
 }
+=======
+    .div {
+        width: 15rem;
+        flex-direction: column;
+    }
+}
+.btnaddcollabo{
+    width: 30px!important;
+    height: 30px!important;
+    background-color: #0583f2;
+    padding-right: 10px!important;
+    padding-bottom: 20px!important;
+   margin-bottom: 30px!important;
+
+}
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5

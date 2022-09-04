@@ -28,13 +28,17 @@ import Error from "./components/dashboard/error";
 import Underconstruction from "./components/dashboard/underconstruction";
 import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
+<<<<<<< HEAD
 import Typedossier from "./components/dashboard/typedossier";
+=======
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 import AuthContext from "./context/AuthContext";
 import { useContext } from "react";
 
 axios.defaults.withCredentials = true;
 
 function Router() {
+<<<<<<< HEAD
    const {loggedIn} = useContext(AuthContext);
 
   return (
@@ -274,6 +278,19 @@ function Router() {
                   )
                 }
               ></Route>
+=======
+  const { loggedIn } = useContext(AuthContext);
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          {loggedIn === false && (
+            <>
+              <Route index element={<Home></Home>}></Route>
+
+              <Route path="login" element={<AccountBox />}></Route>
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 
               <Route
                 path="register"
@@ -321,10 +338,13 @@ function Router() {
                   path="creationdossier"
                   element={<CreationDossier />}
                 ></Route>
+<<<<<<< HEAD
                 <Route
                   path="typedossier"
                   element={<Typedossier />}
                 ></Route>
+=======
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
                 <Route path="dossiers" element={<Dossiers />}></Route>
                 <Route
                   path="underconstruction"

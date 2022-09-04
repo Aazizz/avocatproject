@@ -3,12 +3,17 @@ const route = express.Router();
 const bcrypt = require("bcryptjs");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
+<<<<<<< HEAD
 
+=======
+const cookie = require("cookie-parser");
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 const pool = require("../db");
 require("dotenv").config();
 //bch nasnaa token
 
 
+<<<<<<< HEAD
 
 var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
 
@@ -48,6 +53,63 @@ route.post("/login", (req, res) => {
               .send();
 
             //res.json({ message: "Successufully logged in", accessToken });
+=======
+route.use(cookie());
+var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
+
+route.post("/login", (req, res) => {
+            const { username, password } = req.body;
+            pool.query(
+                    "SELECT * FROM clienttable WHERE username=$1", [username],
+                    (err, result) => {
+                        if (err) {
+                            throw err;
+                        }
+                        if (result.rows.length > 0) {
+                            console.log(result.rows[0]);
+
+                            bcrypt.compare(password, result.rows[0].password, (error, match) => {
+                                        console.log(match);
+
+                                        if (match) {
+                                            console.log("matching");
+
+            const accessToken = jwt.sign(
+              {
+                username: result.rows[0].username,
+                id: result.rows[0].id 
+              },
+              keyaccesstoken,
+              { expiresIn: "35s" }
+            );
+            console.log("token generated after logging in",accessToken);
+            //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
+            if (req.cookies[`${result.rows[0].id}`]) {//check if the cookie amready exists then generate a new one
+              req.cookies[`${result.rows[0].id}`] = "";
+            }
+            
+
+
+            res
+              .cookie("token", accessToken, {
+                httpOnly: true,
+                //secure: true,
+                sameSite: "lax",
+              })
+              .send();
+
+            //res.json({ message: "Successufully logged in", accessToken });
+
+            res.cookie(String(result.rows[0].id), accessToken, {
+              path: "/",
+              expires: new Date(Date.now() + 1000 * 30),
+              httpOnly: true,
+              sameSite: "lax",
+              secure:"true",
+            });
+            res.json({ message: "Successufully logged in", accessToken });
+
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
           } else {
             res.json({ error: "mot de passe incorrecte" });
           }
@@ -58,15 +120,23 @@ route.post("/login", (req, res) => {
     }
   );
 });
+<<<<<<< HEAD
 route.get("/logout", (req, res) => {
   res
     .cookie("token","",{
+=======
+
+route.get("/logout", (req, res) => {
+  res
+    .cookie("token", "", {
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
       httpOnly: true,
       expires: new Date(0),
       //secure: true,
       sameSite: "lax",
     })
     .send();
+<<<<<<< HEAD
 });
 
 route.get("/loggedIn", (req, res) => {
@@ -88,3 +158,9 @@ route.get("/loggedIn", (req, res) => {
 
 
 module.exports = route;
+=======
+});
+
+
+module.exports = route;
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5

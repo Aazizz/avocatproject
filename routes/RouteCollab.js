@@ -109,7 +109,11 @@ route.post("/modif", (req, res) => {
     );
 });
 
+<<<<<<< HEAD
 route.get("/collab",auth, (req, res) => {
+=======
+route.get("/collab", (req, res) => {
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
     pool.query("SELECT * FROM collaboratortable", (error, result) => {
         if (error) {
             console.log(error);

@@ -31,7 +31,11 @@ import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
 import AuthContext from "./context/AuthContext";
 import { useContext } from "react";
+<<<<<<< HEAD
 import Router from "./Router"
+=======
+import Router from "./Router";
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 axios.defaults.withCredentials = true;
 
 function App() {

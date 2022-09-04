@@ -20,7 +20,11 @@ const Timbre = () => {
   });
 
   const columns = [
+<<<<<<< HEAD
     
+=======
+    { key: "1", title: "Id", dataIndex: "id" },
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
     { key: "2", title: "Libelle", dataIndex: "libelle" },
 
     { key: "3", title: "Montant", dataIndex: "montant" },
@@ -37,9 +41,13 @@ const Timbre = () => {
                   editTimbre(record);
                 }}
               ></AiFillEdit>
+<<<<<<< HEAD
               <pre>
                 <p>modifier </p>
               </pre>
+=======
+            <pre> <p>  modifier  </p>  </pre> 
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
             </div>
             <div className="divdelete">
               <MdDeleteForever

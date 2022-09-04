@@ -11,6 +11,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const Parametreglobale = () => {
+  const [check, setCheck] = useState(false);
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingParametre, setEdditingParametre] = useState(null);
@@ -20,8 +21,8 @@ const Parametreglobale = () => {
   });
 
   const columns = [
-    { key: "1", title: "timbrefiscale", dataIndex: "timbrefiscale" },
-    { key: "2", title: "tauxtva", dataIndex: "tauxtva" },
+    { key: "1", title: "Timbre fiscale", dataIndex: "timbrefiscale" },
+    { key: "2", title: "Taux TVA", dataIndex: "tauxtva" },
 
     {
       key: "3",
@@ -58,7 +59,9 @@ const Parametreglobale = () => {
   const getParametrerequest = async () => {
     try {
       const response = await axios.get("/Parametreglobale");
-      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
+      setlisteservice(response.data); 
+      if (response.data.length==0)
+      setCheck(true); else setCheck(false);// aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
@@ -132,6 +135,7 @@ const Parametreglobale = () => {
   return (
     <div className="App">
       <header className="App-header">
+<<<<<<< HEAD
         <h1>Paramètres Globales</h1>
         <MdOutlineSettingsSuggest className="dashbicons"></MdOutlineSettingsSuggest>
         <button
@@ -143,6 +147,12 @@ const Parametreglobale = () => {
           {" "}
           Ajouter
         </button>
+=======
+      <h1>Parametres globales</h1>
+        {check && <Button className="btnadd"  onClick={() => {
+            setIsAdd(true);
+          } }> Ajouter</Button>}
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
         <div classname="tab">
           <Table
             columns={columns}
@@ -189,7 +199,7 @@ const Parametreglobale = () => {
             }}
           ></Input>
           <Input
-            placeholder="taux_tva"
+            placeholder="Taux TVA"
             value={edditingParametre?.tauxtva}
             onChange={(e) => {
               setEdditingParametre({
@@ -201,7 +211,11 @@ const Parametreglobale = () => {
 
           {/*AJOUT*/}
         </Modal>
+<<<<<<< HEAD
         <Modal
+=======
+        { <Modal
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
           title="ajouter "
           visible={isAdd}
           okText="Enregistrer"
@@ -238,7 +252,12 @@ const Parametreglobale = () => {
               });
             }}
           ></Input>
+<<<<<<< HEAD
         </Modal>
+=======
+           
+          </Modal>}
+>>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
       </header>
     </div>
   );
