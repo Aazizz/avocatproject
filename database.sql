@@ -7,33 +7,6 @@ CREATE TABLE primehuissier(
     impot TEXT NOT NULL ,
     mensuel TEXT NOT NULL
 );
-CREATE TABLE parametreglobale
-(
-    timbrefiscale DOUBLE PRECISION,
-    tauxtva DOUBLE PRECISION,
-)
-
-CREATE TABLE timbre
-(
-    id SERIAL PRIMARY KEY,
-    libelle TEXT,
-    montant DOUBLE PRECISION,
-)
-CREATE TABLE transport
-(
-    montanttransportparjours int,
-)
-CREATE TABLE recettedufinance
-(id SERIAL PRIMARY KEY,
-    libelle text ,
-    montant DOUBLE PRECISION,
-    
-)
-CREATE TABLE photocopie
-(
-    prixphotocopie DOUBLE PRECISION,
-)
-
 CREATE TABLE tachetable(
     id_tache SERIAL PRIMARY KEY,
     tache TEXT NOT NULL ,
@@ -80,32 +53,3 @@ ville TEXT,
     methodepaiment TEXT,
      MONTANT INTEGER,
      nbredossier INTEGER);
-<<<<<<< HEAD
-=======
-CREATE TABLE recherchedossier
-(
-    id_dossier integer NOT NULL PRIMARY KEY,
-    num_affaire BIGINT,
-    emplacement TEXT ,
-    client TEXT ,
-    tel BIGINT,
-    mission TEXT ,
-    adversaire TEXT ,
-    reste BIGINT,
-    code_dossier TEXT ,
-    annee TEXT ,
-    lieu TEXT ,
-    service TEXT ,
-    observation TEXT ,
-    date_creation TEXT ,
-    type_dossier TEXT ,
-    CONSTRAINT recherchedossier_pkey PRIMARY KEY (id_dossier)
-);
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.recherchedossier
-    OWNER to postgres;
-CONSTRAINT service_tribunale_id_fkey FOREIGN KEY (tribunale_id)
-        REFERENCES tribunaletable (id) 
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5

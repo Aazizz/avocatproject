@@ -22,9 +22,8 @@ const PORT = process.env.PORT || 5000;
 const loginroute = require("./routes/RouteLogin");
 const registerroute = require("./routes/RouteRegister");
 const collabroute = require("./routes/RouteCollab");
-<<<<<<< HEAD
 const typedossierroute = require("./routes/typedossier")
-//const homeroute = require("./routes/RouteHome");
+    //const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
 const cookie = require("cookie-parser");
 //const verifyroute = require("./routes/verifytokenroute");
@@ -33,50 +32,27 @@ const cookie = require("cookie-parser");
 //const verifyroute = require("./routes/verifytokenroute")
 require("dotenv").config();
 
-=======
-
-const tribunaleroute = require("./routes/tribunale");
-const cookie = require("cookie-parser");
-
-//const verifyroute = require("./routes/verifytokenroute")
-require("dotenv").config();
-app.use(
-  cors({
-    credentials: true,
-    origin: ["http://localhost:3000",
-    "https://webavocat.herokuapp.com"],
-    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-  })
-);
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 app.use(cookie());
 //middleware
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:3000",
-    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-  })
+    cors({
+        credentials: true,
+        origin: ["http://localhost:3000",
+            "https://webavocat.herokuapp.com",
+        ],
+        methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+    })
 );
-/*app.use(express.static(path.join(__dirname, "front/build")));
+app.use(express.static(path.join(__dirname, "front/build")));
 if (process.env.NODE_ENV === "production") {
-<<<<<<< HEAD
     //server static content
     app.use(express.static(path.join(__dirname, "front/build")));
     //app.get("*", (req, res) => {
     // req.sendFile(path.resolve(__dirname, "front/build", "index.html"));
-=======
-  //server static content
-  app.use(express.static(path.join(__dirname, "front/build")));
-  /* app.get("*", (req, res) => {
-         req.sendFile(path.resolve(__dirname, "front/build", "index.html"));
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 
 }
-console.log(__dirname);
-console.log(path.join(__dirname, "front/build"));*/
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(root1); //parametreglobale
@@ -92,7 +68,6 @@ app.use(root10); //gestionclient
 app.use(root11); //recherchedossier
 app.use(root12); //adversaire
 app.use(root13); //tache
-<<<<<<< HEAD
 //app.use(verifyroute);
 app.use(loginroute);
 app.use(registerroute);
@@ -106,18 +81,6 @@ app.use(typedossierroute);
 /*app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "front/build/index.html"));
 })*/
-=======
-
-app.use(loginroute);
-app.use(registerroute);
-app.use(collabroute);
-
-app.use(tribunaleroute);
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "front/build/index.html"));
-});
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 app.listen(PORT, () => {
-  console.log(`running server on ${PORT}`);
+    console.log(`running server on ${PORT}`);
 });

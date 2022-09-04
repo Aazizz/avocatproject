@@ -17,11 +17,7 @@ root1.post("/parametreglobale", async (req, res) => {
         const { timbrefiscale,tauxtva } = req.body;
        
 
-<<<<<<< HEAD
         const newTodo1 = await pool.query("INSERT INTO public.parametreglobale ( timbrefiscale,tauxtva ) VALUES($1,$2 )",
-=======
-        const newTodo1 = await pool.query("INSERT INTO parametreglobale ( timbrefiscale,tauxtva ) VALUES($1,$2 )",
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
             [ timbrefiscale,tauxtva ]);
         res.json(newTodo1);
 

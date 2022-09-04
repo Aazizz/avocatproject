@@ -12,11 +12,7 @@ root4.post("/photocopie", async (req, res) => {
         const {prixphotocopie} = req.body;
        
 
-<<<<<<< HEAD
         const newTodo2 = await pool.query("INSERT INTO public.photocopie (prixphotocopie) VALUES ($1)  ",
-=======
-        const newTodo2 = await pool.query("INSERT INTO photocopie (prixphotocopie) VALUES ($1)  ",
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
             [prixphotocopie]);
         res.json(newTodo2);
         

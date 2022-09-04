@@ -12,7 +12,6 @@ const pool = require("../db");
 //async taati wa9t lel data bch tekhdem les fctions teeha
 root12.post("/adversaireadd", async(req, res) => {
     try {
-<<<<<<< HEAD
         const { nom, registre, adresse, adressedesigne, avocat, adresseavocat,id_dossier } = req.body;
         const newadversaires = await pool.query(
             "INSERT INTO adversaire (nom, registre, adresse, adressedesigne, avocat,adresseavocat,id_doss) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id_doss", [nom, registre, adresse, adressedesigne, avocat, adresseavocat,id_dossier]
@@ -26,13 +25,6 @@ root12.post("/adversaireadd", async(req, res) => {
           ]
           //res.json("succes"),
         );
-=======
-        const { nom, registre, adresse, adressedesigne, avocat, adresseavocat } = req.body;
-        const newadversaires = await pool.query(
-            "INSERT INTO adversaire (nom, registre, adresse, adressedesigne, avocat,adresseavocat) VALUES($1,$2,$3,$4,$5,$6)", [nom, registre, adresse, adressedesigne, avocat, adresseavocat]
-            //res.json("succes"),
-        );
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
         res.json(newadversaires.rows[0]);
     } catch (err) {
         console.error(err.message);

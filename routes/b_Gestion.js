@@ -8,7 +8,6 @@ const pool = require("../db")
 // pour l'ajout
 root10.post("/gestionclient", async(req, res) => {
     try {
-<<<<<<< HEAD
         const { codecollaborateur, codeclient, raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email } = req.body;
 
 
@@ -30,13 +29,6 @@ root10.post("/gestionclient", async(req, res) => {
                 codeclient
             ]
         );
-=======
-        const { codecollaborateur,codeclient, raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email } = req.body;
-
-
-        const newTodo2 = await pool.query("INSERT INTO gestionclient (codecollaborateur,codeclient,raison,matricule,ville,rue,num,code_postale,activite,situation_fiscale,categorie,fax,email) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) ", //nahit on conflict khater ken yajouti meme id maykblsh haka wala haka
-            [codecollaborateur,codeclient, raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email]);
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
         res.json(newTodo2);
 
 
@@ -47,7 +39,6 @@ root10.post("/gestionclient", async(req, res) => {
 //pour la modification 
 root10.post("/gestionclient/modif", async(req, res) => {
     try {
-<<<<<<< HEAD
         const {
             id,
             raison,
@@ -66,12 +57,6 @@ root10.post("/gestionclient/modif", async(req, res) => {
         } = req.body;
 
         const newTodo2 = await pool.query("UPDATE gestionclient SET codecollaborateur=$2,codeclient=$3,raison=$4,matricule=$5,ville=$6,rue=$7,num=$8,code_postale=$9,activite=$10,situation_fiscale=$11,categorie=$12,fax=$13,email=$14   WHERE id=$1  ", [id, codecollaborateur, codeclient, raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email]);
-=======
-        const { id,codecollaborateur,codeclient, raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email } = req.body;
-
-        const newTodo2 = await pool.query("UPDATE gestionclient SET codecollaborateur=$2,codeclient=$3,raison=$4,matricule=$5,ville=$6,rue=$7,num=$8,code_postale=$9,activite=$10,situation_fiscale=$11,categorie=$12,fax=$13,email=$14   WHERE id=$1  ", 
-        [id,codecollaborateur,codeclient ,raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email]);
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
         res.json(newTodo2);
 
 
