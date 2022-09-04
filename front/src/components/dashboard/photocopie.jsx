@@ -107,10 +107,7 @@ const Parametreenextra = () => {
     <div className="App">
       <header className="App-header">
       <h1>Prix de la photocopie</h1>
-<<<<<<< HEAD
       <PrinterIcon className="dashbicons"></PrinterIcon>
-=======
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
           {check && <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</Button>}

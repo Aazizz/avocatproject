@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import { useEffect } from "react";
 import { useState, createContext } from "react";
 import axios from "axios";
@@ -10,19 +10,11 @@ function AuthContextProvider(props) {
   const getLoggedIn = async () => {
     const loggedInresponse = await axios.get("/loggedIn");
     setLoggedIn(loggedInresponse.data);
-<<<<<<< HEAD
     console.log(loggedInresponse.data);
   };
   useEffect(() => {
     getLoggedIn();
   },[]);
-=======
-    console.log("connected ?", loggedInresponse.data);
-  };
-  useEffect(() => {
-    getLoggedIn();
-  }, []);
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
   return (
     <>
       <AuthContext.Provider value={{ loggedIn, getLoggedIn }}>
@@ -32,4 +24,4 @@ function AuthContextProvider(props) {
   );
 }
 export default AuthContext;
-export { AuthContextProvider };
+export { AuthContextProvider };*/

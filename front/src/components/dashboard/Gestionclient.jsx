@@ -373,19 +373,15 @@ const Gestionclient = () => {
           onOk={() => {
             setIsEdit(false);
             const newlisteservice = listeservice.map((Gestionclient) => {
-              if (Gestionclient.id ===edditingGestionclient.id) {
+              if (Gestionclient.id === edditingGestionclient.id) {
                 return edditingGestionclient;
               } else {
                 return Gestionclient;
               }
             });
             setlisteservice(newlisteservice);
-<<<<<<< HEAD
             editGestionclientrequest(
               edditingGestionclient.id,
-=======
-            editGestionclientrequest( edditingGestionclient.id,
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
               edditingGestionclient.codecollaborateur,
               edditingGestionclient.codeclient,
               edditingGestionclient.raison,
@@ -398,8 +394,7 @@ const Gestionclient = () => {
               edditingGestionclient.situation_fiscale,
               edditingGestionclient.categorie,
               edditingGestionclient.fax,
-              edditingGestionclient.email,
-             
+              edditingGestionclient.email
             ); // a ne pas toucher l'id
             resetEditing();
             toast.success("Gestionclient modifié avec succée");
@@ -408,7 +403,6 @@ const Gestionclient = () => {
           <Cascader
             className="cascader2"
             options={liste}
-<<<<<<< HEAD
             onChange={(value) => {
               console.log("aawinekbelehy", typeof value[0]);
               setEdditingGestionclient({
@@ -416,13 +410,6 @@ const Gestionclient = () => {
                 codecollaborateur: value[0],
               });
             }}
-=======
-            onChange={(value) => {console.log("aawinekbelehy",typeof(value[0]))
-            setEdditingGestionclient({
-              ...edditingGestionclient,
-              codecollaborateur: value[0],
-            });}}
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
             placeholder="selectionner code collaborateur "
             showSearch={{
               filter,
@@ -433,10 +420,6 @@ const Gestionclient = () => {
 
           <Input
             placeholder="code client"
-<<<<<<< HEAD
-=======
-
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
             value={edditingGestionclient?.codeclient}
             onChange={(e) => {
               setEdditingGestionclient({
@@ -445,7 +428,6 @@ const Gestionclient = () => {
               });
             }}
           ></Input>
-        
 
           <Input
             placeholder=""
@@ -609,33 +591,21 @@ const Gestionclient = () => {
           onOk={() => {
             addGestionclient();
             setIsAdd(false);
-<<<<<<< HEAD
             toast.success("client_ajouté avec succès");
             console.log("vaaaaaaa", val);
-=======
-            toast.success("client_ajouté avec succès");console.log('vaaaaaaa',val)
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
           }}
         >
           <Cascader
             className="cascader2"
             options={liste}
-<<<<<<< HEAD
             onChange={(value) => {
               console.log("aawinekbelehy", value[0]);
-=======
-            onChange={(value) => {console.log("aawinekbelehy",value[0])
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
               setAddingGestionclient({
                 ...addingGestionclient,
                 codecollaborateur: value[0],
               });
             }}
-<<<<<<< HEAD
             placeholder="Selectionner code collaborateur "
-=======
-            placeholder="Selectionner ClassName collaborateur "
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
             showSearch={{
               filter,
             }}
@@ -652,20 +622,14 @@ const Gestionclient = () => {
               <Input
                 placeholder="code client"
                 value={val}
-<<<<<<< HEAD
                 onChange={(e) => {
                   console.log("traahwari", e.target.value);
                   setVal(e.target.value);
-=======
-                onChange={(e) => {console.log('traahwari',e.target.value)
-                  setVal(e.target.value)
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
                   setAddingGestionclient({
                     ...addingGestionclient,
                     codeclient: val,
                   });
                 }}
-<<<<<<< HEAD
               ></Input>
             </div>
           )}
@@ -687,32 +651,6 @@ const Gestionclient = () => {
               ></Input>
             </div>
           )}
-=======
-                
-
-                
-              ></Input>
-            </div>}
-
-
-          {check1 &&
-            <div id='2'>
-              <Input disabled
-                placeholder="code client"
-                value={addingGestionclient.codeclient}
-                onChange={(e) => {console.log('traahwari',e.target.value)
-  //matekhdmsh
-                  setAddingGestionclient({
-                    ...addingGestionclient,
-                    codeclient:persons + '/' + addingGestionclient.raison[0] ,
-                  });
-                }}
-              //amltha win lmatricule lval ghadi win yiwali yaml feha
-
-              ></Input>
-            </div>
-          }
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
           <Input
             placeholder="raison"
             value={addingGestionclient.raison}
@@ -720,16 +658,9 @@ const Gestionclient = () => {
               setAddingGestionclient({
                 ...addingGestionclient,
                 raison: e.target.value,
-<<<<<<< HEAD
 
                 codeclient: persons + "/" + addingGestionclient.raison[0],
-=======
-  
-                
-                codeclient:persons + '/' + addingGestionclient.raison[0] ,
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
               });
-              
             }}
           ></Input>
           <Input
@@ -740,7 +671,6 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 matricule: e.target.value,
               });
-              
             }}
           ></Input>
           <Input
@@ -786,7 +716,6 @@ const Gestionclient = () => {
           <Input
             placeholder="activité"
             value={addingGestionclient.activite}
-<<<<<<< HEAD
             onChange={(e) => {
               setVal(persons + "/" + addingGestionclient.raison[0]);
               setAddingGestionclient({
@@ -795,15 +724,6 @@ const Gestionclient = () => {
               });
               setAddingGestionclient({
                 ...addingGestionclient,
-=======
-            onChange={(e) => {setVal(persons + '/' + addingGestionclient.raison[0]);
-            setAddingGestionclient({
-              ...addingGestionclient,
-              codeclient:val ,
-            });
-              setAddingGestionclient({
-                ...addingGestionclient,
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
                 activite: e.target.value,
               });
             }}
@@ -844,11 +764,6 @@ const Gestionclient = () => {
                   </Radio>
 
                   <Radio
-<<<<<<< HEAD
-=======
-                  
-
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
                     placeholder="situation_fiscale"
                     value={3}
                     onChange={(e) => {

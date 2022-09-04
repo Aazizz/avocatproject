@@ -5,10 +5,7 @@ import { Table, Modal, Input } from "antd";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
-<<<<<<< HEAD
 import { FaUserTie } from "react-icons/fa";
-=======
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
 import { toast } from "react-toastify";
 const PrimeHuissier = () => {
   //declaration necessaires
@@ -54,14 +51,9 @@ const PrimeHuissier = () => {
                   deleteprime(record);
                 }}
               ></MdDeleteForever>
-<<<<<<< HEAD
               <pre>
                 <p>supprimer</p>
               </pre>
-=======
-
-              <p>supprimer</p>
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
             </div>
           </div>
         );
@@ -132,7 +124,6 @@ const PrimeHuissier = () => {
   return (
     <div className="App">
       <header className="App-header">
-<<<<<<< HEAD
         <h1>Prime huissier</h1>
         <FaUserTie className="dashbicons"></FaUserTie>
         <button
@@ -143,10 +134,6 @@ const PrimeHuissier = () => {
         >
           Ajouter Primehuissier
         </button>
-=======
-      <h1>Prime huissier</h1>
-        <button className="btnadd" onClick={()=>{setIsAdd(true)}}>Ajouter Primehuissier</button>
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
         <div className="tab">
           <Table
             columns={column}
@@ -249,7 +236,6 @@ const PrimeHuissier = () => {
             addprime();
             setIsAdd(false);
             toast.success("Primehuissier ajoutée avec succès");
-<<<<<<< HEAD
             setAddingprime({
               libelle: "",
               montant: "",
@@ -257,8 +243,6 @@ const PrimeHuissier = () => {
               impot: "",
               mensuel: "",
             });
-=======
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
           }}
         >
           <Input
@@ -318,4 +302,3 @@ const PrimeHuissier = () => {
 };
 
 export default PrimeHuissier;
-  

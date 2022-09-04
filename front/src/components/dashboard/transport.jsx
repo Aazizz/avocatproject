@@ -108,11 +108,8 @@ const Transport = () => {
     <div className="App">
       <header className="App-header">
       <h1>Transport</h1>
-<<<<<<< HEAD
       <TruckIcon className="dashbicons"></TruckIcon>
 
-=======
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
         {check && <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</Button>}

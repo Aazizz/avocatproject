@@ -97,12 +97,9 @@ function Collaborateur() {
             placeholder="code collaborateur"
             options={liste}
             onChange={onChange}
-<<<<<<< HEAD
             showSearch={{
               filter,
             }}
-=======
->>>>>>> 169d05a8b617891682b6ce6f35278aa8322f88b5
           ></Cascader>
         </div>
         <div className="inputcoll">
