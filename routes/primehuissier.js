@@ -51,7 +51,7 @@ root8.post("/primehuissier/update", async(req, res) => {
         const updatePrime = await pool.query(
             "UPDATE primehuissier SET libelle=$1,montant=$2,dessociable=$3,impot=$4,mensuel=$5 WHERE id=$6", [libelle, montant, dessociable, impot, mensuel, id]
         );
-        res.json("prime updateddd");
+        res.json("prime updated");
     } catch (err) {
         console.error(err.message);
     }

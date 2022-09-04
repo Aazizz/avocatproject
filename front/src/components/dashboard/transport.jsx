@@ -8,19 +8,21 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
+import { TruckIcon } from "@heroicons/react/outline";
 
 const Transport = () => {
   const [listeservice, setlisteservice] = useState([]);
+  const [check, setCheck] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingTransport, setEdditingTransport] = useState(null);
-  const [addingTransport, setAddingTransport] = useState({
+  const [addingParametre, setAddingParametre] = useState({
     montanttransportparjours: 0,
   });
 
   const columns = [
     {
       key: "1",
-      title: " montanttransportparjours",
+      title: " Montant transport par jours",
       dataIndex: "montanttransportparjours",
     },
     {
@@ -59,6 +61,8 @@ const Transport = () => {
     try {
       const response = await axios.get("/transport");
       setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
+      if (response.data.length==0)
+      setCheck(true); else setCheck(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -91,14 +95,24 @@ const Transport = () => {
   }; ///////////////////// Ajout
   //lien aveclback pour l'ajout
   const [isAdd, setIsAdd] = useState(false);
+  const addTransport = async () => {
+    try {
+      const resp = await axios.post("/transport", addingParametre);
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="App">
       <header className="App-header">
       <h1>Transport</h1>
-        {/*<Button className="btnadd"  onClick={() => {
+      <TruckIcon className="dashbicons"></TruckIcon>
+
+        {check && <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
-          } }> Ajouter</Button>*/}
+          } }> Ajouter</Button>}
         <div className="tab">
           <Table
             columns={columns}
@@ -147,6 +161,32 @@ const Transport = () => {
 
           {/*AJOUT*/}
         </Modal>
+        <Modal
+          title="ajouter "
+          visible={isAdd}
+          okText="Enregistrer"
+          cancelText="Annuler"
+          onCancel={() => {
+            setIsAdd(false);
+          }}
+          onOk={() => {
+            addTransport();
+            setIsAdd(false);
+            toast.success("Timbre ajouté avec succès");
+          }}
+        >
+          <Input
+            placeholder="libelle"
+            value={addingParametre.montanttransportparjours}
+            onChange={(e) => {
+              setAddingParametre({
+                ...addingParametre,
+                montanttransportparjours: e.target.value,
+              });
+            }}
+          ></Input>
+           
+           </Modal>
       </header>
     </div>
   );

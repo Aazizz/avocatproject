@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table, Modal, Input} from "antd";
+import { useState, useEffect } from "react";
+import { Table, Modal, Input } from "antd";
 import "antd/dist/antd.min.css";
-import {AiFillEdit} from "react-icons/ai";
-import {MdDeleteForever} from "react-icons/md";
-import {toast} from "react-toastify";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+import { FaUserTie } from "react-icons/fa";
+import { toast } from "react-toastify";
 const PrimeHuissier = () => {
   //declaration necessaires
   const [listeservice, setlisteservice] = useState([]);
@@ -20,12 +21,12 @@ const PrimeHuissier = () => {
     mensuel: "",
   });
   const column = [
-    {key: "1", title: "ID", dataIndex: "id"},
-    {key: "2", title: "libelle", dataIndex: "libelle"},
-    {key: "3", title: "montant", dataIndex: "montant"},
-    {key: "4", title: "dessociable", dataIndex: "dessociable"},
-    {key: "5", title: "impot", dataIndex: "impot"},
-    {key: "6", title: "mensuel", dataIndex: "mensuel"},
+    { key: "1", title: "ID", dataIndex: "id" },
+    { key: "2", title: "libelle", dataIndex: "libelle" },
+    { key: "3", title: "montant", dataIndex: "montant" },
+    { key: "4", title: "dessociable", dataIndex: "dessociable" },
+    { key: "5", title: "impot", dataIndex: "impot" },
+    { key: "6", title: "mensuel", dataIndex: "mensuel" },
     {
       key: "16",
       title: "Actions",
@@ -37,7 +38,8 @@ const PrimeHuissier = () => {
                 className="edit"
                 onClick={() => {
                   editprime(record);
-                }}></AiFillEdit>
+                }}
+              ></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -47,9 +49,11 @@ const PrimeHuissier = () => {
                 className="delete"
                 onClick={() => {
                   deleteprime(record);
-                }}></MdDeleteForever>
-
-              <p>supprimer</p>
+                }}
+              ></MdDeleteForever>
+              <pre>
+                <p>supprimer</p>
+              </pre>
             </div>
           </div>
         );
@@ -74,7 +78,7 @@ const PrimeHuissier = () => {
   //supprimer primehuissier
   const deleteprime = (record) => {
     Modal.confirm({
-      title: "Vous etes sur de supprimer ce primehuissier?",
+      title: "Vous etes sur de supprimer ce prime huissier?",
       okText: "oui",
       okType: "danger",
       cancelText: "annuler",
@@ -84,7 +88,7 @@ const PrimeHuissier = () => {
         );
         setlisteservice(newlisteservice);
         deleteprimerequest(record.id);
-        toast.success("primehuissier supprimée avec succés");
+        toast.success("prime huissier supprimé avec succès");
       },
     });
   };
@@ -102,7 +106,7 @@ const PrimeHuissier = () => {
   //modifier un primehuissier
   const editprime = (record) => {
     setIsEdit(true);
-    setEdditingprime({...record}); //copie mel record
+    setEdditingprime({ ...record }); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -121,11 +125,13 @@ const PrimeHuissier = () => {
     <div className="App">
       <header className="App-header">
         <h1>Prime huissier</h1>
+        <FaUserTie className="dashbicons"></FaUserTie>
         <button
           className="btnadd"
           onClick={() => {
             setIsAdd(true);
-          }}>
+          }}
+        >
           Ajouter Primehuissier
         </button>
         <div className="tab">
@@ -133,11 +139,12 @@ const PrimeHuissier = () => {
             columns={column}
             dataSource={listeservice}
             size="medium"
-            bordered={true}></Table>
+            bordered={true}
+          ></Table>
         </div>
 
         <Modal
-          title="modifier primehuissier"
+          title="modifier prime huissier"
           visible={isEdit}
           okText="Enregistrer"
           cancelText="Annuler"
@@ -164,7 +171,8 @@ const PrimeHuissier = () => {
             setlisteservice(newlisteservice);
             resetEditing();
             toast.success("primehuissier modifié avec succès");
-          }}>
+          }}
+        >
           <Input
             placeholder="Tapez le libelle"
             value={edditingprime?.libelle}
@@ -173,14 +181,16 @@ const PrimeHuissier = () => {
                 ...edditingprime,
                 libelle: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           {/*edditingprime? s'il n'est pas null*/}
           <Input
             placeholder="Tapez le Montant"
             value={edditingprime?.montant}
             onChange={(e) => {
-              setEdditingprime({...edditingprime, montant: e.target.value});
-            }}></Input>
+              setEdditingprime({ ...edditingprime, montant: e.target.value });
+            }}
+          ></Input>
           <Input
             placeholder="Confirmez le dessociable ?"
             value={edditingprime?.dessociable}
@@ -189,42 +199,62 @@ const PrimeHuissier = () => {
                 ...edditingprime,
                 dessociable: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Confimez l'impot ?"
             value={edditingprime?.impot}
             onChange={(e) => {
-              setEdditingprime({...edditingprime, impot: e.target.value});
-            }}></Input>
+              setEdditingprime({ ...edditingprime, impot: e.target.value });
+            }}
+          ></Input>
           <Input
             placeholder="Confirmez le Mensuel"
             value={edditingprime?.mensuel}
             onChange={(e) => {
-              setEdditingprime({...edditingprime, mensuel: e.target.value});
-            }}></Input>
+              setEdditingprime({ ...edditingprime, mensuel: e.target.value });
+            }}
+          ></Input>
         </Modal>
         <Modal
-          title="ajouter primehuissier"
+          title="ajouter prime huissier"
           visible={isAdd}
           okText="Enregistrer"
           cancelText="Annuler"
+          destroyOnClose={true}
           onCancel={() => {
             setIsAdd(false);
+            setAddingprime({
+              libelle: "",
+              montant: "",
+              dessociable: "",
+              impot: "",
+              mensuel: "",
+            });
           }}
           onOk={() => {
             addprime();
             setIsAdd(false);
             toast.success("Primehuissier ajoutée avec succès");
-          }}>
+            setAddingprime({
+              libelle: "",
+              montant: "",
+              dessociable: "",
+              impot: "",
+              mensuel: "",
+            });
+          }}
+        >
           <Input
-            placeholder="tapez le libéllé"
+            placeholder="tapez le libellé"
             value={addingprime.libelle}
             onChange={(e) => {
               setAddingprime({
                 ...addingprime,
                 libelle: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Tapez le Montant"
             value={addingprime.montant}
@@ -233,34 +263,38 @@ const PrimeHuissier = () => {
                 ...addingprime,
                 montant: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
-            placeholder="Confirmez le dessociable ?"
+            placeholder="Confirmez le dessociable ? Tapez Oui ou Non"
             value={addingprime.dessociable}
             onChange={(e) => {
               setAddingprime({
                 ...addingprime,
                 dessociable: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
-            placeholder="Confirmez l'impot ?"
+            placeholder="Confirmez l'impot ?  Tapez Oui ou Non"
             value={addingprime.impot}
             onChange={(e) => {
               setAddingprime({
                 ...addingprime,
                 impot: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
-            placeholder="Confirmez le Mensuel"
+            placeholder="Confirmez le Mensuel ? Tapez Oui ou Non"
             value={addingprime.mensuel}
             onChange={(e) => {
               setAddingprime({
                 ...addingprime,
                 mensuel: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
         </Modal>
       </header>
     </div>

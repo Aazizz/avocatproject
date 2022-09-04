@@ -3,9 +3,8 @@ body {
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  
+  background-position: center center;
 
-  width: 100%;
 }
 
 .edit {
@@ -14,12 +13,23 @@ body {
   height: 30px;
 }
 
+
+.dashbicons {
+  color: black;
+  width: 50px;
+  height: 50px;
+}
+
 .delete {
   color: red;
   width: 25px;
   height: 30px;
 }
-
+.addtachediv{
+  color: #ffc107;
+  width: 25px;
+  height: 30px;
+}
 .edit:hover {
   color: #0583f26b;
 }
@@ -27,7 +37,9 @@ body {
 .delete:hover {
   color: rgba(255, 0, 0, 0.296);
 }
-
+.addtachediv:hover {
+  color: #ffc10788;
+}
 .tableau {
   margin-top: 100px;
 }
@@ -100,19 +112,36 @@ body {
   border-radius: 10px;
   border: 3px solid #0583f2;
   font-size: 15px;
-  margin-top: 20px;
+  margin-top: 60px;
 }
 
 .btnadd:hover {
   background-color: white;
   color: rgb(0, 0, 0);
+}.btndossier {
+  /*margin-top: 100px;*/
+  /*margin-bottom: 40px;*/
+  color: rgb(255, 255, 255);
+  background-color: #0583f2;
+  width: 200px;
+  height: 38px;
+  border: 3px solid #0583f2;
+  font-size: 15px;
+  margin-top: 20px;
 }
+
+.btndossier:hover {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+
 
 .ant-table {
   overflow-x: auto !important;
   width: 1200px;
   margin: auto !important;
   margin-top: 10px !important;
+  background-color: rgba(255, 255, 255, 0.537) !important;
 }
 
 @media only screen and (max-width: 1500px) {
@@ -242,7 +271,30 @@ body {
   width: 500rem !important;
 }
 .Errorpagediv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white !important;
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
-  width: 56%;
-  height: 60%;
+}
+.Errorpagediv img {
+  width: 50%;
+}
+.constpagediv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+}
+
+.constpagediv img {
+  width: 60rem;
+}
+@media only screen and (max-width: 700px) {
+  .constpagediv img {
+    padding-top: 20px;
+  }
 }

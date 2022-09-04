@@ -8,7 +8,7 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
-
+import { PhotographIcon } from "@heroicons/react/outline";
 const Timbre = () => {
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -20,11 +20,12 @@ const Timbre = () => {
   });
 
   const columns = [
-    { key: "1", title: "libelle", dataIndex: "libelle" },
+    
+    { key: "2", title: "Libelle", dataIndex: "libelle" },
 
-    { key: "2", title: "montant", dataIndex: "montant" },
+    { key: "3", title: "Montant", dataIndex: "montant" },
     {
-      key: "3",
+      key: "4",
       title: "Actions",
       render: (record) => {
         return (
@@ -36,7 +37,9 @@ const Timbre = () => {
                   editTimbre(record);
                 }}
               ></AiFillEdit>
-              <p>modifier</p>
+              <pre>
+                <p>modifier </p>
+              </pre>
             </div>
             <div className="divdelete">
               <MdDeleteForever
@@ -45,8 +48,9 @@ const Timbre = () => {
                   deleteTimbre(record);
                 }}
               ></MdDeleteForever>
-
-              <p>supprimer</p>
+              <pre>
+                <p>supprimer</p>
+              </pre>
             </div>
           </div>
         );
@@ -66,29 +70,29 @@ const Timbre = () => {
   useEffect(() => {
     getTimbrerequest();
   }, [listeservice]);
-  console.log(listeservice);
+ 
 
   //supprimer une Timbre
   const deleteTimbre = (record) => {
     Modal.confirm({
-      title: "Vous etes sur de supprimer l'Timbre?",
+      title: "Vous etes sur de supprimer ce timbre ?",
       okText: "oui",
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (Timbre) => Timbre.libelle !== record.libelle
+          (Timbre) => Timbre.id !== record.id
         );
         setlisteservice(newlisteservice);
-        deleteTimbrerequest(record.libelle);
+        deleteTimbrerequest(record.id);
         toast.success("Timbre supprimé avec succès");
       },
     });
   };
-  const deleteTimbrerequest = async (libelle) => {
+  const deleteTimbrerequest = async (id) => {
     try {
       const deleted = await axios.post("/timbre/delete", {
-        libelle: libelle,
+        id:id,
       });
       console.log("Timbre supprimé");
     } catch (error) {
@@ -107,15 +111,13 @@ const Timbre = () => {
     setEdditingTimbre(null);
   };
   //lien aveclback pour la modif
-  const editTimbrerequest = async (libelle, montant) => {
+  const editTimbrerequest = async (edditingTimbre) => {
     try {
-      const modified = await axios.post("/timbre/modif", {
-        libelle: libelle,
-        montant: montant,
-      });
+      console.log(edditingTimbre)
+      const modified = await axios.post("/timbre/modif", edditingTimbre);
       console.log("Timbre modifié");
     } catch (error) {
-      console.log(error);
+      console.log('aaaaaaaaaaaaaaaaggg',error);
     }
   };
   ///////////////////// Ajout
@@ -134,13 +136,14 @@ const Timbre = () => {
     <div className="App">
       <header className="App-header">
       <h1>Timbres</h1> 
-        <Button className="btnadd"  onClick={() => {
+      <PhotographIcon className="dashbicons"></PhotographIcon>
+        <button className="btnadd"  onClick={() => {
             setIsAdd(true);
           }}
         >
           {" "}
           Ajouter
-        </Button>
+        </button>
         <div classname="tab">
           <Table
             columns={columns}
@@ -161,14 +164,14 @@ const Timbre = () => {
           onOk={() => {
             setIsEdit(false);
             const newlisteservice = listeservice.map((Timbre) => {
-              if (Timbre.libelle === edditingTimbre.libelle) {
+              if (Timbre.id === edditingTimbre.id) {
                 return edditingTimbre;
               } else {
                 return Timbre;
               }
             });
             setlisteservice(newlisteservice);
-            editTimbrerequest(edditingTimbre.libelle, edditingTimbre.montant);
+            editTimbrerequest(edditingTimbre);
             resetEditing();
             toast.success("Timbre modifie avec succée");
           }}
@@ -189,7 +192,8 @@ const Timbre = () => {
             value={edditingTimbre?.montant}
             onChange={(e) => {
               setEdditingTimbre({ ...edditingTimbre, montant: e.target.value });
-            }}
+              console.log('aaaaaaaa',edditingTimbre)}}
+            
           ></Input>
 
           {/*AJOUT*/}

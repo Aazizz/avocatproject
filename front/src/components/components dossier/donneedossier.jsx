@@ -17,12 +17,14 @@ import Selectdossier from "./selectemplacement";
 import TabDossier from "./tabdossier";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
+import { domMax } from "framer-motion";
+import {RiFolderAddFill} from "react-icons/ri";
 
 const { Option } = Select;
 let index = 0;
 
 const DonneeDossier = () => {
-  const [items, setItems] = useState([
+  /*const [items, setItems] = useState([
     "إداري",
     "أذون",
     "أمر بالدفع",
@@ -44,29 +46,28 @@ const DonneeDossier = () => {
     "مرور",
     "ملك تجاري",
     "نفقة",
-  ]);
-  const [name, setName] = useState("");
-  const inputRef = useRef(null);
+  ]);*/
+  const [typedossierliste,setTypedossierliste] = useState([]);
+    const [typedossier1, setTypedossier1] = useState([]);
+  
 
-  const onNameChange = (event) => {
-    setName(event.target.value);
-    setAdd_dossier({ ...add_dossier, typedossier: name });
-  };
+ 
 
-  const addItem = (e) => {
-    e.preventDefault();
-    setItems([...items, name || `New item ${index++}`]);
-    setName("");
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 0);
-  };
+
 
   const [value, setValue] = useState(1);
+  const [disabledtrib, setDisabledtrib] = useState(false);
+  const [disabledservice, setDisabledservice] = useState(false);
   const [listeTrib, setListeTrib] = useState([]);
   const [listeservice, setListeservice] = useState([]);
   const [listeserviceinput, setListeserviceinput] = useState([]);
   const [listeemplacement, setListeemplacement] = useState([]);
+  const [liste, setListe] = useState([]);
+  const [vider, setVider] = useState(false);
+  const [listeser, setListeser] = useState([]);
+  const [valuetrib, setValuetrib] = useState("");
+  const [valueservice, setValueservice] = useState("");
+
   const [add_dossier, setAdd_dossier] = useState({
     typedossier: "",
     codedossier: "",
@@ -78,26 +79,35 @@ const DonneeDossier = () => {
     service: "",
     observation: "",
     date_creation: "",
-
+    id_dossier: 0,
   });
+  const [clear, setClear] = useState(false);
   const onChangeemp = (value, selectedOptions) => {
     console.log(value, selectedOptions);
     setAdd_dossier({ ...add_dossier, emplacement: selectedOptions[0].label });
   };
-  const onChange = (value, selectedOptions) => {
-    console.log(value, selectedOptions);
-    const newlisteser = listeser.filter(
-      (ser) =>
-        ser.value.substring(value.indexOf(":"), value.length) ==
-        selectedOptions[0].value
-    );
-    setListeserviceinput(newlisteser);
-    setAdd_dossier({ ...add_dossier, lieu: selectedOptions[0].label });
-    console.log(listeserviceinput, "ena liste service jdida");
-  };
+    const onChange = (value, selectedOptions) => {
+      console.log(value, selectedOptions);
+      setValuetrib(selectedOptions[0].label);
+      const newlisteser = listeser.filter(
+        (ser) =>
+          ser.value.substring(0,((ser.value).indexOf(":"))) ==
+          selectedOptions[0].value
+      );
+      console.log(newlisteser, "hello");
+      setListeserviceinput(newlisteser);
+      
+      setAdd_dossier({ ...add_dossier, lieu: selectedOptions[0].label });
+      setDisabledtrib(true);
+      console.log(listeserviceinput, "ena liste service jdida");
+    };
+
+
   const onChangeservice = (value, selectedOptions) => {
     console.log(value, selectedOptions);
+    setValueservice(selectedOptions[0].label);
     setAdd_dossier({ ...add_dossier, service: selectedOptions[0].label });
+    setDisabledservice(true);
   };
   const onChangedate = (date, dateString) => {
     console.log(date, dateString, "ena date heeey");
@@ -129,6 +139,13 @@ const DonneeDossier = () => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
+      const onChangetype = (value, selectedOptions) => {
+        console.log(value, selectedOptions);
+        setAdd_dossier({
+          ...add_dossier,
+          typedossier: selectedOptions[0].label,
+        });
+      };
   //**********select tribunale********************
 
   const gettribunalerequest = async () => {
@@ -137,6 +154,12 @@ const DonneeDossier = () => {
       //console.log(response.data);
 
       setListeTrib(response.data);
+      const newliste1 = listeTrib.map((trib) => ({
+        value: trib.id,
+        label: trib.lieu,
+      }));
+      setListe(newliste1);
+      
       // console.log("hellolistetrib", listeTrib);
     } catch (error) {
       console.log(error.message);
@@ -158,18 +181,16 @@ const DonneeDossier = () => {
     try {
       const response = await axios.get("/service");
       setListeservice(response.data);
+      const newliste = listeservice.map((ser) => ({
+        value: ser.tribunale_id + ":" + ser.service_id,
+        label: ser.nom,
+      }));
+      setListeser(newliste);
     } catch (error) {
       console.log(error.message);
     }
   };
-  const liste = useMemo(() => {
-    gettribunalerequest();
 
-    return listeTrib.map((trib) => ({
-      value: trib.id,
-      label: trib.lieu,
-    }));
-  }, [listeTrib]);
 
   const listeemp = useMemo(() => {
     getemplacementdossierrequest();
@@ -179,71 +200,75 @@ const DonneeDossier = () => {
       label: emp.libelle,
     }));
   }, [listeemplacement]);
-
-  const listeser = useMemo(() => {
-    getservicerequest();
-
-    return listeservice.map((ser) => ({
-      value: ser.tribunale_id + ":" + ser.service_id,
-      label: ser.nom,
-    }));
-  }, [listeservice]);
+  
 
   //************ajouter dossier **************/
+    const getTypedossierrequest = async () => {
+    try {
+      const response = await axios.get("/typedossier");
+      setTypedossierliste(response.data); 
+      const newliste = typedossierliste.map((ser) => ({
+        value: ser.id ,
+        label: ser.type_dossier,
+      }));
+      setTypedossier1(newliste);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    gettribunalerequest();
+    getTypedossierrequest();
+    console.log(typedossierliste,"type")
+    const id = localStorage.getItem("id_dossier");
+    console.log(id, "ena el id eli bch netbaath");
+    setAdd_dossier({ ...add_dossier, id_dossier: id });
+  }, [liste,typedossierliste,add_dossier.id_dossier]);
+
+  useEffect(() => {
+    getservicerequest();
+    console.log(listeservice)
+     console.log(listeser,"listeserena");
+  },[listeservice]);
+
   const adddossier = async () => {
     try {
-      const resp = await axios.post("/recherchedossieradd", add_dossier);
-      console.log("helloooooooooooooooooooooooooooooooooooooooo")
-      console.log(add_dossier,dossierdata,"ena dossier dataaaaaaaaaaaaaaaa")
-      toast.success("les données de dossier sont ajoutés avec succès")
+      console.log(add_dossier);
+      const resp = await axios.post("/donneedossieradd", add_dossier);
+
+      //console.log(add_dossier, dossierdata, "ena dossier dataaaaaaaaaaaaaaaa");
+      toast.success("les données de dossier sont ajoutés avec succès");
     } catch (error) {
       console.log(error);
     }
   };
 
-  //const listesaved = useMemo(()=>gettribunalerequest(),[listeTrib,listelieutrib])
-
   return (
     <div className="container">
-      <div className="client2">
+      <h1
+        style={{
+          fontSize: "1.3rem",
+          color: "#0583f2",
+        }}
+      >
+        Données Dossier
+      </h1>
+      <RiFolderAddFill className="addclientdem"></RiFolderAddFill>
+      <Marginer direction="vertical" margin={50} />
+      <div className="client1">
         <div className="div">
           <label>Type Dossier:</label>
 
-          <Select
-            style={{
-              width: 250,
+          <Cascader
+            className="cascader1"
+            options={typedossier1}
+            placeholder="Type dossier"
+            onChange={onChangetype}
+            showSearch={{
+              filter,
             }}
-            placeholder="Type de Dossier"
-            dropdownRender={(menu) => (
-              <>
-                {menu}
-                <Divider
-                  style={{
-                    margin: "8px 0",
-                  }}
-                />
-                <Space
-                  style={{
-                    padding: "0 8px 4px",
-                  }}
-                >
-                  <Input
-                    placeholder="Ajouter un type"
-                    ref={inputRef}
-                    value={name}
-                    onChange={onNameChange}
-                  />
-                  <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
-                    Ajouter Type
-                  </Button>
-                </Space>
-              </>
-            )}
-          >
-            {items.map((item) => (
-              <Option key={item}>{item}</Option>
-            ))}
-          </Select>
+            onSearch={(value) => console.log(value)}
+          ></Cascader>
         </div>
         <div className="div">
           <label htmlFor="code">Code Dossier :</label>
@@ -259,25 +284,24 @@ const DonneeDossier = () => {
               });
             }}
           />
-          <div className="client1">
-            <div className="dateinput">
-              <label>Année</label>
-              <DatePicker
-                picker="year"
-                placeholder="Année"
-                onChange={onChangedate}
-              />
-            </div>
-          </div>
         </div>
       </div>
       <div className="client2">
+        <div className="div">
+          <label>Année</label>
+          <DatePicker
+            className="dateinput"
+            picker="year"
+            placeholder="Année"
+            onChange={onChangedate}
+          />
+        </div>
         <div className="div">
           <label>Mission :</label>
 
           <Input
             type="text"
-            classame="mission"
+            className="mission"
             value={add_dossier.mission}
             onChange={(e) => {
               setAdd_dossier({
@@ -288,6 +312,7 @@ const DonneeDossier = () => {
           />
         </div>
       </div>
+
       <div className="client3">
         <div className="div">
           <label htmlFor="emplacement"> Emplacement :</label>
@@ -325,6 +350,8 @@ const DonneeDossier = () => {
           <label>lieu :</label>
 
           <Cascader
+            disabled={disabledtrib}
+            id="cascadertrib"
             className="cascader1"
             options={liste}
             placeholder="Chercher lieu"
@@ -333,12 +360,16 @@ const DonneeDossier = () => {
               filter,
             }}
             onSearch={(value) => console.log(value)}
+            allowClear={clear}
+            value={valuetrib}
           />
         </div>
         <div className="div">
           <label>Service :</label>
 
           <Cascader
+            id="cascaderservice"
+            disabled={disabledservice}
             className="cascader1"
             options={listeserviceinput}
             onChange={onChangeservice}
@@ -346,13 +377,29 @@ const DonneeDossier = () => {
               filter,
             }}
             onSearch={(value) => console.log(value)}
+            value={valueservice}
           />
         </div>
+        <Button
+          type="primary"
+          style={{ width: 300 }}
+          onClick={() => {
+            setDisabledtrib(false);
+            setDisabledservice(false);
+            setValuetrib("");
+            setValueservice("");
+            const id = localStorage.getItem("id_dossier");
+            console.log(id, "ena mel local storage");
+          }}
+        >
+          resélectionner les données du tribunale
+        </Button>
       </div>
       <div className="client5">
         <div className="div">
           <label>Observation(s) : </label>
           <Input
+            className="mission"
             type="text"
             value={add_dossier.observation}
             onChange={(e) => {
@@ -374,29 +421,13 @@ const DonneeDossier = () => {
         </div>
       </div>
 
-      {/*<div className="boutonet">
-        <Button className="bouton" type="primary" block>
-          {" "}
-          Ajouter Adversaire
-        </Button>
-        <Marginer direction="vertical" margin={10} />
-        <Button className="bouton" type="primary" block>
-          {" "}
-          Retirer Adversaire{" "}
-        </Button>
-
-        <div className="boutonvalid">
-          <Button className="bouton" type="primary" block onClick={adddossier}>
-            Valider Dossier
-          </Button>
-          <Marginer direction="vertical" margin={10} />
-        </div>
-      </div>
-
-
-          </div>*/}
-
+      <div className="boutonet"></div>
       <TabDossier />
+      <div className="boutonvalid">
+        <button className="buttonvalidate" onClick={adddossier}>
+          Valider Dossier
+        </button>
+      </div>
     </div>
   );
 };

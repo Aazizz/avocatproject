@@ -1,64 +1,29 @@
-import { Cascader, Input, Radio, Button } from "antd";
-import React, { useState,useMemo } from "react";
+import { Cascader, Input, Radio, Button,Popover } from "antd";
+import React, { useState, useMemo } from "react";
 import "./dossier.css";
 import { Marginer } from "../marginer/marginfile";
 import TabClient from "./tabclientdemandeur";
 import axios from "axios";
-import { dossierdata } from "./dossierdata";
-
-/*const options = [
-  {
-    value: "zhejiang",
-    label: "Zhejiang",
-    children: [
-      {
-        value: "hangzhou",
-        label: "Hangzhou",
-        children: [
-          {
-            value: "xihu",
-            label: "West Lake",
-          },
-          {
-            value: "xiasha",
-            label: "Xia Sha",
-            disabled: true,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: "jiangsu",
-    label: "Jiangsu",
-    children: [
-      {
-        value: "nanjing",
-        label: "Nanjing",
-        children: [
-          {
-            value: "zhonghuamen",
-            label: "Zhong Hua men",
-          },
-        ],
-      },
-    ],
-  },
-];*/
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { Link} from "react-router-dom";
+import {FaUserPlus} from "react-icons/fa"
 
 const ClientDemandeur = () => {
-  const [value, setValue] = useState( 1 );
-  const [listeClient, setListeClient] = useState( [] );
-  const [matricule, setMatricule] = useState( "" );
-  const [newclient, setNewclient] = useState( [] );
- // const [ischecked, setIschecked] = useState( [false,false,false] );
+  const [value, setValue] = useState(1);
+  const [listeClient, setListeClient] = useState([]);
+  const [id_dossier, setId_dossier] = useState(0);
+  const [liste, setListe] = useState([]);
   const [donnee, setDonnee] = useState({
     matricule: "",
     raison: "",
     num: "",
     activité: "",
     categorie: "",
-    situation_fiscale:"",
+    situation_fiscale: "",
+    checkassuj: false,
+    checknonassuj: false,
+    checkexono: false,
   });
 
   const filter = (inputValue, path) =>
@@ -72,42 +37,55 @@ const ClientDemandeur = () => {
       console.log(response.data);
 
       setListeClient(response.data);
+      const newliste = listeClient.map((client) => ({
+        value: client.id,
+        label: client.codeclient,
+      }));
+      setListe(newliste);
     } catch (error) {
       console.log(error.message);
     }
   };
-  const liste = useMemo(() => {
+
+  useEffect(() => {
     getclientrequest();
-    return listeClient.map((client) => ({
-      value: client.id,
-      label: client.raison +":"+client.id+":"+client.raison[0],
-    }));
-  }, [listeClient] );
+    if (id_dossier !== 0) {
+      localStorage.setItem("id_dossier", id_dossier);
+    }
+    console.log("ena check", donnee);
+  }, [listeClient, id_dossier]);
 
- 
-  const onChange = ( value, selectedOptions ) => {
-    console.log( value, "lefriki", selectedOptions );
-    const newlistclient = listeClient.filter(
-      ( ser ) => ser.id == selectedOptions[0].value
-    );
-    console.log( newlistclient, "KING" )
-    setNewclient( newlistclient )
-   
+  const onChangeradio = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue(e.target.value);
+  };
 
-    setDonnee({
-      matricule: newclient[0].matricule,
-      raison: newclient[0].raison,
-      categorie: newclient[0].categorie,
-      num: newclient[0].num,
-      activité:newclient[0].activité,
-      situation_fiscale: newclient[0].situation_fiscale,
+  const onChange = (value, selectedOptions) => {
+    console.log(value, selectedOptions);
+    listeClient.map((ser) => {
+      if (ser.codeclient === selectedOptions[0].label) {
+        setDonnee({
+          matricule: ser.matricule,
+          raison: ser.raison,
+          categorie: ser.categorie,
+          num: ser.num,
+          activité: ser.activite,
+          situation_fiscale: ser.situation_fiscale,
+          checkassuj:
+            ser.situation_fiscale === "Asujetti" ||
+            ser.situation_fiscale === "assujeti"
+              ? true
+              : false,
+          checknonassuj:
+            ser.situation_fiscale === "non Assujetti" ? true : false,
+          checkexono: ser.situation_fiscale === "Exonoré" ? true : false,
+        });
+      }
     });
-    console.log( "donnee", donnee);
- 
-    console.log("dataaaaaaaaaaaaaa",dossierdata)
-   
 
-    
+    console.log("donnee", donnee);
+    console.log("hellooo", donnee.situation_fiscale);
+
     /*if(donnee.situation_fiscale == "Assujetti" ){
       setIschecked(true,false,false);
     }
@@ -119,19 +97,45 @@ const ClientDemandeur = () => {
       setIschecked(false, false, true);
     }
           console.log(ischecked,"checkbox")*/
-  }
-    /*const onChangeradio = (e) => {
-      console.log("radio checked", e.target.value);
-      if (donnee.situation_fiscale === "Assujetti") {
-        setValue(1);
-      } else if (donnee.situation_fiscale === "Non Assujetti") {
-        setValue(2);
+  };
+
+  const addclientdossier = async () => {
+    try {
+      const resp = await axios.post("/clientdossieradd", donnee);
+      //console.log(resp, "dataaaaaaaa");
+      if (resp.data.error) {
+        toast.error(resp.data.error);
       } else {
-        setValue(3);
+        setId_dossier(resp.data.id_dossier);
+        toast.success("Données du client validées avec succés");
       }
-    };*/
+
+      //console.log("ena id", typeof id_dossier, id_dossier);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container">
+      <h1 style={{ fontSize: "1.3rem", color: "#0583f2" }}>
+        Client et Demandeur
+      </h1>
+      <Popover
+        placement="bottom"
+        content={
+          <div>
+            <Link to="/home/collaborateurs">
+              <h1 style={{ color: "#f25e5e" }}>
+                Voulez vous ajouter un client qui n'existe pas ?
+              </h1>
+            </Link>
+          </div>
+        }
+        trigger="hover"
+      >
+        <FaUserPlus className="addclientdem" style={{cursor: "crosshair"}}></FaUserPlus>
+      </Popover>
       <div className="reglementdiv1">
         <div className="div">
           <label>Code client :</label>
@@ -147,6 +151,7 @@ const ClientDemandeur = () => {
             onSearch={(value) => {
               console.log(value);
             }}
+            changeOnSelect={true}
           />
         </div>
 
@@ -158,9 +163,6 @@ const ClientDemandeur = () => {
             className="input"
             placeholder="CIN"
             value={donnee.matricule}
-            onChange={(e) => {
-              dossierdata.cin = e.target.value;
-            }}
           />
         </div>
       </div>
@@ -172,53 +174,21 @@ const ClientDemandeur = () => {
             type="text"
             placeholder="Raison Sociale"
             value={donnee.raison}
-            onChange={(e) => {
-              dossierdata.raison = e.target.value;
-            }}
           />
         </div>
 
         <div className="div">
           <label>Situation Fiscale :</label>
           <div className="radioet">
-            <Radio.Group>
-              <Radio
-                checked={() => {
-                  if (donnee.situation_fiscale == "Assujetti") {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-                value={1}
-              >
-                Non Assujetie
-              </Radio>
-              <Radio
-                checked={() => {
-                  if (donnee.situation_fiscale == "non Assujetti") {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-                value={2}
-              >
-                Assujetie
-              </Radio>
-              <Radio
-                checked={() => {
-                  if (donnee.situation_fiscale == "Exonoré") {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-                value={3}
-              >
-                exonoré
-              </Radio>
-            </Radio.Group>
+            <Radio checked={donnee.checkassuj} value="1">
+              Assujetie
+            </Radio>
+            <Radio checked={donnee.checknonassuj} value="2">
+              Non Assujetie
+            </Radio>
+            <Radio checked={donnee.checkexono} value="3">
+              exonoré
+            </Radio>
           </div>
         </div>
       </div>
@@ -251,9 +221,6 @@ const ClientDemandeur = () => {
             className="inputraison"
             placeholder="Numéro de tel"
             value={donnee.num}
-            onChange={(e) => {
-              dossierdata.tel = e.target.value;
-            }}
           />
         </div>
       </div>
@@ -272,12 +239,11 @@ const ClientDemandeur = () => {
       </div>
       <Marginer direction="vertical" margin={20} />
       <TabClient />
-      {/*<Button className="boutonvalid" type="primary" block>
-          {" "}
-          Valider Dossier
-            </Button>*/}
+      <button className="buttonvalidate" onClick={addclientdossier}>
+        Valider Dossier
+      </button>
     </div>
   );
-}
+};
 
-  export default ClientDemandeur;
+export default ClientDemandeur;
