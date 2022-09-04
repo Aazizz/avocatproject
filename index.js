@@ -45,7 +45,7 @@ app.use(
         methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
     })
 );
-app.use(express.static(path.join(__dirname, "front/build")));
+//app.use(express.static(path.join(__dirname, "front/build")));
 if (process.env.NODE_ENV === "production") {
     //server static content
     app.use(express.static(path.join(__dirname, "front/build")));
