@@ -2,10 +2,10 @@ const express = require("express");
 const route = express.Router();
 const pool = require("../db");
 const bodyParser = require("body-parser");
-const { validateToken } = require("../middlewares/AuthMiddleWare");
+const { validateToken } = require("../middlewares/MiddleWare");
 const { refreshToken } = require("../middlewares/AuthMiddleWare");
 const auth = require("../middlewares/AuthMiddleWare")
-route.post("/collab",(req, res) => {
+route.post("/collab", (req, res) => {
     const {
         username,
         cin,
