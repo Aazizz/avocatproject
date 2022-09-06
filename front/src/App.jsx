@@ -39,7 +39,6 @@ function App() {
       <Router />
 
   );
-  return (<Router />);
 }
 
 export default App;
