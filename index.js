@@ -44,6 +44,14 @@ if (process.env.NODE_ENV === "production") {
     // req.sendFile(path.resolve(__dirname, "front/build", "index.html"));
 
 }
+app.use(
+    cors({
+      credentials: true,
+      origin: ["http://localhost:3000",
+      "https://webavocat.herokuapp.com",],
+      methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+    })
+  );
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(root1); //parametreglobale

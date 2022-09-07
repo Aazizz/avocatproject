@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import React from "react";
 //import Axios from 'axios';
@@ -34,7 +35,7 @@ import { useContext } from "react";
 axios.defaults.withCredentials = true;
 
 function Router() {
-   const {loggedIn} = useContext(AuthContext);
+  const { loggedIn } = useContext(AuthContext);
 
   return (
     /*<BrowserRouter>
