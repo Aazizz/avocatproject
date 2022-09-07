@@ -35,12 +35,10 @@ import Router from "./Router";
 axios.defaults.withCredentials = true;
 
 function App() {
-  /*return (
-    <AuthContextProvider>
+  return (
       <Router />
-    </AuthContextProvider>
-  );*/
-  return (<Router />);
+
+  );
 }
 
 export default App;
