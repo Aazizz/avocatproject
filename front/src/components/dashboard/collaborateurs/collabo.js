@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import { FcAcceptDatabase } from "react-icons/fc";
 import styled from "styled-components";
 import { MdPersonSearch } from "react-icons/md";
-import { HiUserGroup } from "react-icons/hi";
 
 axios.defaults.withCredentials = true;
 
@@ -255,8 +254,6 @@ export const Collabo = () => {
   return (
     <div className="back">
       <header className="App-header">
-        <h1>Collaborateurs</h1>
-        <HiUserGroup className="dashbicons"></HiUserGroup>
         <button
           className="btnadd"
           onClick={() => {
@@ -442,47 +439,14 @@ export const Collabo = () => {
           title="ajouter un collaborateur"
           visible={isAdd}
           okText="Enregistrer"
-          destroyOnClose={true}
           cancelText="Annuler"
           onCancel={() => {
             setIsAdd(false);
-            setAddingCollab({
-              username: "",
-              cin: "",
-              ville: "",
-              rue: "",
-              num: 0,
-              codepostal: "",
-              activite: "",
-              tel: "",
-              fax: "",
-              email: "",
-              matricule: "",
-              methodepaiment: "",
-              montant: 0,
-              nbredossier: 0,
-            });
           }}
           onOk={() => {
             addCollab();
             setIsAdd(false);
             toast.success("collaborateur ajouté avec succès");
-            setAddingCollab({
-              username: "",
-              cin: "",
-              ville: "",
-              rue: "",
-              num: 0,
-              codepostal: "",
-              activite: "",
-              tel: "",
-              fax: "",
-              email: "",
-              matricule: "",
-              methodepaiment: "",
-              montant: 0,
-              nbredossier: 0,
-            });
           }}
         >
           <Input

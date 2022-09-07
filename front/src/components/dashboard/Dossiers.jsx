@@ -14,10 +14,8 @@ import {
   Radio,
   Cascader,
 } from "antd";
-import { FolderIcon } from "@heroicons/react/outline";
 import "../../App.css";
 import {GrDocumentTransfer} from "react-icons/gr"
-import { BsFolderSymlink } from "react-icons/bs";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
@@ -357,8 +355,6 @@ const Dossiers = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Emplacement Dossier</h1>
-        <BsFolderSymlink className="dashbicons"></BsFolderSymlink>
         <div className="boutonet">
           <table>
             <tr>

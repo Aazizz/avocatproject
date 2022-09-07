@@ -9,7 +9,6 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
-import { CurrencyDollarIcon } from "@heroicons/react/outline";
 
 const Recettedufinance = () => {
   const [listeservice, setlisteservice] = useState([]);
@@ -142,7 +141,6 @@ const Recettedufinance = () => {
     <div className="App">
       <header className="App-header">
       <h1>Recette du finance</h1>
-      <CurrencyDollarIcon className="dashbicons"></CurrencyDollarIcon>
         {<button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</button>}
@@ -220,24 +218,13 @@ const Recettedufinance = () => {
           visible={isAdd}
           okText="Enregistrer"
           cancelText="Annuler"
-          destroyOnClose={true}
           onCancel={() => {
             setIsAdd(false);
-              setAddingRecettedufinance({
-                id: "",
-                libelle: "",
-                montant: "",
-              });
           }}
           onOk={() => {
             addRecettedufinance();
             setIsAdd(false);
-            toast.success("Recette finance ajoutée avec succès");
-            setAddingRecettedufinance({
-              id: "",
-              libelle: "",
-              montant: "",
-            });
+            toast.success("Recettedufinance ajouté avec succès");
           }}
         >
           <Input

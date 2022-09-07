@@ -7,7 +7,7 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
-import { MdOutlineCreditScore } from "react-icons/md";
+
 const Honoraireenextra = () => {
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -35,9 +35,7 @@ const Honoraireenextra = () => {
                   editHonoraire(record);
                 }}
               ></AiFillEdit>
-              <pre>
-                <p>modifier </p>
-              </pre>
+              <p>modifier</p>
             </div>
             <div className="divdelete">
               <MdDeleteForever
@@ -46,9 +44,8 @@ const Honoraireenextra = () => {
                   deleteHonoraire(record);
                 }}
               ></MdDeleteForever>
-              <pre>
-                <p>supprimer</p>
-              </pre>
+
+              <p>supprimer</p>
             </div>
           </div>
         );
@@ -135,11 +132,8 @@ const Honoraireenextra = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Honoraire en extra</h1>
-        <MdOutlineCreditScore className="dashbicons"></MdOutlineCreditScore>
-        <button
-          className="btnadd"
-          onClick={() => {
+      <h1>Honoraire en extra</h1>
+        <button className="btnadd"  onClick={() => {
             setIsAdd(true);
           }}
         >
@@ -221,23 +215,12 @@ const Honoraireenextra = () => {
           cancelText="Annuler"
           onCancel={() => {
             setIsAdd(false);
-            setAddingHonoraire({
-              libelle: "",
-              libelle_francais: "",
-              montant: 0,
-            });
           }}
           onOk={() => {
             addHonoraire();
             setIsAdd(false);
             toast.success("Honoraire ajouté avec succès");
-            setAddingHonoraire({
-              libelle: "",
-              libelle_francais: "",
-              montant: 0,
-            });
           }}
-          destroyOnClose={true}
         >
           <Input
             placeholder="libelle"

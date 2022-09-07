@@ -10,10 +10,9 @@ import { useState, useEffect, useMemo } from "react";
 import { Table, Button, Modal, Input, Space, Cascader, Radio, Checkbox } from "antd";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
-import { FaUsersCog } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
-import { SearchOutlined } from "@ant-design/icons";
+
 import { Marginer } from "../marginer/marginfile";
 
 
@@ -55,8 +54,6 @@ const Gestionclient = () => {
     fax: "",
     email: "",
   });
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(6);
   const onChange1 = (e) => {
     var cb = document.getElementById('abc')
     var input1 = document.getElementById('1')
@@ -110,23 +107,18 @@ const Gestionclient = () => {
                   editGestionclient(record);
                 }}
               ></AiFillEdit>
-              <pre>
-                <p>modifier </p>
-              </pre>
+              <p>modifier</p>
             </div>
-            {
-              <div className="divdelete">
-                <MdDeleteForever
-                  className="delete"
-                  onClick={() => {
-                    deleteGestionclient(record);
-                  }}
-                ></MdDeleteForever>
-                <pre>
-                  <p>supprimer</p>
-                </pre>
-              </div>
-            }
+            {<div className="divdelete">
+              <MdDeleteForever
+                className="delete"
+                onClick={() => {
+                  deleteGestionclient(record);
+                }}
+              ></MdDeleteForever>
+
+              <p>supprimer</p>
+            </div>}
           </div>
         );
       },
@@ -149,7 +141,7 @@ const Gestionclient = () => {
   };
   useEffect(() => {
     getGestionclientrequest();
-  });
+  }, []);
   //console.log("listeservice",listeservice);
 
   //supprimer une Gestionclient
@@ -319,7 +311,6 @@ const Gestionclient = () => {
     <div className="App">
       <header className="App-header">
         <h1>Les clients</h1>
-        <FaUsersCog className="dashbicons"></FaUsersCog>
         {
           <button
             className="btnadd"
@@ -348,16 +339,9 @@ const Gestionclient = () => {
         <Marginer direction="vertical" margin={50} />
         <div classname="tab">
           <Table
-            pagination={{
-              current: page,
-              pageSize: pageSize,
-              onChange: (page, pageSize) => {
-                setPage(page);
-                setPageSize(pageSize);
-              },
-            }}
             columns={columns}
             dataSource={gridData && gridData.length ? gridData : listeservice}
+
             bordered={true}
           />
         </div>
@@ -373,15 +357,14 @@ const Gestionclient = () => {
           onOk={() => {
             setIsEdit(false);
             const newlisteservice = listeservice.map((Gestionclient) => {
-              if (Gestionclient.id === edditingGestionclient.id) {
+              if (Gestionclient.id ===edditingGestionclient.id) {
                 return edditingGestionclient;
               } else {
                 return Gestionclient;
               }
             });
             setlisteservice(newlisteservice);
-            editGestionclientrequest(
-              edditingGestionclient.id,
+            editGestionclientrequest( edditingGestionclient.id,
               edditingGestionclient.codecollaborateur,
               edditingGestionclient.codeclient,
               edditingGestionclient.raison,
@@ -394,22 +377,22 @@ const Gestionclient = () => {
               edditingGestionclient.situation_fiscale,
               edditingGestionclient.categorie,
               edditingGestionclient.fax,
-              edditingGestionclient.email
+              edditingGestionclient.email,
+             
             ); // a ne pas toucher l'id
             resetEditing();
             toast.success("Gestionclient modifié avec succée");
           }}
         >
           <Cascader
+
             className="cascader2"
             options={liste}
-            onChange={(value) => {
-              console.log("aawinekbelehy", typeof value[0]);
-              setEdditingGestionclient({
-                ...edditingGestionclient,
-                codecollaborateur: value[0],
-              });
-            }}
+            onChange={(value) => {console.log("aawinekbelehy",typeof(value[0]))
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              codecollaborateur: value[0],
+            });}}
             placeholder="selectionner code collaborateur "
             showSearch={{
               filter,
@@ -420,6 +403,7 @@ const Gestionclient = () => {
 
           <Input
             placeholder="code client"
+
             value={edditingGestionclient?.codeclient}
             onChange={(e) => {
               setEdditingGestionclient({
@@ -428,6 +412,7 @@ const Gestionclient = () => {
               });
             }}
           ></Input>
+        
 
           <Input
             placeholder=""
@@ -505,8 +490,10 @@ const Gestionclient = () => {
             <div className="radioet">
               <Radio.Group onChange={onChangeradio} value={value}>
                 <Radio
+
                   placeholder="situation_fiscale"
                   value={1}
+
                   onChange={(e) => {
                     if (e.target.checked) {
                       setEdditingGestionclient({
@@ -515,25 +502,24 @@ const Gestionclient = () => {
                       });
                     }
                   }}
-                >
-                  {" "}
-                  non Assujeti
+                > non Assujeti
                 </Radio>
 
                 <Radio
+
                   placeholder="situation_fiscale"
                   value={2}
                   onChange={(e) => {
+
                     setEdditingGestionclient({
                       ...edditingGestionclient,
                       situation_fiscale: "Asujetti",
                     });
                   }}
-                >
-                  Assujeti
-                </Radio>
+                >Assujeti</Radio>
 
                 <Radio
+
                   placeholder="situation_fiscale"
                   value={3}
                   onChange={(e) => {
@@ -542,9 +528,8 @@ const Gestionclient = () => {
                       situation_fiscale: "Exonoré",
                     });
                   }}
-                >
-                  Exonoré
-                </Radio>
+                >Exonoré</Radio>
+
               </Radio.Group>
             </div>
           </div>
@@ -580,6 +565,11 @@ const Gestionclient = () => {
           ></Input>
         </Modal>
 
+
+
+
+
+
         <Modal
           title="Ajouter un client "
           visible={isAdd}
@@ -591,66 +581,64 @@ const Gestionclient = () => {
           onOk={() => {
             addGestionclient();
             setIsAdd(false);
-            toast.success("client_ajouté avec succès");
-            console.log("vaaaaaaa", val);
+            toast.success("client_ajouté avec succès");console.log('vaaaaaaa',val)
           }}
         >
           <Cascader
             className="cascader2"
             options={liste}
-            onChange={(value) => {
-              console.log("aawinekbelehy", value[0]);
+            onChange={(value) => {console.log("aawinekbelehy",value[0])
               setAddingGestionclient({
                 ...addingGestionclient,
                 codecollaborateur: value[0],
               });
             }}
-            placeholder="Selectionner code collaborateur "
+            placeholder="Selectionner ClassName collaborateur "
             showSearch={{
               filter,
             }}
             onSearch={(value) => console.log(value)}
           />
           <br />
-          <Checkbox id="abc" onChange={onChange1}>
-            {" "}
-            Saisie Manuel ( code client ){" "}
-          </Checkbox>
-          :
-          {check && (
-            <div id="1">
+
+          <Checkbox id="abc" onChange={onChange1}> Saisie Manuel ( code client ) </Checkbox>:
+
+          {check &&
+            <div id='1'>
               <Input
                 placeholder="code client"
                 value={val}
-                onChange={(e) => {
-                  console.log("traahwari", e.target.value);
-                  setVal(e.target.value);
+                onChange={(e) => {console.log('traahwari',e.target.value)
+                  setVal(e.target.value)
                   setAddingGestionclient({
                     ...addingGestionclient,
                     codeclient: val,
                   });
                 }}
+                
+
+                
               ></Input>
-            </div>
-          )}
-          {check1 && (
-            <div id="2">
-              <Input
-                disabled
+            </div>}
+
+
+          {check1 &&
+            <div id='2'>
+              <Input disabled
                 placeholder="code client"
                 value={addingGestionclient.codeclient}
-                onChange={(e) => {
-                  console.log("traahwari", e.target.value);
-                  //matekhdmsh
+                onChange={(e) => {console.log('traahwari',e.target.value)
+  //matekhdmsh
                   setAddingGestionclient({
                     ...addingGestionclient,
-                    codeclient: persons + "/" + addingGestionclient.raison[0],
+                    codeclient:persons + '/' + addingGestionclient.raison[0] ,
                   });
                 }}
-                //amltha win lmatricule lval ghadi win yiwali yaml feha
+              //amltha win lmatricule lval ghadi win yiwali yaml feha
+
               ></Input>
             </div>
-          )}
+          }
           <Input
             placeholder="raison"
             value={addingGestionclient.raison}
@@ -658,9 +646,11 @@ const Gestionclient = () => {
               setAddingGestionclient({
                 ...addingGestionclient,
                 raison: e.target.value,
-
-                codeclient: persons + "/" + addingGestionclient.raison[0],
+  
+                
+                codeclient:persons + '/' + addingGestionclient.raison[0] ,
               });
+              
             }}
           ></Input>
           <Input
@@ -671,6 +661,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 matricule: e.target.value,
               });
+              
             }}
           ></Input>
           <Input
@@ -716,12 +707,11 @@ const Gestionclient = () => {
           <Input
             placeholder="activité"
             value={addingGestionclient.activite}
-            onChange={(e) => {
-              setVal(persons + "/" + addingGestionclient.raison[0]);
-              setAddingGestionclient({
-                ...addingGestionclient,
-                codeclient: val,
-              });
+            onChange={(e) => {setVal(persons + '/' + addingGestionclient.raison[0]);
+            setAddingGestionclient({
+              ...addingGestionclient,
+              codeclient:val ,
+            });
               setAddingGestionclient({
                 ...addingGestionclient,
                 activite: e.target.value,
@@ -735,8 +725,10 @@ const Gestionclient = () => {
               <div className="radioet">
                 <Radio.Group onChange={onChangeradio} value={value}>
                   <Radio
+
                     placeholder="situation_fiscale"
                     value={1}
+
                     onChange={(e) => {
                       if (e.target.checked) {
                         setAddingGestionclient({
@@ -745,25 +737,25 @@ const Gestionclient = () => {
                         });
                       }
                     }}
-                  >
-                    {" "}
-                    non Assujeti
+                  > non Assujeti
                   </Radio>
 
                   <Radio
+
                     placeholder="situation_fiscale"
                     value={2}
                     onChange={(e) => {
+
                       setAddingGestionclient({
                         ...addingGestionclient,
                         situation_fiscale: "Asujetti",
                       });
                     }}
-                  >
-                    Assujeti
-                  </Radio>
+                  >Assujeti</Radio>
 
                   <Radio
+                  
+
                     placeholder="situation_fiscale"
                     value={3}
                     onChange={(e) => {
@@ -772,9 +764,8 @@ const Gestionclient = () => {
                         situation_fiscale: "Exonoré",
                       });
                     }}
-                  >
-                    Exonoré
-                  </Radio>
+                  >Exonoré</Radio>
+
                 </Radio.Group>
               </div>
             </fieldset>

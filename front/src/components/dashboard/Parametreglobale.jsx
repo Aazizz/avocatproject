@@ -4,7 +4,6 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Table, Button, Modal, Input } from "antd";
-import { MdOutlineSettingsSuggest } from "react-icons/md";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
@@ -69,33 +68,32 @@ const Parametreglobale = () => {
   console.log(listeservice);
 
   //supprimer une Parametre
-  const deleteParametre = (record) => {
-    Modal.confirm({
-      title: "Vous etes sur de supprimer ce Paramètre?",
-      okText: "oui",
-      okType: "danger",
-      cancelText: "annuler",
-      onOk: () => {
-        const newlisteservice = listeservice.filter(
-          (Parametre) => Parametre.timbrefiscale !== record.timbrefiscale
-        );
-        setlisteservice(newlisteservice);
-        deleteParametrerequest(record.timbrefiscale);
-        toast.success("Paramètre supprimé avec succès");
-      },
+  /*const deleteParametre = (record) => {
+  Modal.confirm({
+    title: "Vous etes sur de supprimer l'Parametre?",
+    okText: "oui",
+    okType: "danger",
+    cancelText: "annuler",
+    onOk: () => {
+      const newlisteservice = listeservice.filter((Parametre) => Parametre.timbrefiscale !== record.timbrefiscale);
+      setlisteservice(newlisteservice);
+      deleteParametrerequest(record.timbrefiscale);
+      toast.success("Parametre supprimé avec succès");
+    },
+  });
+};
+const deleteParametrerequest = async (timbrefiscale) => {
+  try {
+    const deleted = await axios.post("/Parametreenextra/delete", {
+      timbrefiscale:timbrefiscale ,
     });
-  };
-  const deleteParametrerequest = async (timbrefiscale) => {
-    try {
-      const deleted = await axios.post("/Parametreenextra/delete", {
-        timbrefiscale: timbrefiscale,
-      });
-      console.log("Parametre supprimé");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    console.log("Parametre supprimé");
+  } catch (error) {
+    console.log(error);
+  }
+ };
 
+*/
   ////////////
   //modifier une Parametre
   const editParametre = (record) => {
@@ -132,17 +130,10 @@ const Parametreglobale = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Paramètres Globales</h1>
-        <MdOutlineSettingsSuggest className="dashbicons"></MdOutlineSettingsSuggest>
-        <button
-          className="btnadd"
-          onClick={() => {
+      <h1>Parametres globales</h1>
+        {/*<Button className="btnadd"  onClick={() => {
             setIsAdd(true);
-          }}
-        >
-          {" "}
-          Ajouter
-        </button>
+          } }> Ajouter</Button>*/}
         <div classname="tab">
           <Table
             columns={columns}
@@ -175,7 +166,7 @@ const Parametreglobale = () => {
               edditingParametre.tauxtva
             );
             resetEditing();
-            toast.success("Paramètre modifié avec succès");
+            toast.success("Parametre modifie avec succée");
           }}
         >
           <Input
@@ -201,21 +192,18 @@ const Parametreglobale = () => {
 
           {/*AJOUT*/}
         </Modal>
-        <Modal
+        {/* <Modal
           title="ajouter "
           visible={isAdd}
           okText="Enregistrer"
           cancelText="Annuler"
           onCancel={() => {
             setIsAdd(false);
-            setAddingParametre({ timbrefiscale: 0, tauxtva: 0 });
           }}
-          destroyOnClose={true}
           onOk={() => {
             addParametre();
             setIsAdd(false);
-            toast.success("Paramètre ajouté avec succès");
-            setAddingParametre({ timbrefiscale: 0, tauxtva: 0 });
+            toast.success("Parametre ajouté avec succès");
           }}
         >
           <Input
@@ -228,7 +216,7 @@ const Parametreglobale = () => {
               });
             }}
           ></Input>
-          <Input
+           <Input
             placeholder="tauxtva"
             value={addingParametre.tauxtva}
             onChange={(e) => {
@@ -238,7 +226,8 @@ const Parametreglobale = () => {
               });
             }}
           ></Input>
-        </Modal>
+           
+          </Modal>*/}
       </header>
     </div>
   );

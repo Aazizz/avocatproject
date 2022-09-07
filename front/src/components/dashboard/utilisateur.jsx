@@ -5,7 +5,6 @@ import { Table, Modal, Input } from "antd";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
-import { BiUserPin } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 const Utilisateur = () => {
@@ -123,8 +122,7 @@ const Utilisateur = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1> Utilisateurs</h1>
-        <BiUserPin className="dashbicons"></BiUserPin>
+        <h1>listeservice Des Utilisateurs</h1>
         <button
           className="btnadd"
           onClick={() => {

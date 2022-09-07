@@ -11,7 +11,6 @@ const { TabPane } = Tabs;
 export default function CreationDossier() {
   return (
     <div className="dosscontainer">
-      
       <Tabs type="card">
         <TabPane tab="Client & Demandeur" key="1">
          <ClientDemandeur/>
