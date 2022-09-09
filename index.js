@@ -33,13 +33,6 @@ app.use(cookie());
 //middleware
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(
-    cors({
-        credentials: true,
-        origin: ["http://localhost:3000", "https://webavocat.herokuapp.com"],
-        methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-    })
-);
 //app.use(express.static(path.join(__dirname, "front/build")));
 if (process.env.NODE_ENV === "production") {
     //server static content
