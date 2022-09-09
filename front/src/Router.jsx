@@ -287,7 +287,7 @@ function Router() {
           )}
 
           <Route path="home" element={<Sharedlayout />}>
-            {loggedIn === true && (
+            
               <>
                 <Route path="primehuissier" element={<PrimeHuissier />} />
                 <Route path="utilisateur" element={<Utilisateur />} />
@@ -321,12 +321,12 @@ function Router() {
                   path="underconstruction"
                   element={<Underconstruction></Underconstruction>}></Route>
               </>
-            )}
+            
           </Route>
 
-          {loggedIn == true && (
+          
             <Route path="*" element={<Error></Error>}></Route>
-          )}
+        
         </Route>
       </Routes>
 
