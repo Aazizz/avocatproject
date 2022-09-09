@@ -29,7 +29,7 @@ const cookie = require("cookie-parser");
 const verifyroute = require("./routes/verifytokenroute");
 const user = require("./routes/user");
 const logout = require("./routes/logout");
-const verifyroute = require("./routes/verifytokenroute")
+
 require("dotenv").config();
 
 app.use(cookie());
