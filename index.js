@@ -67,7 +67,7 @@ app.use(homeroute);
 app.use(user);
 app.use(tribunaleroute);
 app.use(typedossierroute);
-app.use(logout);
+//app.use(logout);
 
 /*app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "front/build/index.html"));
