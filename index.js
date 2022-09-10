@@ -66,9 +66,9 @@ app.use(tribunaleroute);
 app.use(typedossierroute);
 //app.use(logout);
 
-/*app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "front/build/index.html"));
-})*/
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, 'front/build/index.html'));
+});
 app.listen(PORT, () => {
     console.log(`running server on ${PORT}`);
 });
