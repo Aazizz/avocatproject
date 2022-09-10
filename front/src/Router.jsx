@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import React from "react";
-//import Axios from 'axios';
+import Axios from 'axios';
 import Parametreglobale from "./components/dashboard/Parametreglobale";
 import PrimeHuissier from "./components/dashboard/primehuissier.jsx";
 import {Sharedlayout} from "./components/dashboard/sharedLayout.jsx";
@@ -31,13 +31,13 @@ import {AuthContextProvider} from "./context/AuthContext";
 import AuthContext from "./context/AuthContext";
 import {useContext} from "react";
 
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 
 function Router() {
   const {loggedIn} = useContext(AuthContext);
 
   return (
-    <BrowserRouter>
+   /* <BrowserRouter>
       <Routes>
         <Route path="/">
           <Route
@@ -255,8 +255,8 @@ function Router() {
       </Routes>
     
       <ToastContainer position="top-center"></ToastContainer>
-    </BrowserRouter>
-    /*<BrowserRouter>
+    </BrowserRouter>*/
+    <BrowserRouter>
       <Routes>
         <Route path="/">
           
@@ -331,7 +331,7 @@ function Router() {
       </Routes>
 
       <ToastContainer position="top-center"></ToastContainer>
-    </BrowserRouter>*/
+    </BrowserRouter>
   );
 }
 

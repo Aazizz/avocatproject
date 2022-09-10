@@ -36,8 +36,9 @@ import Router from "./Router";
 
 function App() {
   return (
+    <AuthContextProvider>
       <Router />
-
+    </AuthContextProvider>
   );
 }
 

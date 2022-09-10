@@ -29,7 +29,7 @@ const cookie = require("cookie-parser");
 
 require("dotenv").config();
 
-//app.use(cookie());
+app.use(cookie());
 //middleware
 app.use(cors());
 app.use(express.json());
