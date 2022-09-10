@@ -37,7 +37,7 @@ function Router() {
   const {loggedIn} = useContext(AuthContext);
 
   return (
-    /*<BrowserRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/">
           <Route
@@ -255,11 +255,11 @@ function Router() {
       </Routes>
     
       <ToastContainer position="top-center"></ToastContainer>
-    </BrowserRouter>*/
-    <BrowserRouter>
+    </BrowserRouter>
+    /*<BrowserRouter>
       <Routes>
         <Route path="/">
-          {loggedIn == false && (
+          
             <>
               <Route index element={<Home></Home>}></Route>
 
@@ -284,7 +284,7 @@ function Router() {
                 }
               />
             </>
-          )}
+        
 
           <Route path="home" element={<Sharedlayout />}>
             
@@ -331,7 +331,7 @@ function Router() {
       </Routes>
 
       <ToastContainer position="top-center"></ToastContainer>
-    </BrowserRouter>
+    </BrowserRouter>*/
   );
 }
 
