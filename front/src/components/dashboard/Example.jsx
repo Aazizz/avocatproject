@@ -1,338 +1,347 @@
-import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import React from "react";
-//import Axios from 'axios';
-import Parametreglobale from "./components/dashboard/Parametreglobale";
-import PrimeHuissier from "./components/dashboard/primehuissier.jsx";
-import {Sharedlayout} from "./components/dashboard/sharedLayout.jsx";
-import {AccountBox, RegisterBox} from "./components/accountBox/index.jsx";
-import {ToastContainer} from "react-toastify";
-import Gestionclient from "./components/dashboard/Gestionclient.jsx";
-import "react-toastify/dist/ReactToastify.css";
-import Honoraireenextra from "./components/dashboard/honoraireenextra.jsx";
-import Timbre from "./components/dashboard/timbre.jsx";
-import Photocopie from "./components/dashboard/photocopie.jsx";
-import Transport from "./components/dashboard/transport.jsx";
-import Recettedufinance from "./components/dashboard/recettedufinance.jsx";
-import Emplacementdossier from "./components/dashboard/emplacementdossier.jsx";
-import Utilisateur from "./components/dashboard/utilisateur";
-import Tribunale from "./components/dashboard/tribinaux_administrations/tribunale";
-import Welcome from "./components/welcome/welcome";
-import RechercheDossier from "./components/dashboard/recherchedossier";
-import Home from "./components/welcome/Home";
-import {Collabo} from "./components/dashboard/collaborateurs/collabo";
-import CreationDossier from "./components/dashboard/creationdossier";
-import Footer from "./components/FOOTER/footer";
-import Dossiers from "./components/dashboard/Dossiers";
-import About from "./components/welcome/about";
-import Error from "./components/dashboard/error";
-import Underconstruction from "./components/dashboard/underconstruction";
-import axios from "axios";
-import {AuthContextProvider} from "./context/AuthContext";
-import AuthContext from "./context/AuthContext";
-import {useContext} from "react";
 
-axios.defaults.withCredentials = true;
+import "bootstrap/dist/css/bootstrap.css";
+import {Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {
+  PlusIcon,
+  ServerIcon,
+  ScaleIcon,
+  CogIcon,
+  CreditCardIcon,
+  ChartBarIcon,
+  CursorClickIcon,
+  DocumentReportIcon,
+  MenuIcon,
+  RefreshIcon,
+  ShieldCheckIcon,
+  ViewGridIcon,
+  XIcon,
+  ClockIcon,
+  CurrencyYenIcon,
+  FlagIcon,
+  FolderOpenIcon,
+  LibraryIcon,
+  FolderIcon,
+  UserCircleIcon,
+  UserIcon,
+  DocumentSearchIcon,
+  ArchiveIcon,
+  DocumentIcon,
+  PhotographIcon,
+  TruckIcon,
+  PrinterIcon,
+  CurrencyDollarIcon,
+} from "@heroicons/react/outline";
+import {
+  ChevronDownIcon,
+  FolderAddIcon,
+  PencilAltIcon,
+  UserAddIcon,
+  UserGroupIcon,
+} from "@heroicons/react/solid";
+const solutions = [
+  {
+    name: "Paramètre globale",
+    description: "",
+    href: "/home/Parametreglobale",
+    icon: CogIcon,
+  },
+  {
+    name: "honoraire en extra",
+    description: "",
+    href: "/home/honoraireenextra",
+    icon: CreditCardIcon,
+  },
+];
+const resourcesdebours = [
+  {
+    name: "timbre",
+    description: "",
+    href: "/home/timbre",
+    icon: PhotographIcon,
+  },
+  {
+    name: "photocopie",
+    description: "",
+    href: "/home/photocopie",
+    icon: PrinterIcon,
+  },
+  {
+    name: "transport",
+    description: "",
+    href: "/home/transport",
+    icon: TruckIcon,
+  },
+  {
+    name: "recette finance",
+    description: "",
+    href: "/home/recettedufinance",
+    icon: CurrencyDollarIcon,
+  },
+];
 
-function Router() {
-  const {loggedIn} = useContext(AuthContext);
+const solutions1 = [
+  {
+    name: "Emplacement dossier",
+    description: "",
+    href: "/home/emplacementdossier",
+    icon: FolderOpenIcon,
+  },
+  {
+    name: "Tribunaux et Administrations",
+    description: "",
+    href: "/home/Tribunaux_et_administrations",
+    icon: LibraryIcon,
+  },
+  {
+    name: "Type dossier",
+    description: " ",
+    href: "/home/underconstruction",
+    icon: FolderIcon,
+  },
+  {
+    name: "Utilisateur",
+    description: " ",
+    href: "/home/utilisateur",
+    icon: UserAddIcon,
+  },
+  {
+    name: "Huissier",
+    description: " ",
+    href: "/home/primehuissier",
+    icon: UserCircleIcon,
+  },
+  {
+    name: "Collaborateur",
+    description: " ",
+    href: "/home/collaborateurs",
+    icon: UserGroupIcon,
+  },
+  {
+    name: "primeorateur",
+    description: "",
+    href: "/home/underconstruction",
+    icon: CurrencyYenIcon,
+  },
+  {
+    name: "Greffier",
+    description: " ",
+    href: "/home/underconstruction",
+    icon: PencilAltIcon,
+  },
+  {
+    name: "Prime Greffier",
+    description: " ",
+    href: "/home/underconstruction",
+    icon: CreditCardIcon,
+  },
+];
 
+const client0 = [
+  {name: "Gestion Client", href: "/home/gestionclient", icon: UserIcon},
+  {
+    name: "Fiche Signalitique",
+    href: "/home/underconstruction",
+    icon: DocumentIcon,
+  },
+];
+const resources = [
+  {
+    name: "Etat huissier",
+    description: "",
+    href: "/home/underconstruction",
+  },
+];
+const resources4 = [
+  {
+    name: "Etat huissier",
+    description: "",
+    href: "/home/underconstruction",
+  },
+];
+
+const resources2 = [
+  {
+    name: "Recherche",
+    description: "",
+    href: "/home/recherchedossier",
+    icon: DocumentSearchIcon,
+  },
+  {
+    name: "Emplacement Dossier",
+    description: "",
+    href: "/home/dossiers",
+    icon: FolderIcon,
+  },
+  {
+    name: "Creation",
+    description: "",
+    href: "/home/creationdossier",
+    icon: FolderAddIcon,
+  },
+  {
+    name: "Gestion Archive",
+    description: "",
+    href: "#",
+    icon: ArchiveIcon,
+  },
+];
+const resources3 = [
+  {
+    name: "Tâche",
+    description: "",
+    href: "/home/underconstruction",
+  },
+  {
+    name: "Huissier",
+    description: "",
+    href: "/home/underconstruction",
+  },
+  {
+    name: "Echéance",
+    description: "",
+    href: "/home/underconstruction",
+  },
+  {
+    name: "Recouvrement",
+    description: "",
+    href: "/home/underconstruction",
+  },
+  {
+    name: "Expert",
+    description: "",
+    href: "/home/underconstruction",
+  },
+];
+
+export default function Example() {
+  const navigate = useNavigate();
+  const {getLoggedIn} = useContext(AuthContext);
+  const logOut = async () => {
+    await axios.get("/logout");
+    getLoggedIn();
+    navigate("/login");
+  };
   return (
-    /*<BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route
-            index
-            element={
-              <Home></Home>
-            }
-          ></Route>
-          <Route
-            path="login"
-            element={
-              loggedIn == false ? (
-                <AccountBox />
-              ) : (
-                <Navigate replace to={"/home"} />
-              )
-            }
-          ></Route>
+    <div className="App">
+      <Navbar
+        bg="light"
+        variant="black"
+        expand="sm"
+        className="flex justify-between items-center px-1 py-6 sm:px-6 md:justify-start ">
+        <Navbar.Brand></Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Nav>
+            <NavDropdown
+              title="Paramètres"
+              className="relative -ml-7 mt-1 transform w-screen max-w-sm lg:max-w-3xl font-bold">
+              <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2 w-100 h-100">
+                {solutions.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="-m-1 p-1 flex items-start rounded-lg hover:bg-gray-50">
+                    <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
+                      <item.icon className="h-6 w-6" aria-hidden="true" />
+                    </div>
+                    <div className="ml-4">
+                      <p className="text-base font-medium text-gray-900">
+                        {item.name}
+                      </p>
+                      <p className="mt-1 text-sm text-gray-500">
+                        {item.description}
+                      </p>
+                    </div>
+                  </a>
+                ))}
 
-          <Route
-            path="register"
-            element={
-              loggedIn == false ? (
-                <RegisterBox />
-              ) : (
-                <Navigate replace to={"/home"} />
-              )
-            }
-          />
+                {solutions1.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="-m-2 p-2 flex items-start rounded-lg hover:bg-gray-50">
+                    <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
+                      <item.icon className="h-6 w-6" aria-hidden="true" />
+                    </div>
 
-          <>
-            <Route
-              exact path="home"
-              element={
-                loggedIn === true ? (
-                  <Sharedlayout />
-                ) : (
-                  <Navigate replace to={"/login"} />
-                )
-              }
-            >
-              <Route
-                exact path="primehuissier"
-                element={
-                  
-                    <PrimeHuissier />
-                 
-                }
-              />
-              <Route
-                 path="utilisateur"
-                element={
-                  loggedIn == true ? (
-                    <Utilisateur />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-              <Route
-                path="Parametreglobale"
-                element={
-                  loggedIn == true ? (
-                    <Parametreglobale />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-              <Route
-                path="honoraireenextra"
-                element={
-                  loggedIn == true ? (
-                    <Honoraireenextra />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-              <Route
-                path="timbre"
-                element={
-                  loggedIn == true ? (
-                    <Timbre />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-              <Route
-                path="photocopie"
-                element={
-                  loggedIn == true ? (
-                    <Photocopie />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-              <Route
-                path="transport"
-                element={
-                  loggedIn == true ? (
-                    <Transport />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-              <Route
-                path="recettedufinance"
-                element={
-                  loggedIn == true ? (
-                    <Recettedufinance />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-              <Route
-                path="emplacementdossier"
-                element={
-                  loggedIn == true ? (
-                    <Emplacementdossier />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-              <Route
-                path="gestionclient"
-                element={
-                  loggedIn == true ? (
-                    <Gestionclient />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-              <Route
-                path="collaborateurs"
-                element={
-                  loggedIn == true ? (
-                    <Collabo></Collabo>
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              ></Route>
-              <Route
-                path="Tribunaux_et_administrations"
-                element={
-                  loggedIn == true ? (
-                    <Tribunale />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              />
-
-              <Route
-                path="recherchedossier"
-                element={
-                  loggedIn == true ? (
-                    <RechercheDossier />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              ></Route>
-              <Route
-                path="creationdossier"
-                element={
-                  loggedIn == true ? (
-                    <CreationDossier />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              ></Route>
-              <Route
-                path="dossiers"
-                element={
-                  loggedIn == true ? (
-                    <Dossiers />
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              ></Route>
-              <Route
-                path="underconstruction"
-                element={
-                  loggedIn == true ? (
-                    <Underconstruction></Underconstruction>
-                  ) : (
-                    <Navigate replace to={"/login"} />
-                  )
-                }
-              ></Route>
-            </Route>
-          </>
-
-          <Route
-            path="*"
-            element={
-              loggedIn == true ? (
-                <Error></Error>
-              ) : (
-                <Navigate replace to={"/login"} />
-              )
-            }
-          ></Route>
-        </Route>
-      </Routes>
-    
-      <ToastContainer position="top-center"></ToastContainer>
-    </BrowserRouter>*/
-    <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          {loggedIn == false && (
-            <>
-              <Route index element={<Home></Home>}></Route>
-
-              <Route
-                path="login"
-                element={
-                  loggedIn === false ? (
-                    <AccountBox />
-                  ) : (
-                    <Navigate replace to={"/home"} />
-                  )
-                }></Route>
-
-              <Route
-                path="register"
-                element={
-                  loggedIn === false ? (
-                    <RegisterBox />
-                  ) : (
-                    <Navigate replace to={"/home"} />
-                  )
-                }
-              />
-            </>
-          )}
-
-          <Route path="home" element={<Sharedlayout />}>
-            {loggedIn === true && (
-              <>
-                <Route path="primehuissier" element={<PrimeHuissier />} />
-                <Route path="utilisateur" element={<Utilisateur />} />
-                <Route path="Parametreglobale" element={<Parametreglobale />} />
-                <Route path="honoraireenextra" element={<Honoraireenextra />} />
-                <Route path="timbre" element={<Timbre />} />
-                <Route path="photocopie" element={<Photocopie />} />
-                <Route path="transport" element={<Transport />} />
-                <Route path="recettedufinance" element={<Recettedufinance />} />
-                <Route
-                  path="emplacementdossier"
-                  element={<Emplacementdossier />}
-                />
-                <Route path="gestionclient" element={<Gestionclient />} />
-                <Route
-                  path="collaborateurs"
-                  element={<Collabo></Collabo>}></Route>
-                <Route
-                  path="Tribunaux_et_administrations"
-                  element={<Tribunale />}
-                />
-                <Route path="welcome" element={<Welcome></Welcome>}></Route>
-                <Route
-                  path="recherchedossier"
-                  element={<RechercheDossier />}></Route>
-                <Route
-                  path="creationdossier"
-                  element={<CreationDossier />}></Route>
-                <Route path="dossiers" element={<Dossiers />}></Route>
-                <Route
-                  path="underconstruction"
-                  element={<Underconstruction></Underconstruction>}></Route>
-              </>
-            )}
-          </Route>
-
-          {loggedIn == true && (
-            <Route path="*" element={<Error></Error>}></Route>
-          )}
-        </Route>
-      </Routes>
-
-      <ToastContainer position="top-center"></ToastContainer>
-    </BrowserRouter>
+                    <p className="text-base font-medium text-gray-900 p-2">
+                      {item.name}
+                    </p>
+                  </a>
+                ))}
+              </div>
+            </NavDropdown>
+            <NavDropdown title="Clients" className="font-bold">
+              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                  {client0.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="-m-4 p-1 flex items-start rounded-lg hover:bg-gray-50">
+                      <div
+                        className="flex-shrink-0 flex items-center justify-center h-5 w-5 rounded-md bg-blue-500 
+                              text-white sm:h-12 sm:w-12">
+                        <item.icon className="h-6 w-6" aria-hidden="true" />
+                      </div>
+                      <div className="ml-4">
+                        <p className="text-base font-medium text-gray-900">
+                          {item.name}
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </NavDropdown>
+            <NavDropdown title="Dossiers" className="font-bold ">
+              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden ">
+                <div className="relative grid gap-6 bg-white px-4 py-6 sm:gap-8 sm:p-5">
+                  {resources2.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="-m-4 p-2 flex items-start rounded-lg hover:bg-gray-50">
+                      <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
+                        <item.icon className="h-6 w-6" aria-hidden="true" />
+                      </div>
+                      <div className="ml-4">
+                        <p className="text-base font-medium text-gray-900 p-1">
+                          {item.name}
+                        </p>
+                        <p className="mt-1 text-sm text-gray-500">
+                          {item.description}
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </NavDropdown>
+            <div className="font-bold">
+              <Nav.Link href="/home/underconstruction">Rappel</Nav.Link>
+            </div>
+            <div className="font-bold">
+              <Nav.Link href="/home/underconstruction" className="font-bold">
+                Réglement
+              </Nav.Link>
+            </div>
+            <div className="font-bold">
+              <Nav.Link href="/home/underconstruction" className="font-bold">
+                Etat Huissier
+              </Nav.Link>
+            </div>
+            <div className="flex items-center md:ml-60">
+              <a
+                href="/"
+                className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-500  ml-10">
+                Se déconnecter
+              </a>
+            </div>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
   );
 }
-
-export default Router;
