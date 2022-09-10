@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.4dec8a66.css",
-    "main.js": "/static/js/main.1b9438fc.js",
+    "main.css": "/static/css/main.1ccc3fc6.css",
+    "main.js": "/static/js/main.c7a63876.js",
     "static/js/787.71df535f.chunk.js": "/static/js/787.71df535f.chunk.js",
     "static/media/backgroundavocat.jpg": "/static/media/backgroundavocat.da8ce56e92a3714aab3b.jpg",
     "static/media/lawback2.jpg": "/static/media/lawback2.ea6ca6b026df24fc2fb1.jpg",
@@ -11,12 +11,12 @@
     "static/media/errorimage.png": "/static/media/errorimage.2e045ac1e83d8d2a6f8c.png",
     "static/media/underconstruction.png": "/static/media/underconstruction.e66df5c59f08325b54c7.png",
     "index.html": "/index.html",
-    "main.4dec8a66.css.map": "/static/css/main.4dec8a66.css.map",
-    "main.1b9438fc.js.map": "/static/js/main.1b9438fc.js.map",
+    "main.1ccc3fc6.css.map": "/static/css/main.1ccc3fc6.css.map",
+    "main.c7a63876.js.map": "/static/js/main.c7a63876.js.map",
     "787.71df535f.chunk.js.map": "/static/js/787.71df535f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4dec8a66.css",
-    "static/js/main.1b9438fc.js"
+    "static/css/main.1ccc3fc6.css",
+    "static/js/main.c7a63876.js"
   ]
 }

@@ -29,15 +29,15 @@ import Error from "./components/dashboard/error";
 import Underconstruction from "./components/dashboard/underconstruction";
 import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
-import AuthContext from "./context/AuthContext";
 import { useContext } from "react";
 import Router from "./Router";
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 
 function App() {
   return (
+    <AuthContextProvider>
       <Router />
-
+    </AuthContextProvider>
   );
 }
 

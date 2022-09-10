@@ -3,6 +3,7 @@ const express = require("express");
 const root12 = express.Router();
 const cors = require("cors");
 const pool = require("../db");
+const auth = require("../middlewares/AuthMiddleWare");
 
 //middleware
 
@@ -10,20 +11,19 @@ const pool = require("../db");
 //create adversaire
 //req heya requete client res heya res li bch ymchi lclient
 //async taati wa9t lel data bch tekhdem les fctions teeha
-root12.post("/adversaireadd", async(req, res) => {
+root12.post("/adversaireadd", auth, async(req, res) => {
     try {
-        const { nom, registre, adresse, adressedesigne, avocat, adresseavocat,id_dossier } = req.body;
+        const { nom, registre, adresse, adressedesigne, avocat, adresseavocat, id_dossier } = req.body;
         const newadversaires = await pool.query(
-            "INSERT INTO adversaire (nom, registre, adresse, adressedesigne, avocat,adresseavocat,id_doss) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id_doss", [nom, registre, adresse, adressedesigne, avocat, adresseavocat,id_dossier]
+            "INSERT INTO adversaire (nom, registre, adresse, adressedesigne, avocat,adresseavocat,id_doss) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id_doss", [nom, registre, adresse, adressedesigne, avocat, adresseavocat, id_dossier]
             //res.json("succes"),
         );
         const id_doss = newadversaires.rows[0].id_doss
         const addadversaire = await pool.query(
-          "UPDATE recherchedossier SET adversaire=$1 WHERE id_dossier=$2",
-          [
-            nom,id_doss
-          ]
-          //res.json("succes"),
+            "UPDATE recherchedossier SET adversaire=$1 WHERE id_dossier=$2", [
+                nom, id_doss
+            ]
+            //res.json("succes"),
         );
         res.json(newadversaires.rows[0]);
     } catch (err) {
