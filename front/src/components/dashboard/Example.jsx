@@ -215,13 +215,6 @@ const resources3 = [
 ];
 
 export default function Example() {
-  const navigate = useNavigate();
-  const {getLoggedIn} = useContext(AuthContext);
-  const logOut = async () => {
-    await axios.get("/logout");
-    getLoggedIn();
-    navigate("/login");
-  };
   return (
     <div className="App">
       <Navbar
