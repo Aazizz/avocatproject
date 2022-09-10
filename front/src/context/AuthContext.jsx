@@ -2,9 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useState, createContext } from "react";
 import axios from "axios";
-export const AuthContext = createContext();
+const AuthContext = createContext();
 // this component is going to stock the state logged in
-export function AuthContextProvider(props) {
+function AuthContextProvider(props) {
   const [loggedIn, setLoggedIn] = useState(undefined);
 
   const getLoggedIn = async () => {
@@ -23,5 +23,5 @@ export function AuthContextProvider(props) {
     </>
   );
 }
-
-
+export default AuthContext;
+export { AuthContextProvider };
