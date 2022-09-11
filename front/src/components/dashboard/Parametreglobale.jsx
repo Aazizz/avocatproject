@@ -18,6 +18,7 @@ const Parametreglobale = () => {
     timbrefiscale: 0,
     tauxtva: 0,
   });
+  const [check,setCheck]=useState()
 
   const columns = [
     { key: "1", title: "Timbre fiscale", dataIndex: "timbrefiscale" },
