@@ -58,7 +58,9 @@ const Parametreglobale = () => {
   const getParametrerequest = async () => {
     try {
       const response = await axios.get("/Parametreglobale");
-      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
+      setlisteservice(response.data); 
+      if (response.data.length==0)
+      setCheck(true); else setCheck(false);// aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
@@ -134,7 +136,7 @@ const Parametreglobale = () => {
       <header className="App-header">
         <h1>Paramètres Globales</h1>
         <MdOutlineSettingsSuggest className="dashbicons"></MdOutlineSettingsSuggest>
-        <button
+        {check && <button
           className="btnadd"
           onClick={() => {
             setIsAdd(true);
@@ -142,7 +144,7 @@ const Parametreglobale = () => {
         >
           {" "}
           Ajouter
-        </button>
+        </button>}
         <div classname="tab">
           <Table
             columns={columns}
