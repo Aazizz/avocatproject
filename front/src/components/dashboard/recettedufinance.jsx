@@ -17,7 +17,7 @@ const Recettedufinance = () => {
   const [edditingRecettedufinance, setEdditingRecettedufinance] =
     useState(null);
   const [addingRecettedufinance, setAddingRecettedufinance] = useState({
-    id: "",
+    
     libelle: "",
     montant: "",
   });
@@ -25,9 +25,8 @@ const Recettedufinance = () => {
   const columns = [
     { key: "1", title: "Libelle", dataIndex: "libelle" },
     { key: "2", title: "Montant", dataIndex: "montant" },
-    { key: "3", title: "Id", dataIndex: "id" },
     {
-      key: "4",
+      key: "3",
       title: "Actions",
       render: (record) => {
         return (

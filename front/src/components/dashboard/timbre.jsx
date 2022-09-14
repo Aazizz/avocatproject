@@ -15,7 +15,6 @@ const Timbre = () => {
   const [edditingTimbre, setEdditingTimbre] = useState(null);
   const [addingTimbre, setAddingTimbre] = useState({
     libelle: "",
-
     montant: 0,
   });
 
