@@ -235,9 +235,6 @@ export default function Example() {
                     key={item.name}
                     href={item.href}
                     className="-m-1 p-1 flex items-start rounded-lg hover:bg-gray-50">
-                    <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
-                      <item.icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
                     <div className="ml-4">
                       <p className="text-base font-medium text-gray-900">
                         {item.name}
@@ -254,9 +251,6 @@ export default function Example() {
                     key={item.name}
                     href={item.href}
                     className="-m-2 p-2 flex items-start rounded-lg hover:bg-gray-50">
-                    <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
-                      <item.icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
 
                     <p className="text-base font-medium text-gray-900 p-2">
                       {item.name}
@@ -273,11 +267,6 @@ export default function Example() {
                       key={item.name}
                       href={item.href}
                       className="-m-4 p-1 flex items-start rounded-lg hover:bg-gray-50">
-                      <div
-                        className="flex-shrink-0 flex items-center justify-center h-5 w-5 rounded-md bg-blue-500 
-                              text-white sm:h-12 sm:w-12">
-                        <item.icon className="h-6 w-6" aria-hidden="true" />
-                      </div>
                       <div className="ml-4">
                         <p className="text-base font-medium text-gray-900">
                           {item.name}
@@ -296,9 +285,6 @@ export default function Example() {
                       key={item.name}
                       href={item.href}
                       className="-m-4 p-2 flex items-start rounded-lg hover:bg-gray-50">
-                      <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
-                        <item.icon className="h-6 w-6" aria-hidden="true" />
-                      </div>
                       <div className="ml-4">
                         <p className="text-base font-medium text-gray-900 p-1">
                           {item.name}
