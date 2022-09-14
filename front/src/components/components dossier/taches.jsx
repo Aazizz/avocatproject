@@ -684,10 +684,10 @@ function Taches() {
               resélectionner les données du lieu
             </Button>
 
-            <label>Date de Déchéance:</label>
+            <label>Date D 'échéance:</label>
             <DatePicker
               onChange={onChangedatedecheance}
-              placeholder="date de déchéance"
+              placeholder="date D'échéance"
             />
           </div>
         </Modal>
