@@ -1,6 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
-// delte and add are not an option
-// il faut changer lupdate where libelle=$1(besh nzid id wakhaw yabda unique primary key maaneha)
 import React from "react";
 import axios from "axios";
 import {useState, useEffect} from "react";
@@ -25,7 +22,7 @@ const Recettedufinance = () => {
   const columns = [
     {key: "1", title: "Libelle", dataIndex: "libelle"},
     {key: "2", title: "Montant", dataIndex: "montant"},
-    {key: "3", title: "Id", dataIndex: "id"},
+
     {
       key: "4",
       title: "Actions",
@@ -38,7 +35,9 @@ const Recettedufinance = () => {
                 onClick={() => {
                   editRecettedufinance(record);
                 }}></AiFillEdit>
-              <p>modifier</p>
+              <pre>
+                <p>Modifier </p>
+              </pre>
             </div>
             {
               <div className="divdelete">
@@ -48,7 +47,9 @@ const Recettedufinance = () => {
                     deleteRecettedufinance(record);
                   }}></MdDeleteForever>
 
-                <p>supprimer</p>
+                <pre>
+                  <p>Supprimer</p>
+                </pre>
               </div>
             }
           </div>
@@ -187,15 +188,6 @@ const Recettedufinance = () => {
             toast.success("Recettedufinance modifie avec succée");
           }}>
           <Input
-            placeholder="id"
-            value={edditingRecettedufinance?.id}
-            onChange={(e) => {
-              setEdditingRecettedufinance({
-                ...edditingRecettedufinance,
-                id: e.target.value,
-              });
-            }}></Input>
-          <Input
             placeholder="libelle"
             value={edditingRecettedufinance?.libelle}
             onChange={(e) => {
@@ -240,15 +232,6 @@ const Recettedufinance = () => {
               montant: "",
             });
           }}>
-          <Input
-            placeholder="id"
-            value={addingRecettedufinance.id}
-            onChange={(e) => {
-              setAddingRecettedufinance({
-                ...addingRecettedufinance,
-                id: e.target.value,
-              });
-            }}></Input>
           <Input
             placeholder="libelle"
             value={addingRecettedufinance.libelle}
