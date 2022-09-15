@@ -235,8 +235,7 @@ const RechercheDossier = () => {
                 className="edit"
                 onClick={() => {
                   editdossier(record);
-                }}
-              ></AiFillEdit>
+                }}></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -246,8 +245,7 @@ const RechercheDossier = () => {
                 className="delete"
                 onClick={() => {
                   deletedossier(record);
-                }}
-              ></MdDeleteForever>
+                }}></MdDeleteForever>
               <pre>
                 <p>supprimer </p>
               </pre>
@@ -256,8 +254,7 @@ const RechercheDossier = () => {
             <div className="divdelete">
               <HiClipboardCheck
                 className="addtachediv"
-                onClick={navigate ("/home/creationdossier")}
-              ></HiClipboardCheck>
+                onClick={showDrawer}></HiClipboardCheck>
               <pre>
                 <p>+Tâche</p>
               </pre>
