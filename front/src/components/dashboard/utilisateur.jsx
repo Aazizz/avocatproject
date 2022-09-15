@@ -51,7 +51,7 @@ const Utilisateur = () => {
                 }}
               ></MdDeleteForever>
               <pre>
-                <p> supprimer</p>
+                <p>supprimer</p>
               </pre>
             </div>
           </div>

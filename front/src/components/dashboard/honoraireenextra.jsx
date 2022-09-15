@@ -20,7 +20,7 @@ const Honoraireenextra = () => {
 
   const columns = [
     { key: "1", title: "libelle", dataIndex: "libelle" },
-    { key: "2", title: "Libelle_francais", dataIndex: "libelle_francais" },
+    { key: "2", title: "Libelle_français", dataIndex: "libelle_francais" },
     { key: "3", title: "Montant", dataIndex: "montant" },
     {
       key: "4",
