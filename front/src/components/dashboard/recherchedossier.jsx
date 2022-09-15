@@ -4,6 +4,7 @@ import axios from "axios";
 import "../../App.css";
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import {
   Table,
   Modal,
@@ -30,6 +31,8 @@ import {
   
 } from "react-icons/hi";
 import {FaCalendarCheck} from "react-icons/fa"
+import { Navigate } from "react-router";
+
 const options = [
   {
     value: "zhejiang",
@@ -51,6 +54,7 @@ const options = [
 
 
 const RechercheDossier = () => {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [placement, setPlacement] = useState("right");
 
@@ -231,8 +235,7 @@ const RechercheDossier = () => {
                 className="edit"
                 onClick={() => {
                   editdossier(record);
-                }}
-              ></AiFillEdit>
+                }}></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -242,8 +245,7 @@ const RechercheDossier = () => {
                 className="delete"
                 onClick={() => {
                   deletedossier(record);
-                }}
-              ></MdDeleteForever>
+                }}></MdDeleteForever>
               <pre>
                 <p>supprimer </p>
               </pre>
@@ -252,8 +254,7 @@ const RechercheDossier = () => {
             <div className="divdelete">
               <HiClipboardCheck
                 className="addtachediv"
-                onClick={showDrawer}
-              ></HiClipboardCheck>
+                onClick={showDrawer}></HiClipboardCheck>
               <pre>
                 <p>+Tâche</p>
               </pre>
