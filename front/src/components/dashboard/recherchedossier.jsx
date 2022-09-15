@@ -3,7 +3,7 @@ import axios from "axios";
 
 import "../../App.css";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect,useNavigate } from "react";
 import {
   Table,
   Modal,
