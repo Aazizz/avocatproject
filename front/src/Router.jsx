@@ -23,6 +23,7 @@ import { Collabo } from "./components/dashboard/collaborateurs/collabo";
 import CreationDossier from "./components/dashboard/creationdossier";
 import Footer from "./components/FOOTER/footer";
 import Dossiers from "./components/dashboard/Dossiers";
+import Typedossier from "./components/dashboard/typedossier";
 import About from "./components/welcome/about";
 import Error from "./components/dashboard/error";
 import Underconstruction from "./components/dashboard/underconstruction";
@@ -60,14 +61,17 @@ function Router() {
                 <Route path="transport" element={<Transport />} />
                 <Route path="recettedufinance" element={<Recettedufinance />} />
                 <Route
+                  path="typedossier"
+                  element={<Typedossier />}
+                />
+                <Route
                   path="emplacementdossier"
                   element={<Emplacementdossier />}
                 />
                 <Route path="gestionclient" element={<Gestionclient />} />
                 <Route
                   path="collaborateurs"
-                  element={<Collabo></Collabo>}
-                ></Route>
+                  element={<Collabo></Collabo>}></Route>
                 <Route
                   path="Tribunaux_et_administrations"
                   element={<Tribunale />}
@@ -75,17 +79,14 @@ function Router() {
                 <Route path="welcome" element={<Welcome></Welcome>}></Route>
                 <Route
                   path="recherchedossier"
-                  element={<RechercheDossier />}
-                ></Route>
+                  element={<RechercheDossier />}></Route>
                 <Route
                   path="creationdossier"
-                  element={<CreationDossier />}
-                ></Route>
+                  element={<CreationDossier />}></Route>
                 <Route path="dossiers" element={<Dossiers />}></Route>
                 <Route
                   path="underconstruction"
-                  element={<Underconstruction></Underconstruction>}
-                ></Route>
+                  element={<Underconstruction></Underconstruction>}></Route>
               </Route>
             </>
           )}
