@@ -240,7 +240,7 @@ export default function Example() {
         <Navbar.Collapse>
           <Nav>
             <NavDropdown title="Paramètres" className="font-bold">
-              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden ">
+              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden bg-white">
                 <div className="relative grid gap-6 bg-white px-4 py-6 sm:gap-8 sm:p-5">
                   {solutions1.map((item) => (
                     <a
@@ -328,7 +328,7 @@ export default function Example() {
                 Etat Huissier
               </Nav.Link>
             </div>
-            <div className="flex items-center ml-200">
+            <div className="flex items-center ml-200 align-items-end">
               <Button title="se Déconnecter" onClick={logOut}>
                 Se déconnecter
               </Button>
