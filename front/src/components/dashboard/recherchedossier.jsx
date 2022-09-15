@@ -30,6 +30,8 @@ import {
   
 } from "react-icons/hi";
 import {FaCalendarCheck} from "react-icons/fa"
+import { Navigate } from "react-router";
+
 const options = [
   {
     value: "zhejiang",
@@ -51,6 +53,7 @@ const options = [
 
 
 const RechercheDossier = () => {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [placement, setPlacement] = useState("right");
 
@@ -252,7 +255,7 @@ const RechercheDossier = () => {
             <div className="divdelete">
               <HiClipboardCheck
                 className="addtachediv"
-                onClick={showDrawer}
+                onClick={navigate ("/home/creationdossier")}
               ></HiClipboardCheck>
               <pre>
                 <p>+Tâche</p>
