@@ -85,7 +85,7 @@ const Recettedufinance = () => {
         );
         setlisteservice(newlisteservice);
         deleteRecettedufinancerequest(record.id);
-        toast.success("Recettedufinance supprimé avec succès");
+        toast.success("Recette du finance supprimée avec succès");
       },
     });
   };
@@ -162,7 +162,7 @@ const Recettedufinance = () => {
         </div>
         {/*MODIFICATION*/}
         <Modal
-          title="modifier Recettedufinance"
+          title="Modification de la Recette du finance"
           visible={isEdit}
           okText="Enregistrer"
           cancelText="Annuler"
@@ -185,7 +185,7 @@ const Recettedufinance = () => {
               edditingRecettedufinance.montant
             );
             resetEditing();
-            toast.success("Recettedufinance modifie avec succée");
+            toast.success("Recette du finance modifié avec succès");
           }}>
           <Input
             placeholder="libelle"
@@ -225,7 +225,7 @@ const Recettedufinance = () => {
           onOk={() => {
             addRecettedufinance();
             setIsAdd(false);
-            toast.success("Recette finance ajoutée avec succès");
+            toast.success("Recette du finance ajoutée avec succès");
             setAddingRecettedufinance({
               id: "",
               libelle: "",

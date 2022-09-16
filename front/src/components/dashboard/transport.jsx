@@ -2,13 +2,13 @@
 // delte and add are not an option
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { Table, Button, Modal, Input } from "antd";
+import {useState, useEffect} from "react";
+import {Table, Button, Modal, Input} from "antd";
 import "antd/dist/antd.min.css";
-import { AiFillEdit } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
-import { toast } from "react-toastify";
-import { TruckIcon } from "@heroicons/react/outline";
+import {AiFillEdit} from "react-icons/ai";
+import {MdDeleteForever} from "react-icons/md";
+import {toast} from "react-toastify";
+import {TruckIcon} from "@heroicons/react/outline";
 
 const Transport = () => {
   const [listeservice, setlisteservice] = useState([]);
@@ -36,8 +36,7 @@ const Transport = () => {
                 className="edit"
                 onClick={() => {
                   editTransport(record);
-                }}
-              ></AiFillEdit>
+                }}></AiFillEdit>
               <p>modifier</p>
             </div>
             {/* <div className="divdelete">
@@ -61,8 +60,8 @@ const Transport = () => {
     try {
       const response = await axios.get("/transport");
       setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
-      if (response.data.length==0)
-      setCheck(true); else setCheck(false);
+      if (response.data.length == 0) setCheck(true);
+      else setCheck(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -76,7 +75,7 @@ const Transport = () => {
   //modifier une Transport
   const editTransport = (record) => {
     setIsEdit(true);
-    setEdditingTransport({ ...record }); //copie mel record
+    setEdditingTransport({...record}); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -107,23 +106,30 @@ const Transport = () => {
   return (
     <div className="App">
       <header className="App-header">
-      <h1>Transport</h1>
-      <TruckIcon className="dashbicons"></TruckIcon>
+        <h1>Transport</h1>
+        <TruckIcon className="dashbicons"></TruckIcon>
 
-        {check && <Button className="btnadd"  onClick={() => {
-            setIsAdd(true);
-          } }> Ajouter</Button>}
+        {check && (
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}>
+            {" "}
+            Ajouter
+          </button>
+        )}
         <div className="tab">
           <Table
             columns={columns}
             dataSource={listeservice}
-            style={{ with: 15 }}
+            style={{with: 15}}
             bordered={true}
           />
         </div>
         {/*MODIFICATION*/}
         <Modal
-          title="modifier montant_transport_par_jours"
+          title="Modification du  montant de transport par jours"
           visible={isEdit}
           okText="Enregistrer"
           cancelText="Annuler"
@@ -145,19 +151,17 @@ const Transport = () => {
             setlisteservice(newlisteservice);
             editTransportrequest(edditingTransport.montanttransportparjours);
             resetEditing();
-            toast.success("prix_Transport modifie avec succée");
-          }}
-        >
+            toast.success("Prix du transport modifié avec succès");
+          }}>
           <Input
-            placeholder=" montant_transport_par_jours"
+            placeholder=" Montant du Transport par jours"
             value={edditingTransport?.montanttransportparjours}
             onChange={(e) => {
               setEdditingTransport({
                 ...edditingTransport,
                 montanttransportparjours: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
 
           {/*AJOUT*/}
         </Modal>
@@ -173,8 +177,7 @@ const Transport = () => {
             addTransport();
             setIsAdd(false);
             toast.success("Timbre ajouté avec succès");
-          }}
-        >
+          }}>
           <Input
             placeholder="libelle"
             value={addingParametre.montanttransportparjours}
@@ -183,10 +186,8 @@ const Transport = () => {
                 ...addingParametre,
                 montanttransportparjours: e.target.value,
               });
-            }}
-          ></Input>
-           
-           </Modal>
+            }}></Input>
+        </Modal>
       </header>
     </div>
   );

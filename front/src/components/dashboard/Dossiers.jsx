@@ -3,7 +3,7 @@ import axios from "axios";
 
 import "../../App.css";
 
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import {
   Table,
   Modal,
@@ -14,16 +14,16 @@ import {
   Radio,
   Cascader,
 } from "antd";
-import { FolderIcon } from "@heroicons/react/outline";
+import {FolderIcon} from "@heroicons/react/outline";
 import "../../App.css";
-import {GrDocumentTransfer} from "react-icons/gr"
-import { BsFolderSymlink } from "react-icons/bs";
+import {GrDocumentTransfer} from "react-icons/gr";
+import {BsFolderSymlink} from "react-icons/bs";
 import "antd/dist/antd.min.css";
-import { AiFillEdit } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
-import { toast } from "react-toastify";
-import { SearchOutlined } from "@ant-design/icons";
-import { Marginer } from "../marginer/marginfile";
+import {AiFillEdit} from "react-icons/ai";
+import {MdDeleteForever} from "react-icons/md";
+import {toast} from "react-toastify";
+import {SearchOutlined} from "@ant-design/icons";
+import {Marginer} from "../marginer/marginfile";
 const options = [
   {
     value: "zhejiang",
@@ -76,9 +76,9 @@ const Dossiers = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   let [filteredData] = useState();
   const column = [
-    { key: "1", title: "id_dossier", dataIndex: "id_dossier" },
-    { key: "2", title: "num_affaire", dataIndex: "num_affaire" },
-    { key: "3", title: "emplacement", dataIndex: "emplacement" },
+    {key: "1", title: "id_dossier", dataIndex: "id_dossier"},
+    {key: "2", title: "num_affaire", dataIndex: "num_affaire"},
+    {key: "3", title: "emplacement", dataIndex: "emplacement"},
     {
       key: "4",
       title: "client",
@@ -97,21 +97,19 @@ const Dossiers = () => {
               value={selectedKeys[0]}
               onChange={(e) => {
                 setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
+                confirm({closeDropdown: false});
               }}
               onPressEnter={() => {
                 confirm();
               }}
               onBlur={() => {
                 confirm();
-              }}
-            ></Input>
+              }}></Input>
             <Button
               onClick={() => {
                 confirm();
               }}
-              type="primary"
-            >
+              type="primary">
               {" "}
               Rechercher{" "}
             </Button>
@@ -119,8 +117,7 @@ const Dossiers = () => {
               onClick={() => {
                 clearFilters();
               }}
-              type="danger"
-            >
+              type="danger">
               Réinitialiser{" "}
             </Button>
           </React.Fragment>
@@ -133,7 +130,7 @@ const Dossiers = () => {
         return record.client.toLowerCase().includes(value.toLowerCase());
       },
     },
-    { key: "5", title: "tel", dataIndex: "tel" },
+    {key: "5", title: "tel", dataIndex: "tel"},
     {
       key: "6",
       title: "mission",
@@ -152,21 +149,19 @@ const Dossiers = () => {
               value={selectedKeys[0]}
               onChange={(e) => {
                 setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
+                confirm({closeDropdown: false});
               }}
               onPressEnter={() => {
                 confirm();
               }}
               onBlur={() => {
                 confirm();
-              }}
-            ></Input>
+              }}></Input>
             <Button
               onClick={() => {
                 confirm();
               }}
-              type="primary"
-            >
+              type="primary">
               {" "}
               Rechercher{" "}
             </Button>
@@ -174,8 +169,7 @@ const Dossiers = () => {
               onClick={() => {
                 clearFilters();
               }}
-              type="danger"
-            >
+              type="danger">
               Réinitialiser{" "}
             </Button>
           </React.Fragment>
@@ -206,21 +200,19 @@ const Dossiers = () => {
               value={selectedKeys[0]}
               onChange={(e) => {
                 setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
+                confirm({closeDropdown: false});
               }}
               onPressEnter={() => {
                 confirm();
               }}
               onBlur={() => {
                 confirm();
-              }}
-            ></Input>
+              }}></Input>
             <Button
               onClick={() => {
                 confirm();
               }}
-              type="primary"
-            >
+              type="primary">
               {" "}
               Rechercher{" "}
             </Button>
@@ -228,8 +220,7 @@ const Dossiers = () => {
               onClick={() => {
                 clearFilters();
               }}
-              type="danger"
-            >
+              type="danger">
               Réinitialiser{" "}
             </Button>
           </React.Fragment>
@@ -242,7 +233,7 @@ const Dossiers = () => {
         return record.adversaire.toLowerCase().includes(value.toLowerCase());
       },
     },
-    { key: "8", title: "reste", dataIndex: "reste" },
+    {key: "8", title: "reste", dataIndex: "reste"},
     {
       key: "16",
       title: "Actions",
@@ -254,13 +245,11 @@ const Dossiers = () => {
                 className="edit"
                 onClick={() => {
                   editdossier(record);
-                }}
-              ></GrDocumentTransfer>
+                }}></GrDocumentTransfer>
               <pre>
                 <p>Transférer dossier </p>
               </pre>
             </div>
-            
           </div>
         );
       },
@@ -300,6 +289,7 @@ const Dossiers = () => {
   const handleChange = (e) => {
     setSearchText(e.target.value);
     if (e.target.value === "") getdossierrequest();
+    globalSearch(e.target.value);
   };
   const reset = () => {
     setSortedInfo({});
@@ -338,7 +328,7 @@ const Dossiers = () => {
   //modifier un dossier
   const editdossier = (record) => {
     setIsEdit(true);
-    setEdditingdossier({ ...record }); //copie mel record
+    setEdditingdossier({...record}); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -362,13 +352,8 @@ const Dossiers = () => {
         <div className="boutonet">
           <table>
             <tr>
-              <td>
-                
-              </td>
-              <td>
-            
-              </td>
-              
+              <td></td>
+              <td></td>
             </tr>
           </table>
         </div>
@@ -393,8 +378,7 @@ const Dossiers = () => {
             columns={column}
             dataSource={gridData && gridData.length ? gridData : liste}
             size="large"
-            bordered={true}
-          ></Table>
+            bordered={true}></Table>
         </div>
 
         <Modal
@@ -425,9 +409,7 @@ const Dossiers = () => {
             setListe(newListe);
             resetEditing();
             toast.success("dossier modifié avec succès");
-          }}
-        >
-          
+          }}>
           <Input
             placeholder="Tapez l'emplacement"
             value={edditingdossier?.emplacement}
@@ -436,13 +418,7 @@ const Dossiers = () => {
                 ...edditingdossier,
                 emplacement: e.target.value,
               });
-            }}
-          ></Input>
-          
-          
-            
-          
-          
+            }}></Input>
         </Modal>
         <Modal
           title="Ajouter une Tâche"
@@ -456,8 +432,7 @@ const Dossiers = () => {
             adddossier();
             setIsAdd(false);
             toast.success("dossier ajoutée avec succès");
-          }}
-        >
+          }}>
           <Input
             placeholder="numéro d'affaire"
             value={addingdossier.num_affaire}
@@ -466,8 +441,7 @@ const Dossiers = () => {
                 ...addingdossier,
                 num_affaire: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="emplacement dossier"
             value={addingdossier.emplacement}
@@ -476,8 +450,7 @@ const Dossiers = () => {
                 ...addingdossier,
                 emplacement: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Nom du client "
             value={addingdossier.client}
@@ -486,8 +459,7 @@ const Dossiers = () => {
                 ...addingdossier,
                 client: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Numéro du tel du client"
             value={addingdossier.tel}
@@ -496,8 +468,7 @@ const Dossiers = () => {
                 ...addingdossier,
                 tel: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Mission"
             value={addingdossier.mission}
@@ -506,8 +477,7 @@ const Dossiers = () => {
                 ...addingdossier,
                 mission: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Adversaire"
             value={addingdossier.adversaire}
@@ -516,8 +486,7 @@ const Dossiers = () => {
                 ...addingdossier,
                 adversaire: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Reste"
             value={addingdossier.reste}
@@ -526,8 +495,7 @@ const Dossiers = () => {
                 ...addingdossier,
                 reste: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
 
           <div className="formaddtache">
             <label>Tâche:</label>

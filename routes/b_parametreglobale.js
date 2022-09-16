@@ -12,52 +12,58 @@ const pool = require("../db")
 
 //RouTES
 //create a todo 
-root1.post("/parametreglobale", async (req, res) => {
+root1.post("/parametreglobale", async(req, res) => {
     try {
-        const { timbrefiscale,tauxtva } = req.body;
-       
+        const { timbrefiscale, tauxtva } = req.body;
 
-        const newTodo1 = await pool.query("INSERT INTO public.parametreglobale ( timbrefiscale,tauxtva ) VALUES($1,$2 )",
-            [ timbrefiscale,tauxtva ]);
+
+        const newTodo1 = await pool.query("INSERT INTO public.parametreglobale ( timbrefiscale,tauxtva ) VALUES($1,$2 )", [timbrefiscale, tauxtva]);
         res.json(newTodo1);
 
 
-    }
-    catch (err) {
+    } catch (err) {
         console.error(err.message);
     }
 
 });
 //select
-root1.get("/parametreglobale", async (req, res) => {
+root1.get("/parametreglobale", async(req, res) => {
     try {
-        
-       
+
+
 
         const newTodo = await pool.query("SELECT * FROM parametreglobale")
         res.json(newTodo.rows);
-        
 
-    }
-    catch (err) {
+
+    } catch (err) {
         console.error(err.message);
     }
 });
 //pour la modification 
-root1.post("/parametreglobale/modif", async (req, res) => {
+root1.post("/parametreglobale/modif", async(req, res) => {
     try {
-        const { timbrefiscale,tauxtva} = req.body;
-       
+        const { timbrefiscale, tauxtva } = req.body;
 
-        const newTodo2 = await pool.query("UPDATE parametreglobale SET timbrefiscale=$1,tauxtva=$2 ",
-            [timbrefiscale,tauxtva]);
+
+        const newTodo2 = await pool.query("UPDATE parametreglobale SET timbrefiscale=$1,tauxtva=$2 ", [timbrefiscale, tauxtva]);
         res.json(newTodo2);
-        
 
+
+    } catch (err) {
+        console.error(err.message);
     }
-    catch (err) {
+});
+root1.post("/parametreglobaleeff", async(req, res) => {
+    try {
+        const { timbrefiscale } = req.body;
+        const deleteParametre = await pool.query(
+            "DELETE FROM parametreglobale WHERE timbrefiscale=$1", [timbrefiscale]
+        );
+        res.json("deleted");
+    } catch (err) {
         console.error(err.message);
     }
 });
 
-module.exports=root1;
+module.exports = root1;

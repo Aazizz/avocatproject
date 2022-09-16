@@ -3,8 +3,7 @@ import axios from "axios";
 
 import "../../App.css";
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import {useState, useEffect} from "react";
 import {
   Table,
   Modal,
@@ -14,25 +13,20 @@ import {
   DatePicker,
   Radio,
   Cascader,
-  Drawer
+  Drawer,
 } from "antd";
 import "../../App.css";
+import {Navigate, useNavigate} from "react-router-dom";
 
 import "antd/dist/antd.min.css";
-import { AiFillEdit } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
-import { toast } from "react-toastify";
-import { SearchOutlined } from "@ant-design/icons";
-import { Marginer } from "../marginer/marginfile";
-import { DocumentSearchIcon } from "@heroicons/react/outline";
-import {
-  HiClipboardDocumentCheck,
-  HiClipboardCheck,
-  
-} from "react-icons/hi";
-import {FaCalendarCheck} from "react-icons/fa"
-import { Navigate } from "react-router";
-
+import {AiFillEdit} from "react-icons/ai";
+import {MdDeleteForever} from "react-icons/md";
+import {toast} from "react-toastify";
+import {SearchOutlined} from "@ant-design/icons";
+import {Marginer} from "../marginer/marginfile";
+import {DocumentSearchIcon} from "@heroicons/react/outline";
+import {HiClipboardDocumentCheck, HiClipboardCheck} from "react-icons/hi";
+import {FaCalendarCheck} from "react-icons/fa";
 const options = [
   {
     value: "zhejiang",
@@ -52,9 +46,7 @@ const options = [
   },
 ];
 
-
 const RechercheDossier = () => {
-  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [placement, setPlacement] = useState("right");
 
@@ -83,6 +75,7 @@ const RechercheDossier = () => {
   const onChange = (date, dateString) => {
     console.log(date, dateString);
   };
+  const navigate = useNavigate();
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
@@ -102,10 +95,10 @@ const RechercheDossier = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   let [filteredData] = useState();
   const column = [
-    { key: "1", title: "id_dossier", dataIndex: "id_dossier" },
-    { key: "2", title: "code_dossier", dataIndex: "code_dossier" },
-    { key: "3", title: "num_affaire", dataIndex: "num_affaire" },
-    { key: "4", title: "emplacement", dataIndex: "emplacement" },
+    {key: "1", title: "id_dossier", dataIndex: "id_dossier"},
+    {key: "2", title: "code_dossier", dataIndex: "code_dossier"},
+    {key: "3", title: "num_affaire", dataIndex: "num_affaire"},
+    {key: "4", title: "emplacement", dataIndex: "emplacement"},
     {
       key: "5",
       title: "client",
@@ -124,21 +117,19 @@ const RechercheDossier = () => {
               value={selectedKeys[0]}
               onChange={(e) => {
                 setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
+                confirm({closeDropdown: false});
               }}
               onPressEnter={() => {
                 confirm();
               }}
               onBlur={() => {
                 confirm();
-              }}
-            ></Input>
+              }}></Input>
             <Button
               onClick={() => {
                 confirm();
               }}
-              type="primary"
-            >
+              type="primary">
               {" "}
               Rechercher{" "}
             </Button>
@@ -146,8 +137,7 @@ const RechercheDossier = () => {
               onClick={() => {
                 clearFilters();
               }}
-              type="danger"
-            >
+              type="danger">
               Réinitialiser{" "}
             </Button>
           </React.Fragment>
@@ -160,7 +150,7 @@ const RechercheDossier = () => {
         return record.client.toLowerCase().includes(value.toLowerCase());
       },
     },
-    { key: "6", title: "tel", dataIndex: "tel" },
+    {key: "6", title: "tel", dataIndex: "tel"},
     {
       key: "7",
       title: "mission",
@@ -184,21 +174,19 @@ const RechercheDossier = () => {
               value={selectedKeys[0]}
               onChange={(e) => {
                 setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
+                confirm({closeDropdown: false});
               }}
               onPressEnter={() => {
                 confirm();
               }}
               onBlur={() => {
                 confirm();
-              }}
-            ></Input>
+              }}></Input>
             <Button
               onClick={() => {
                 confirm();
               }}
-              type="primary"
-            >
+              type="primary">
               {" "}
               Rechercher{" "}
             </Button>
@@ -206,8 +194,7 @@ const RechercheDossier = () => {
               onClick={() => {
                 clearFilters();
               }}
-              type="danger"
-            >
+              type="danger">
               Réinitialiser{" "}
             </Button>
           </React.Fragment>
@@ -220,10 +207,10 @@ const RechercheDossier = () => {
         return record.adversaire.toLowerCase().includes(value.toLowerCase());
       },
     },
-    { key: "9", title: "reste", dataIndex: "reste" },
-    { key: "10", title: "lieu", dataIndex: "lieu" },
-    { key: "11", title: "service", dataIndex: "service" },
-    { key: "12", title: "Type_dossier", dataIndex: "type_dossier" },
+    {key: "9", title: "reste", dataIndex: "reste"},
+    {key: "10", title: "lieu", dataIndex: "lieu"},
+    {key: "11", title: "service", dataIndex: "service"},
+    {key: "12", title: "Type_dossier", dataIndex: "type_dossier"},
     {
       key: "16",
       title: "Actions",
@@ -235,8 +222,7 @@ const RechercheDossier = () => {
                 className="edit"
                 onClick={() => {
                   editdossier(record);
-                }}
-              ></AiFillEdit>
+                }}></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -246,18 +232,18 @@ const RechercheDossier = () => {
                 className="delete"
                 onClick={() => {
                   deletedossier(record);
-                }}
-              ></MdDeleteForever>
+                }}></MdDeleteForever>
               <pre>
-                <p>supprimer </p>
+                <p>supprimer</p>
               </pre>
             </div>
 
             <div className="divdelete">
               <HiClipboardCheck
                 className="addtachediv"
-                onClick={navigate ("/home/creationdossier")}
-              ></HiClipboardCheck>
+                onClick={() => {
+                  navigate("/home/creationdossier");
+                }}></HiClipboardCheck>
               <pre>
                 <p>+Tâche</p>
               </pre>
@@ -289,7 +275,7 @@ const RechercheDossier = () => {
   useEffect(() => {
     getdossierrequest();
     getadversairerequest();
-  },[listeadversaire,liste]);
+  }, [listeadversaire, liste]);
   const deletedossier = (record) => {
     Modal.confirm({
       title: "Vous etes sur de supprimer ce dossier?",
@@ -340,6 +326,7 @@ const RechercheDossier = () => {
   const handleChange = (e) => {
     setSearchText(e.target.value);
     if (e.target.value === "") getdossierrequest();
+    globalSearch(e.target.value);
   };
   const reset = () => {
     setSortedInfo({});
@@ -352,7 +339,7 @@ const RechercheDossier = () => {
   //modifier un dossier
   const editdossier = (record) => {
     setIsEdit(true);
-    setEdditingdossier({ ...record }); //copie mel record
+    setEdditingdossier({...record}); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -386,13 +373,12 @@ const RechercheDossier = () => {
                   Ajouter Tache
                 </button>
                 </td>*/}
-              
+
               <button
                 className="btndossier"
                 onClick={() => {
                   setIsAdd(true);
-                }}
-              >
+                }}>
                 Archiver Dossier
               </button>
             </tr>
@@ -419,8 +405,7 @@ const RechercheDossier = () => {
             columns={column}
             dataSource={gridData && gridData.length ? gridData : liste}
             size="large"
-            bordered={true}
-          ></Table>
+            bordered={true}></Table>
         </div>
 
         <Modal
@@ -451,8 +436,7 @@ const RechercheDossier = () => {
             setListe(newListe);
             resetEditing();
             toast.success("dossier modifié avec succès");
-          }}
-        >
+          }}>
           <Input
             placeholder="Tapez le num_affaire"
             value={edditingdossier?.num_affaire}
@@ -461,8 +445,7 @@ const RechercheDossier = () => {
                 ...edditingdossier,
                 num_affaire: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           {/*edditingdossier? s'il n'est pas null*/}
           <Input
             placeholder="Tapez l'emplacement"
@@ -472,8 +455,7 @@ const RechercheDossier = () => {
                 ...edditingdossier,
                 emplacement: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=" nom du client "
             value={edditingdossier?.client}
@@ -482,15 +464,13 @@ const RechercheDossier = () => {
                 ...edditingdossier,
                 client: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=" numéro de tel du client "
             value={edditingdossier?.tel}
             onChange={(e) => {
-              setEdditingdossier({ ...edditingdossier, tel: e.target.value });
-            }}
-          ></Input>
+              setEdditingdossier({...edditingdossier, tel: e.target.value});
+            }}></Input>
           <Input
             placeholder=" mission"
             value={edditingdossier?.mission}
@@ -499,8 +479,7 @@ const RechercheDossier = () => {
                 ...edditingdossier,
                 mission: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=" adversaire "
             value={edditingdossier?.adversaire}
@@ -509,15 +488,13 @@ const RechercheDossier = () => {
                 ...edditingdossier,
                 adversaire: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=" reste "
             value={edditingdossier?.reste}
             onChange={(e) => {
-              setEdditingdossier({ ...edditingdossier, reste: e.target.value });
-            }}
-          ></Input>
+              setEdditingdossier({...edditingdossier, reste: e.target.value});
+            }}></Input>
         </Modal>
 
         <Drawer
@@ -533,8 +510,7 @@ const RechercheDossier = () => {
                 Enregistrer
               </Button>
             </Space>
-          }
-        >
+          }>
           <Input
             placeholder="numéro d'affaire"
             value={addingdossier.num_affaire}
@@ -543,8 +519,7 @@ const RechercheDossier = () => {
                 ...addingdossier,
                 num_affaire: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="emplacement dossier"
             value={addingdossier.emplacement}
@@ -553,8 +528,7 @@ const RechercheDossier = () => {
                 ...addingdossier,
                 emplacement: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Nom du client "
             value={addingdossier.client}
@@ -563,8 +537,7 @@ const RechercheDossier = () => {
                 ...addingdossier,
                 client: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Numéro du tel du client"
             value={addingdossier.tel}
@@ -573,8 +546,7 @@ const RechercheDossier = () => {
                 ...addingdossier,
                 tel: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Mission"
             value={addingdossier.mission}
@@ -583,8 +555,7 @@ const RechercheDossier = () => {
                 ...addingdossier,
                 mission: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Adversaire"
             value={addingdossier.adversaire}
@@ -593,8 +564,7 @@ const RechercheDossier = () => {
                 ...addingdossier,
                 adversaire: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="Reste"
             value={addingdossier.reste}
@@ -603,8 +573,7 @@ const RechercheDossier = () => {
                 ...addingdossier,
                 reste: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
 
           <div className="formaddtache">
             <label>Tâche:</label>
@@ -802,4 +771,3 @@ const RechercheDossier = () => {
 };
 
 export default RechercheDossier;
-

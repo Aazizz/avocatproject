@@ -6,18 +6,24 @@
 //l(ajout fde lid annulle khiir ahawka malezmouch yidakhel haja kdima namloha felback unique) different ala fazet eya lelcode client besh matodkhlsh badha (ashel) amltha ken front felajout w lmodifier naaresh ftableau eli wrah mawjoud wale edheya nesel aleha
 import React from "react";
 import axios from "axios";
-import { useState, useEffect, useMemo } from "react";
-import { Table, Button, Modal, Input, Space, Cascader, Radio, Checkbox } from "antd";
+import {useState, useEffect, useMemo} from "react";
+import {
+  Table,
+  Button,
+  Modal,
+  Input,
+  Space,
+  Cascader,
+  Radio,
+  Checkbox,
+} from "antd";
 import "antd/dist/antd.min.css";
-import { AiFillEdit } from "react-icons/ai";
-import { FaUsersCog } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
-import { toast } from "react-toastify";
+import {AiFillEdit} from "react-icons/ai";
+import {FaUsersCog} from "react-icons/fa";
+import {MdDeleteForever} from "react-icons/md";
+import {toast} from "react-toastify";
 
-import { Marginer } from "../marginer/marginfile";
-
-
-
+import {Marginer} from "../marginer/marginfile";
 
 const Gestionclient = () => {
   const [listecodecollab, setListecodecollab] = useState([]);
@@ -29,7 +35,8 @@ const Gestionclient = () => {
   const filter = (inputValue, path) =>
     path.some(
       (listecodecollab) =>
-        listecodecollab.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+        listecodecollab.label.toLowerCase().indexOf(inputValue.toLowerCase()) >
+        -1
     );
   const [value, setValue] = useState(0);
   const [val, setVal] = useState();
@@ -43,8 +50,8 @@ const Gestionclient = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [edditingGestionclient, setEdditingGestionclient] = useState(null);
   const [addingGestionclient, setAddingGestionclient] = useState({
-    codecollaborateur:"",
-    codeclient:"",
+    codecollaborateur: "",
+    codeclient: "",
     raison: "",
     matricule: "",
     ville: "",
@@ -57,26 +64,29 @@ const Gestionclient = () => {
     fax: "",
     email: "",
   });
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(6);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
   const onChange1 = (e) => {
-    var cb = document.getElementById('abc')
-    var input1 = document.getElementById('1')
-    var input2 = document.getElementById('2')
-    
-    if (cb.checked == true) {console.log("winek aa",addingGestionclient.codecollaborateur)
-      setCheck(true); setCheck1(false);
-       setCheckk(true);console.log(checkk,'zer')
-      input1.style.display = "block"//yidhaher
-      input2.style.display = "none"
-    }
-    else {
-      setCheck1(true); setCheck(false); 
-      setCheckk(false);console.log(checkk,'zer')
-      input1.style.display = "none";
-      input2.style.display = "block"
-    }
+    var cb = document.getElementById("abc");
+    var input1 = document.getElementById("1");
+    var input2 = document.getElementById("2");
 
+    if (cb.checked == true) {
+      console.log("winek aa", addingGestionclient.codecollaborateur);
+      setCheck(true);
+      setCheck1(false);
+      setCheckk(true);
+      console.log(checkk, "zer");
+      input1.style.display = "block"; //yidhaher
+      input2.style.display = "none";
+    } else {
+      setCheck1(true);
+      setCheck(false);
+      setCheckk(false);
+      console.log(checkk, "zer");
+      input1.style.display = "none";
+      input2.style.display = "block";
+    }
   };
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
@@ -87,22 +97,23 @@ const Gestionclient = () => {
   let [filteredData] = useState();
 
   const columns = [
-    { key: "1", title: "id", dataIndex: "id" },
-    {key: "2",title: "raison",dataIndex: "raison" },
-    {key: "3",title: "matricule",dataIndex: "matricule"},
-    { key: "4", title: "ville", dataIndex: "ville" },
-    { key: "5", title: "rue", dataIndex: "rue" },
-    { key: "6", title: "num", dataIndex: "num" },
-    { key: "7", title: "code_postale", dataIndex: "code_postale" },
-    { key: "8", title: "activité", dataIndex: "activite" },
-    { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale" },
-    { key: "10", title: "categorie", dataIndex: "categorie" },
-    { key: "11", title: "Fax", dataIndex: "fax" },
-    { key: "12", title: "Email", dataIndex: "email" },
-    { key: "13", title: "Code client", dataIndex: "codeclient" },
-    { key: "14", title: "code collaborateur", dataIndex: "codecollaborateur" },
-    
-    {key: "15",
+    {key: "1", title: "id", dataIndex: "id"},
+    {key: "2", title: "raison", dataIndex: "raison"},
+    {key: "3", title: "matricule", dataIndex: "matricule"},
+    {key: "4", title: "ville", dataIndex: "ville"},
+    {key: "5", title: "rue", dataIndex: "rue"},
+    {key: "6", title: "num", dataIndex: "num"},
+    {key: "7", title: "code_postale", dataIndex: "code_postale"},
+    {key: "8", title: "activité", dataIndex: "activite"},
+    {key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale"},
+    {key: "10", title: "categorie", dataIndex: "categorie"},
+    {key: "11", title: "Fax", dataIndex: "fax"},
+    {key: "12", title: "Email", dataIndex: "email"},
+    {key: "13", title: "Code client", dataIndex: "codeclient"},
+    {key: "14", title: "code collaborateur", dataIndex: "codecollaborateur"},
+
+    {
+      key: "15",
       title: "Actions",
       render: (record) => {
         return (
@@ -112,8 +123,7 @@ const Gestionclient = () => {
                 className="edit"
                 onClick={() => {
                   editGestionclient(record);
-                }}
-              ></AiFillEdit>
+                }}></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -124,8 +134,7 @@ const Gestionclient = () => {
                   className="delete"
                   onClick={() => {
                     deleteGestionclient(record);
-                  }}
-                ></MdDeleteForever>
+                  }}></MdDeleteForever>
                 <pre>
                   <p>supprimer</p>
                 </pre>
@@ -137,15 +146,18 @@ const Gestionclient = () => {
     },
   ];
 
-
   //select Gestionclient
   const getGestionclientrequest = async () => {
     try {
       const response = await axios.get("/gestionclient");
       //console.log('aaaaaaaa1',response.data)
       setlisteservice(response.data);
-     // console.log('aaaaaaaa2',listeservice)
-      for (let i = 0; i<response.data.length; i++) {if (response.data[i].id>persons){setPersons( response.data[i].id+1)}}
+      // console.log('aaaaaaaa2',listeservice)
+      for (let i = 0; i < response.data.length; i++) {
+        if (response.data[i].id > persons) {
+          setPersons(response.data[i].id + 1);
+        }
+      }
       //console.log('ahayaliste',(persons)) // aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
@@ -187,10 +199,9 @@ const Gestionclient = () => {
   ////////////
   //modifier une Gestionclient
   const editGestionclient = (record) => {
-    
     setIsEdit(true);
 
-    setEdditingGestionclient({ ...record }); //copie mel record
+    setEdditingGestionclient({...record}); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -199,9 +210,9 @@ const Gestionclient = () => {
   //lien aveclback pour la modif
   const editGestionclientrequest = async (
     id,
-   codecollaborateur,
-   codeclient,
-   raison,
+    codecollaborateur,
+    codeclient,
+    raison,
     matricule,
     ville,
     rue,
@@ -211,14 +222,13 @@ const Gestionclient = () => {
     situation_fiscale,
     categorie,
     fax,
-    email,
-    
+    email
   ) => {
     try {
       const modified = await axios.post("/gestionclient/modif", {
-        id:id,
-        codecollaborateur:codecollaborateur,
-        codeclient:codeclient,
+        id: id,
+        codecollaborateur: codecollaborateur,
+        codeclient: codeclient,
         raison: raison,
         matricule: matricule,
         ville: ville,
@@ -228,10 +238,8 @@ const Gestionclient = () => {
         activite: activite,
         situation_fiscale: situation_fiscale,
         categorie: categorie,
-        fax:fax,
-        email:email,
-        
-
+        fax: fax,
+        email: email,
       });
       console.log("emplacement_dossier_modifié");
     } catch (error) {
@@ -253,15 +261,10 @@ const Gestionclient = () => {
   //tebaa lrecherche
   const handleChange = (e) => {
     setSearchText(e.target.value);
-    if (e.target.value === "")
-      getGestionclientrequest();
-  }
-  const reset = () => {
-    setSortedInfo({});
-    setSearchText("");
-    getGestionclientrequest();
-   
-  }
+    if (e.target.value === "") getGestionclientrequest();
+    globalSearch(e.target.value);
+  };
+
   const getCollabrequest = async () => {
     try {
       const response = await axios.get("/collab", {
@@ -273,20 +276,18 @@ const Gestionclient = () => {
 
       setListecollab(response.data);
       // console.log("salem3",Listecollab);
-      // 
-    }
-    //setListecodecollab([{Listecollab.id + ":" + Listecollab.username}])
-    // console.log("salem2",listecodecollab)
+      //
+    } catch (error) {
+      //setListecodecollab([{Listecollab.id + ":" + Listecollab.username}])
+      // console.log("salem2",listecodecollab)
 
-
-    catch (error) {
       console.log(error.message);
     }
   };
   const liste = useMemo(() => {
     getCollabrequest();
     return Listecollab.map((trib) => ({
-      value: trib.id+ ":" + trib.username,
+      value: trib.id + ":" + trib.username,
       label: trib.id + ":" + trib.username,
     }));
   }, [Listecollab]);
@@ -303,21 +304,20 @@ const Gestionclient = () => {
         value.rue.toLowerCase().includes(searchText.toLowerCase()) ||
         value.code_postale.toLowerCase().includes(searchText.toLowerCase()) ||
         value.activite.toLowerCase().includes(searchText.toLowerCase()) ||
-        value.situation_fiscale.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.situation_fiscale
+          .toLowerCase()
+          .includes(searchText.toLowerCase()) ||
         value.categorie.toLowerCase().includes(searchText.toLowerCase()) ||
         value.fax.toLowerCase().includes(searchText.toLowerCase()) ||
-          value.codeclient.toLowerCase().includes(searchText.toLowerCase())||
+        value.codeclient.toLowerCase().includes(searchText.toLowerCase()) ||
         value.codecollaborateur.toLowerCase().includes(searchText.toLowerCase())
-
       );
-
     });
-    setGridData(filteredData)
-    console.log('filtered', filteredData)
-    console.log('length', filteredData.length)
-    console.log('person', persons)
-  }
-
+    setGridData(filteredData);
+    console.log("filtered", filteredData);
+    console.log("length", filteredData.length);
+    console.log("person", persons);
+  };
 
   return (
     <div className="App">
@@ -329,12 +329,12 @@ const Gestionclient = () => {
             className="btnadd"
             onClick={() => {
               setIsAdd(true);
-            }}
-          >
+            }}>
             {" "}
             Ajouter{" "}
           </button>
         }
+        <Marginer direction="vertical" margin={20} />
         <Space>
           <Input
             placeholder="Texte de recherche"
@@ -343,11 +343,6 @@ const Gestionclient = () => {
             allowClear
             value={searchText}
           />
-          <Button onClick={globalSearch} type="primary">
-            {" "}
-            Chercher Client{" "}
-          </Button>
-          <Button onClick={reset}> Réinitialiser </Button>
         </Space>
         <Marginer direction="vertical" margin={50} />
         <div classname="tab">
@@ -401,9 +396,8 @@ const Gestionclient = () => {
               edditingGestionclient.email
             ); // a ne pas toucher l'id
             resetEditing();
-            toast.success("Gestionclient modifié avec succée");
-          }}
-        >
+            toast.success("Client modifié avec succès");
+          }}>
           <Cascader
             className="cascader2"
             options={liste}
@@ -430,8 +424,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 codeclient: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
 
           <Input
             placeholder=""
@@ -441,8 +434,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 raison: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.matricule}
@@ -451,8 +443,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 matricule: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.ville}
@@ -461,8 +452,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 ville: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.rue}
@@ -471,8 +461,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 rue: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.num}
@@ -481,8 +470,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 num: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.code_postale}
@@ -491,8 +479,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 code_postale: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.activite}
@@ -501,8 +488,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 activite: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
 
           <div ClassName="situation">
             <p>Situation_fiscale</p>
@@ -518,8 +504,7 @@ const Gestionclient = () => {
                         situation_fiscale: "non Assujetti",
                       });
                     }
-                  }}
-                >
+                  }}>
                   {" "}
                   non Assujeti
                 </Radio>
@@ -532,8 +517,7 @@ const Gestionclient = () => {
                       ...edditingGestionclient,
                       situation_fiscale: "Asujetti",
                     });
-                  }}
-                >
+                  }}>
                   Assujeti
                 </Radio>
 
@@ -545,8 +529,7 @@ const Gestionclient = () => {
                       ...edditingGestionclient,
                       situation_fiscale: "Exonoré",
                     });
-                  }}
-                >
+                  }}>
                   Exonoré
                 </Radio>
               </Radio.Group>
@@ -560,8 +543,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 categorie: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="fax"
             value={edditingGestionclient?.fax}
@@ -570,8 +552,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 fax: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.email}
@@ -580,8 +561,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 email: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
         </Modal>
 
         <Modal
@@ -595,10 +575,9 @@ const Gestionclient = () => {
           onOk={() => {
             addGestionclient();
             setIsAdd(false);
-            toast.success("client_ajouté avec succès");
+            toast.success("client ajouté avec succès");
             console.log("vaaaaaaa", val);
-          }}
-        >
+          }}>
           <Cascader
             className="cascader2"
             options={liste}
@@ -633,8 +612,7 @@ const Gestionclient = () => {
                     ...addingGestionclient,
                     codeclient: val,
                   });
-                }}
-              ></Input>
+                }}></Input>
             </div>
           )}
           {check1 && (
@@ -643,42 +621,42 @@ const Gestionclient = () => {
                 disabled
                 placeholder="code client"
                 value={addingGestionclient.codeclient}
-                onChange={(e) => {val='a';
+                onChange={(e) => {
+                  val = "a";
                   console.log("traahwari", e.target.value);
                   //matekhdmsh
-                 
-              
                 }}
                 //amltha win lmatricule lval ghadi win yiwali yaml feha
               ></Input>
             </div>
           )}
-         {checkk==false && <Input
-            placeholder="raison"
-            value={addingGestionclient.raison}
-            onChange={(e) => {console.log('aacava')
+          {checkk == false && (
+            <Input
+              placeholder="raison"
+              value={addingGestionclient.raison}
+              onChange={(e) => {
+                console.log("aacava");
 
-              setAddingGestionclient({
-                ...addingGestionclient,
-                raison: e.target.value,
+                setAddingGestionclient({
+                  ...addingGestionclient,
+                  raison: e.target.value,
 
-                codeclient: persons + "/" + addingGestionclient.raison[0],
-              });
-            }}
-          ></Input>}
-          {checkk==true &&  <Input
-          placeholder="raison"
-          value={addingGestionclient.raison}
-          onChange={(e) => {
-  console.log('hani felinput thenya');
-            setAddingGestionclient({
-              ...addingGestionclient,
-              raison: e.target.value,
-
-             
-            });
-          }}
-        ></Input>}
+                  codeclient: persons + "/" + addingGestionclient.raison[0],
+                });
+              }}></Input>
+          )}
+          {checkk == true && (
+            <Input
+              placeholder="raison"
+              value={addingGestionclient.raison}
+              onChange={(e) => {
+                console.log("hani felinput thenya");
+                setAddingGestionclient({
+                  ...addingGestionclient,
+                  raison: e.target.value,
+                });
+              }}></Input>
+          )}
           <Input
             placeholder="matricule"
             value={addingGestionclient.matricule}
@@ -687,8 +665,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 matricule: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="ville"
             value={addingGestionclient.ville}
@@ -697,8 +674,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 ville: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="rue"
             value={addingGestionclient.rue}
@@ -707,8 +683,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 rue: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="num"
             value={addingGestionclient.num}
@@ -717,8 +692,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 num: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="code_postale"
             value={addingGestionclient.code_postale}
@@ -727,8 +701,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 code_postale: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="activité"
             value={addingGestionclient.activite}
@@ -742,8 +715,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 activite: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <div className="situation">
             <fieldset>
               <legend>Situation Fiscale</legend>
@@ -760,8 +732,7 @@ const Gestionclient = () => {
                           situation_fiscale: "non Assujetti",
                         });
                       }
-                    }}
-                  >
+                    }}>
                     {" "}
                     non Assujeti
                   </Radio>
@@ -774,8 +745,7 @@ const Gestionclient = () => {
                         ...addingGestionclient,
                         situation_fiscale: "Asujetti",
                       });
-                    }}
-                  >
+                    }}>
                     Assujeti
                   </Radio>
 
@@ -787,8 +757,7 @@ const Gestionclient = () => {
                         ...addingGestionclient,
                         situation_fiscale: "Exonoré",
                       });
-                    }}
-                  >
+                    }}>
                     Exonoré
                   </Radio>
                 </Radio.Group>
@@ -803,8 +772,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 categorie: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="fax"
             value={addingGestionclient.fax}
@@ -813,8 +781,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 fax: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="email"
             value={addingGestionclient.email}
@@ -823,8 +790,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 email: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
         </Modal>
       </header>
     </div>

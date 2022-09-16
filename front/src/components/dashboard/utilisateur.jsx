@@ -38,18 +38,17 @@ const Utilisateur = () => {
                 className="edit"
                 onClick={() => {
                   editutilisateur(record);
-                }}
-              ></AiFillEdit>
-
-              <p>modifier </p>
+                }}></AiFillEdit>
+              <pre>
+                <p>modifier </p>
+              </pre>
             </div>
             <div className="divdelete">
               <MdDeleteForever
                 className="delete"
                 onClick={() => {
                   deleteutilisateur(record);
-                }}
-              ></MdDeleteForever>
+                }}></MdDeleteForever>
               <pre>
                 <p>supprimer</p>
               </pre>

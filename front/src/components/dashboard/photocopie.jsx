@@ -142,7 +142,7 @@ const Parametreenextra = () => {
             setlisteservice(newlisteservice);
             editParametrerequest(edditingParametre.prixphotocopie);
             resetEditing();
-            toast.success("Parametre modifié avec succée");
+            toast.success("Le prix de la photocopie a été modifié avec succès");
           }}
         >
           <Input

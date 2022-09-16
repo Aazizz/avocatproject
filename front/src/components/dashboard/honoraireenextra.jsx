@@ -1,3 +1,4 @@
+/* This example requires Tailwind CSS v2.0+ */
 import React from "react";
 import axios from "axios";
 import {useState, useEffect} from "react";
@@ -18,11 +19,11 @@ const Honoraireenextra = () => {
   });
 
   const columns = [
-    {key: "1", title: "libelle", dataIndex: "libelle"},
-    {key: "2", title: "libelle_francais", dataIndex: "libelle_francais"},
-    {key: "3", title: "montant", dataIndex: "montant"},
+    {key: "2", title: "libelle", dataIndex: "libelle"},
+    {key: "3", title: "libelle_francais", dataIndex: "libelle_francais"},
+    {key: "4", title: "montant", dataIndex: "montant"},
     {
-      key: "4",
+      key: "5",
       title: "Actions",
       render: (record) => {
         return (
@@ -76,18 +77,18 @@ const Honoraireenextra = () => {
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (honoraire) => honoraire.libelle !== record.libelle
+          (honoraire) => honoraire.id !== record.id
         );
         setlisteservice(newlisteservice);
-        deleteHonorairerequest(record.libelle);
+        deleteHonorairerequest(record.id);
         toast.success("Honoraire supprimé avec succès");
       },
     });
   };
-  const deleteHonorairerequest = async (libelle) => {
+  const deleteHonorairerequest = async (id) => {
     try {
       const deleted = await axios.post("/honoraireenextra/delete", {
-        libelle: libelle,
+        id: id,
       });
       console.log("Honoraire supprimé");
     } catch (error) {
@@ -107,12 +108,12 @@ const Honoraireenextra = () => {
     setEdditingHonoraire(null);
   };
   //lien aveclback pour la modif
-  const editHonorairerequest = async (libelle, montant) => {
+  const editHonorairerequest = async (edditingHonoraire) => {
     try {
-      const modified = await axios.post("/honoraireenextra/modif", {
-        libelle: libelle,
-        montant: montant,
-      });
+      const modified = await axios.post(
+        "/honoraireenextra/modif",
+        edditingHonoraire
+      );
       console.log("Honoraire modifié");
     } catch (error) {
       console.log(error);
@@ -162,17 +163,14 @@ const Honoraireenextra = () => {
           onOk={() => {
             setIsEdit(false);
             const newlisteservice = listeservice.map((Honoraire) => {
-              if (Honoraire.libelle === edditingHonoraire.libelle) {
+              if (Honoraire.id === edditingHonoraire.id) {
                 return edditingHonoraire;
               } else {
                 return Honoraire;
               }
             });
             setlisteservice(newlisteservice);
-            editHonorairerequest(
-              edditingHonoraire.libelle,
-              edditingHonoraire.montant
-            );
+            editHonorairerequest(edditingHonoraire);
             resetEditing();
             toast.success("Honoraire modifie avec succée");
           }}>
