@@ -217,7 +217,7 @@ export const Collabo = () => {
         toast.error(deleted.data.error);
       } else {
         console.log("collaborateur supprimé");
-        toast.success("collaborateur supprime avec succee");
+        toast.success("collaborateur supprimé avec succès");
       }
     } catch (error) {
       console.log(error);

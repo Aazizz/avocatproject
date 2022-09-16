@@ -2,27 +2,27 @@
 // delte and add are not an option
 import React from "react";
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table, Button, Modal, Input} from "antd";
-import {MdOutlineSettingsSuggest} from "react-icons/md";
+import { useState, useEffect } from "react";
+import { Table, Button, Modal, Input } from "antd";
+import { MdOutlineSettingsSuggest } from "react-icons/md";
 import "antd/dist/antd.min.css";
-import {AiFillEdit} from "react-icons/ai";
-import {MdDeleteForever} from "react-icons/md";
-import {toast} from "react-toastify";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const Parametreglobale = () => {
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingParametre, setEdditingParametre] = useState(null);
   const [addingParametre, setAddingParametre] = useState({
-    timbrefiscale: "",
-    tauxtva: "",
+    timbrefiscale: 0,
+    tauxtva: 0,
   });
 
   const columns = [
-    { key: "0", title: "ID", dataIndex: "id" },
-    { key: "1", title: "Timbre fiscale", dataIndex: "timbrefiscale" },
-    { key: "2", title: "Taux TVA", dataIndex: "tauxtva" },
+    { key: "0", title: "id", dataIndex: "id" },
+    { key: "1", title: "timbrefiscale", dataIndex: "timbrefiscale" },
+    { key: "2", title: "tauxtva", dataIndex: "tauxtva" },
 
     {
       key: "3",
@@ -62,8 +62,7 @@ const Parametreglobale = () => {
   const getParametrerequest = async () => {
     try {
       const response = await axios.get("/Parametreglobale");
-      setlisteservice(response.data);
-      // aleh listeservice dhaherli khtr tji listeservice [{:}]
+      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
@@ -85,14 +84,14 @@ const Parametreglobale = () => {
           (Parametre) => Parametre.id !== record.id
         );
         setlisteservice(newlisteservice);
-        deleteParametrerequest(record.timbrefiscale);
+        deleteParametrerequest(record.id);
         toast.success("Paramètre supprimé avec succès");
       },
     });
   };
-  const deleteParametrerequest = async (timbrefiscale) => {
+  const deleteParametrerequest = async (id) => {
     try {
-      const deleted = await axios.post("/parametreglobaleeff", {
+      const deleted = await axios.post("/Parametreenextra/delete", {
         id: id,
       });
       console.log("Parametre supprimé");
@@ -105,7 +104,7 @@ const Parametreglobale = () => {
   //modifier une Parametre
   const editParametre = (record) => {
     setIsEdit(true);
-    setEdditingParametre({...record}); //copie mel record
+    setEdditingParametre({ ...record }); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -117,7 +116,7 @@ const Parametreglobale = () => {
       const modified = await axios.post("/Parametreglobale/modif", {
         timbrefiscale: timbrefiscale,
         tauxtva: tauxtva,
-        id:id
+        id: id,
       });
       console.log("Parametre modifié");
     } catch (error) {
@@ -140,12 +139,12 @@ const Parametreglobale = () => {
       <header className="App-header">
         <h1>Paramètres Globales</h1>
         <MdOutlineSettingsSuggest className="dashbicons"></MdOutlineSettingsSuggest>
-
         <button
           className="btnadd"
           onClick={() => {
             setIsAdd(true);
-          }}>
+          }}
+        >
           {" "}
           Ajouter
         </button>
@@ -153,7 +152,7 @@ const Parametreglobale = () => {
           <Table
             columns={columns}
             dataSource={listeservice}
-            style={{with: 15}}
+            style={{ with: 15 }}
             bordered={true}
           />
         </div>
@@ -183,7 +182,8 @@ const Parametreglobale = () => {
             );
             resetEditing();
             toast.success("Paramètre modifié avec succès");
-          }}>
+          }}
+        >
           <Input
             placeholder="timbre_fiscale"
             value={edditingParametre?.timbrefiscale}
@@ -192,7 +192,8 @@ const Parametreglobale = () => {
                 ...edditingParametre,
                 timbrefiscale: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="taux_tva"
             value={edditingParametre?.tauxtva}
@@ -201,7 +202,8 @@ const Parametreglobale = () => {
                 ...edditingParametre,
                 tauxtva: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
 
           {/*AJOUT*/}
         </Modal>
@@ -210,35 +212,38 @@ const Parametreglobale = () => {
           visible={isAdd}
           okText="Enregistrer"
           cancelText="Annuler"
-          destroyOnClose={true}
           onCancel={() => {
             setIsAdd(false);
-            setAddingParametre({timbrefiscale: 0, tauxtva: 0});
+            setAddingParametre({ timbrefiscale: 0, tauxtva: 0 });
           }}
+          destroyOnClose={true}
           onOk={() => {
             addParametre();
             setIsAdd(false);
             toast.success("Paramètre ajouté avec succès");
-            setAddingParametre({timbrefiscale: 0, tauxtva: 0});
-          }}>
+            setAddingParametre({ timbrefiscale: 0, tauxtva: 0 });
+          }}
+        >
           <Input
-            placeholder="Timbre Fiscale"
+            placeholder="timbrefiscale"
             value={addingParametre.timbrefiscale}
             onChange={(e) => {
               setAddingParametre({
                 ...addingParametre,
                 timbrefiscale: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
-            placeholder="Taux TVA"
+            placeholder="tauxtva"
             value={addingParametre.tauxtva}
             onChange={(e) => {
               setAddingParametre({
                 ...addingParametre,
                 tauxtva: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
         </Modal>
       </header>
     </div>

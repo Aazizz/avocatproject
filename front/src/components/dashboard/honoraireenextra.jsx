@@ -1,13 +1,13 @@
 /* This example requires Tailwind CSS v2.0+ */
 import React from "react";
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table, Button, Modal, Input} from "antd";
+import { useState, useEffect } from "react";
+import { Table, Button, Modal, Input } from "antd";
 import "antd/dist/antd.min.css";
-import {AiFillEdit} from "react-icons/ai";
-import {MdDeleteForever} from "react-icons/md";
-import {toast} from "react-toastify";
-import {MdOutlineCreditScore} from "react-icons/md";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
+import { MdOutlineCreditScore } from "react-icons/md";
 const Honoraireenextra = () => {
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -19,12 +19,12 @@ const Honoraireenextra = () => {
   });
 
   const columns = [
-  {key:"1",title:"id",dataIndex:"id"},
-    {key: "2", title: "libelle", dataIndex: "libelle"},
-    {key: "3", title: "libelle_francais", dataIndex: "libelle_francais"},
-    {key: "4", title: "montant", dataIndex: "montant"},
+    { key: "0", title: "id", dataIndex: "id" },
+    { key: "1", title: "libelle", dataIndex: "libelle" },
+    { key: "2", title: "libelle_francais", dataIndex: "libelle_francais" },
+    { key: "3", title: "montant", dataIndex: "montant" },
     {
-      key: "5",
+      key: "4",
       title: "Actions",
       render: (record) => {
         return (
@@ -34,7 +34,8 @@ const Honoraireenextra = () => {
                 className="edit"
                 onClick={() => {
                   editHonoraire(record);
-                }}></AiFillEdit>
+                }}
+              ></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -44,7 +45,8 @@ const Honoraireenextra = () => {
                 className="delete"
                 onClick={() => {
                   deleteHonoraire(record);
-                }}></MdDeleteForever>
+                }}
+              ></MdDeleteForever>
               <pre>
                 <p>supprimer</p>
               </pre>
@@ -82,7 +84,6 @@ const Honoraireenextra = () => {
         );
         setlisteservice(newlisteservice);
         deleteHonorairerequest(record.id);
-        toast.success("Honoraire supprimé avec succès");
       },
     });
   };
@@ -92,6 +93,7 @@ const Honoraireenextra = () => {
         id: id,
       });
       console.log("Honoraire supprimé");
+      toast.success("honoraire en extra supprimé avec succee");
     } catch (error) {
       console.log(error);
     }
@@ -101,7 +103,7 @@ const Honoraireenextra = () => {
   //modifier une Honoraire
   const editHonoraire = (record) => {
     setIsEdit(true);
-    setEdditingHonoraire({...record}); //copie mel record
+    setEdditingHonoraire({ ...record }); //copie mel record
   };
 
   const resetEditing = () => {
@@ -109,12 +111,13 @@ const Honoraireenextra = () => {
     setEdditingHonoraire(null);
   };
   //lien aveclback pour la modif
-  const editHonorairerequest = async (edditingHonoraire) => {
+  const editHonorairerequest = async (libelle, montant, id) => {
     try {
-      const modified = await axios.post(
-        "/honoraireenextra/modif",
-        edditingHonoraire
-      );
+      const modified = await axios.post("/honoraireenextra/modif", {
+        libelle: libelle,
+        montant: montant,
+        id: id,
+      });
       console.log("Honoraire modifié");
     } catch (error) {
       console.log(error);
@@ -140,7 +143,8 @@ const Honoraireenextra = () => {
           className="btnadd"
           onClick={() => {
             setIsAdd(true);
-          }}>
+          }}
+        >
           {" "}
           Ajouter
         </button>
@@ -148,7 +152,7 @@ const Honoraireenextra = () => {
           <Table
             columns={columns}
             dataSource={listeservice}
-            style={{with: 15}}
+            style={{ with: 15 }}
             bordered={true}
           />
         </div>
@@ -171,10 +175,15 @@ const Honoraireenextra = () => {
               }
             });
             setlisteservice(newlisteservice);
-            editHonorairerequest(edditingHonoraire);
+            editHonorairerequest(
+              edditingHonoraire.libelle,
+              edditingHonoraire.montant,
+              edditingHonoraire.id
+            );
             resetEditing();
             toast.success("Honoraire modifie avec succée");
-          }}>
+          }}
+        >
           <Input
             placeholder="libelle"
             value={edditingHonoraire?.libelle}
@@ -183,7 +192,8 @@ const Honoraireenextra = () => {
                 ...edditingHonoraire,
                 libelle: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="libelle_français"
             value={edditingHonoraire?.libelle_francais}
@@ -192,7 +202,8 @@ const Honoraireenextra = () => {
                 ...edditingHonoraire,
                 libelle_francais: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Montant"
             value={edditingHonoraire?.montant}
@@ -201,7 +212,8 @@ const Honoraireenextra = () => {
                 ...edditingHonoraire,
                 montant: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
 
           {/*AJOUT*/}
         </Modal>
@@ -228,7 +240,8 @@ const Honoraireenextra = () => {
               montant: 0,
             });
           }}
-          destroyOnClose={true}>
+          destroyOnClose={true}
+        >
           <Input
             placeholder="libelle"
             value={addingHonoraire.libelle}
@@ -237,7 +250,8 @@ const Honoraireenextra = () => {
                 ...addingHonoraire,
                 libelle: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="libelle_francais"
             value={addingHonoraire.libelle_francais}
@@ -246,7 +260,8 @@ const Honoraireenextra = () => {
                 ...addingHonoraire,
                 libelle_francais: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="montant"
             value={addingHonoraire.montant}
@@ -255,7 +270,8 @@ const Honoraireenextra = () => {
                 ...addingHonoraire,
                 montant: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
         </Modal>
       </header>
     </div>
