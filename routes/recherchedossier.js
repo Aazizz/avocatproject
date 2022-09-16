@@ -65,7 +65,9 @@ root11.post("/donneedossieradd", async (req, res) => {
 //get all dossiers
 root11.get("/recherchedossier", async (req, res) => {
   try {
-    const alldossiers = await pool.query("SELECT * FROM recherchedossier");
+    const alldossiers = await pool.query(
+      "SELECT * FROM recherchedossier ORDER by id_dossier asc"
+    );
     res.json(alldossiers.rows);
   } catch (err) {
     console.error(err.message);

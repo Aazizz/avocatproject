@@ -51,7 +51,9 @@ root13.post("/tacheadd", async(req, res) => {
 //get all taches
 root13.get("/tache", async(req, res) => {
     try {
-        const alltaches = await pool.query("SELECT * FROM tachetable");
+        const alltaches = await pool.query(
+          "SELECT * FROM tachetable ORDER by id_tache asc"
+        );
         res.json(alltaches.rows);
     } catch (err) {
         console.error(err.message);

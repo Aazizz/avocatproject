@@ -53,7 +53,7 @@ root7.get("/emplacementdossier", async(req, res) => {
 root7.post("/emplacementdossier/delete", async(req, res) => {
     try {
         const { id } = req.body;
-        const newTodo1 = await pool.query("DELETE FROM public.emplacementdossier WHERE id=$1", [id]);
+        const newTodo1 = await pool.query("DELETE FROM emplacementdossier WHERE id=$1", [id]);
         res.json(newTodo1);
         res.json("emplacement was deleted");
 

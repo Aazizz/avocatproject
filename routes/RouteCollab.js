@@ -107,13 +107,16 @@ route.post("/modif", (req, res) => {
 });
 
 route.get("/collab", (req, res) => {
-    pool.query("SELECT * FROM collaboratortable", (error, result) => {
+    pool.query(
+      "SELECT * FROM collaboratortable ORDER by id asc",
+      (error, result) => {
         if (error) {
-            console.log(error);
+          console.log(error);
         } else {
-            res.json(result.rows);
+          res.json(result.rows);
         }
-    });
+      }
+    );
 });
 
 module.exports = route;

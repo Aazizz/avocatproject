@@ -33,7 +33,9 @@ root12.post("/adversaireadd", auth, async(req, res) => {
 //get all adversaires
 root12.get("/adversaire", async(req, res) => {
     try {
-        const alladversaires = await pool.query("SELECT * FROM adversaire");
+        const alladversaires = await pool.query(
+          "SELECT * FROM adversaire ORDER by id_adversaire asc"
+        );
         res.json(alladversaires.rows);
     } catch (err) {
         console.error(err.message);

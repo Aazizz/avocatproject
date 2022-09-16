@@ -32,7 +32,6 @@ route.post("/deleteTribunale", (req, res) => {
       }
     }
   );
-  
 });
 
 route.post("/modifierTribunale", (req, res) => {
@@ -62,14 +61,16 @@ route.get("/tribunale", (req, res) => {
 
 //services
 route.get("/service", (req, res) => {
-  pool.query("SELECT * FROM servicetable", (error, result) => {
-    if (error) {
-      console.log(error);
-    } else {
-      
-      res.json(result.rows);
+  pool.query(
+    "SELECT * FROM servicetable ORDER by service_id asc",
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        res.json(result.rows);
+      }
     }
-  });
+  );
 });
 route.post("/serviceadd", (req, res) => {
   const { nom, tribunale_id, lundi, mardi, mercredi, jeudi, vendredi, samedi } =
@@ -116,7 +117,17 @@ route.post("/updateservice", (req, res) => {
   } = req.body;
   pool.query(
     "UPDATE servicetable SET nom=$1,lundi=$2,mardi=$3,mercredi=$4,jeudi=$5,vendredi=$6,samedi=$7,tribunale_id=$8 WHERE service_id=$9 ",
-    [nom, lundi, mardi, mercredi, jeudi, vendredi, samedi, tribunale_id, service_id],
+    [
+      nom,
+      lundi,
+      mardi,
+      mercredi,
+      jeudi,
+      vendredi,
+      samedi,
+      tribunale_id,
+      service_id,
+    ],
     (error, result) => {
       if (error) {
         console.log(error);
@@ -128,15 +139,16 @@ route.post("/updateservice", (req, res) => {
 });
 
 route.get("/tribunale", (req, res) => {
-  pool.query("SELECT * FROM tribunaletable", (error, result) => {
-    if (error) {
-      console.log(error);
-    } else {
-      res.json(result.rows);
+  pool.query(
+    "SELECT * FROM tribunaletable ORDER by id asc",
+    (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        res.json(result.rows);
+      }
     }
-  });
+  );
 });
 
 module.exports = route;
-
-

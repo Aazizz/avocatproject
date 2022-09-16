@@ -18,7 +18,7 @@ import TabDossier from "./tabdossier";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { domMax } from "framer-motion";
-import {RiFolderAddFill} from "react-icons/ri";
+import { RiFolderAddFill } from "react-icons/ri";
 
 const { Option } = Select;
 let index = 0;
@@ -47,13 +47,8 @@ const DonneeDossier = () => {
     "ملك تجاري",
     "نفقة",
   ]);*/
-  const [typedossierliste,setTypedossierliste] = useState([]);
-    const [typedossier1, setTypedossier1] = useState([]);
-  
-
- 
-
-
+  const [typedossierliste, setTypedossierliste] = useState([]);
+  const [typedossier1, setTypedossier1] = useState([]);
 
   const [value, setValue] = useState(1);
   const [disabledtrib, setDisabledtrib] = useState(false);
@@ -86,22 +81,21 @@ const DonneeDossier = () => {
     console.log(value, selectedOptions);
     setAdd_dossier({ ...add_dossier, emplacement: selectedOptions[0].label });
   };
-    const onChange = (value, selectedOptions) => {
-      console.log(value, selectedOptions);
-      setValuetrib(selectedOptions[0].label);
-      const newlisteser = listeser.filter(
-        (ser) =>
-          ser.value.substring(0,((ser.value).indexOf(":"))) ==
-          selectedOptions[0].value
-      );
-      console.log(newlisteser, "hello");
-      setListeserviceinput(newlisteser);
-      
-      setAdd_dossier({ ...add_dossier, lieu: selectedOptions[0].label });
-      setDisabledtrib(true);
-      console.log(listeserviceinput, "ena liste service jdida");
-    };
+  const onChange = (value, selectedOptions) => {
+    console.log(value, selectedOptions);
+    setValuetrib(selectedOptions[0].label);
+    const newlisteser = listeser.filter(
+      (ser) =>
+        ser.value.substring(0, ser.value.indexOf(":")) ==
+        selectedOptions[0].value
+    );
+    console.log(newlisteser, "hello");
+    setListeserviceinput(newlisteser);
 
+    setAdd_dossier({ ...add_dossier, lieu: selectedOptions[0].label });
+    setDisabledtrib(true);
+    console.log(listeserviceinput, "ena liste service jdida");
+  };
 
   const onChangeservice = (value, selectedOptions) => {
     console.log(value, selectedOptions);
@@ -139,13 +133,13 @@ const DonneeDossier = () => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
-      const onChangetype = (value, selectedOptions) => {
-        console.log(value, selectedOptions);
-        setAdd_dossier({
-          ...add_dossier,
-          typedossier: selectedOptions[0].label,
-        });
-      };
+  const onChangetype = (value, selectedOptions) => {
+    console.log(value, selectedOptions);
+    setAdd_dossier({
+      ...add_dossier,
+      typedossier: selectedOptions[0].label,
+    });
+  };
   //**********select tribunale********************
 
   const gettribunalerequest = async () => {
@@ -159,7 +153,7 @@ const DonneeDossier = () => {
         label: trib.lieu,
       }));
       setListe(newliste1);
-      
+
       // console.log("hellolistetrib", listeTrib);
     } catch (error) {
       console.log(error.message);
@@ -191,7 +185,6 @@ const DonneeDossier = () => {
     }
   };
 
-
   const listeemp = useMemo(() => {
     getemplacementdossierrequest();
 
@@ -200,15 +193,14 @@ const DonneeDossier = () => {
       label: emp.libelle,
     }));
   }, [listeemplacement]);
-  
 
   //************ajouter dossier **************/
-    const getTypedossierrequest = async () => {
+  const getTypedossierrequest = async () => {
     try {
       const response = await axios.get("/typedossier");
-      setTypedossierliste(response.data); 
+      setTypedossierliste(response.data);
       const newliste = typedossierliste.map((ser) => ({
-        value: ser.id ,
+        value: ser.id,
         label: ser.type_dossier,
       }));
       setTypedossier1(newliste);
@@ -219,17 +211,17 @@ const DonneeDossier = () => {
   useEffect(() => {
     gettribunalerequest();
     getTypedossierrequest();
-    console.log(typedossierliste,"type")
+    console.log(typedossierliste, "type");
     const id = localStorage.getItem("id_dossier");
     console.log(id, "ena el id eli bch netbaath");
     setAdd_dossier({ ...add_dossier, id_dossier: id });
-  }, [liste,typedossierliste,add_dossier.id_dossier]);
+  }, [liste, typedossierliste, add_dossier.id_dossier]);
 
   useEffect(() => {
     getservicerequest();
-    console.log(listeservice)
-     console.log(listeser,"listeserena");
-  },[listeservice]);
+    console.log(listeservice);
+    console.log(listeser, "listeserena");
+  }, [listeservice]);
 
   const adddossier = async () => {
     try {
@@ -379,22 +371,24 @@ const DonneeDossier = () => {
             onSearch={(value) => console.log(value)}
             value={valueservice}
           />
+          <Marginer direction="vertical" margin={35} />
+          <Button
+            type="primary"
+            style={{ width: 280 }}
+            onClick={() => {
+              setDisabledtrib(false);
+              setDisabledservice(false);
+              setValuetrib("");
+              setValueservice("");
+              const id = localStorage.getItem("id_dossier");
+              console.log(id, "ena mel local storage");
+            }}
+          >
+            resélectionner les données du tribunale
+          </Button>
         </div>
-        <Button
-          type="primary"
-          style={{ width: 300 }}
-          onClick={() => {
-            setDisabledtrib(false);
-            setDisabledservice(false);
-            setValuetrib("");
-            setValueservice("");
-            const id = localStorage.getItem("id_dossier");
-            console.log(id, "ena mel local storage");
-          }}
-        >
-          resélectionner les données du tribunale
-        </Button>
       </div>
+
       <div className="client5">
         <div className="div">
           <label>Observation(s) : </label>

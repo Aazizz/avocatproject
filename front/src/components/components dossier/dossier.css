@@ -1,5 +1,5 @@
 .addclientdem {
-  color:#0583f2;
+  color: #0583f2;
   width: 50px;
   height: 50px;
 }
@@ -67,7 +67,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: solid 0.5px rgba(107, 107, 243, 0.66);
   padding: 3%;
   width: 100%;
   margin: auto;
@@ -79,11 +78,9 @@
   align-items: center;
   margin: auto;
   width: 100%;
-  
 }
 
 .reglementdiv1 {
-  
   display: grid;
   grid-template-columns: repeat(2, 3fr);
   grid-gap: 45px;
@@ -140,17 +137,17 @@
 }
 
 .client1 {
-  margin-top:20px;
+  margin-top: 20px;
   display: grid;
-   align-items: center;
-   grid-gap: 50px;
+  align-items: center;
+  grid-gap: 50px;
   grid-template-columns: repeat(2, 3fr);
   grid-auto-rows: minmax(70px, auto);
 }
 
 .client2 {
   display: grid;
-   align-items: center;
+  align-items: center;
   grid-template-columns: repeat(2, 3fr);
   grid-gap: 50px;
   grid-auto-rows: minmax(70px, auto);
@@ -165,8 +162,9 @@
 }
 
 .client4 {
-  align-items: center;
   display: grid;
+  align-items: center;
+
   grid-template-columns: repeat(2, 3fr);
   grid-gap: 50px;
   grid-auto-rows: minmax(70px, auto);
@@ -346,8 +344,8 @@ legend {
   margin-bottom: 30px !important;
 }
 .buttonvalidate {
-  color:  #0583f2;
-  background:  rgb(255, 255, 255);
+  color: #0583f2;
+  background: rgb(255, 255, 255);
   height: 2.45rem;
   border: 2px solid #0583f2;
   width: 15rem !important;
@@ -358,7 +356,7 @@ legend {
   font-weight: bold;
 }
 .buttonvalidate:hover {
-  background: #0583f2!important;
-  color:white !important;
-  border: 2px solid #0583f2!important;
+  background: #0583f2 !important;
+  color: white !important;
+  border: 2px solid #0583f2 !important;
 }

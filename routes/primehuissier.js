@@ -25,7 +25,9 @@ root8.post("/primehuissieradd", async(req, res) => {
 //get all primes
 root8.get("/primehuissier", async(req, res) => {
     try {
-        const allprimes = await pool.query("SELECT * FROM primehuissier");
+        const allprimes = await pool.query(
+          "SELECT * FROM primehuissier ORDER by id asc"
+        );
         res.json(allprimes.rows);
     } catch (err) {
         console.error(err.message);

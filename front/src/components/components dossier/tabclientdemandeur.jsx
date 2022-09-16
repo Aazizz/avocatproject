@@ -21,6 +21,8 @@ const TabClient = () => {
       Fax: "",
     Email:""
   });
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(4);
   const column = [
     {key: "1", title: "Nom", dataIndex: "Nom"},
     {key: "2", title: "CIN", dataIndex: "CIN"},
