@@ -431,13 +431,8 @@ const Tribunale = () => {
           {service === true && (
             <>
               <h1>Liste des services</h1>
-<<<<<<< Updated upstream
               <h3 style={{color: "#0583f2"}}>{nomtrib}</h3>
               <h3 style={{color: "#0583f2"}}>{idtrib}</h3>
-=======
-              <h3 style={{ color: "#0583f2" }}>{nomtrib}</h3>
-              <h3 style={{ color: "#0583f2" }}>{idtrib}</h3>
->>>>>>> Stashed changes
               <MdHomeRepairService className="dashbicons"></MdHomeRepairService>
 
               <button

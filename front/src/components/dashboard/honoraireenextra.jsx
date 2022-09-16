@@ -19,15 +19,9 @@ const Honoraireenextra = () => {
   });
 
   const columns = [
-<<<<<<< Updated upstream
     {key: "2", title: "libelle", dataIndex: "libelle"},
     {key: "3", title: "libelle_francais", dataIndex: "libelle_francais"},
     {key: "4", title: "montant", dataIndex: "montant"},
-=======
-    {key: "1", title: "libelle", dataIndex: "libelle"},
-    {key: "2", title: "libelle_français", dataIndex: "libelle_francais"},
-    {key: "3", title: "montant", dataIndex: "montant"},
->>>>>>> Stashed changes
     {
       key: "5",
       title: "Actions",
