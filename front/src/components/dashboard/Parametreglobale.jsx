@@ -20,8 +20,9 @@ const Parametreglobale = () => {
   });
 
   const columns = [
-    {key: "1", title: "Timbre fiscale", dataIndex: "timbrefiscale"},
-    {key: "2", title: "Taux TVA", dataIndex: "tauxtva"},
+    { key: "0", title: "ID", dataIndex: "id" },
+    { key: "1", title: "Timbre fiscale", dataIndex: "timbrefiscale" },
+    { key: "2", title: "Taux TVA", dataIndex: "tauxtva" },
 
     {
       key: "3",
@@ -34,7 +35,8 @@ const Parametreglobale = () => {
                 className="edit"
                 onClick={() => {
                   editParametre(record);
-                }}></AiFillEdit>
+                }}
+              ></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -44,7 +46,8 @@ const Parametreglobale = () => {
                 className="delete"
                 onClick={() => {
                   deleteParametre(record);
-                }}></MdDeleteForever>
+                }}
+              ></MdDeleteForever>
               <pre>
                 <p>supprimer</p>
               </pre>
@@ -79,7 +82,7 @@ const Parametreglobale = () => {
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (Parametre) => Parametre.timbrefiscale !== record.timbrefiscale
+          (Parametre) => Parametre.id !== record.id
         );
         setlisteservice(newlisteservice);
         deleteParametrerequest(record.timbrefiscale);
@@ -90,7 +93,7 @@ const Parametreglobale = () => {
   const deleteParametrerequest = async (timbrefiscale) => {
     try {
       const deleted = await axios.post("/parametreglobaleeff", {
-        timbrefiscale: timbrefiscale,
+        id: id,
       });
       console.log("Parametre supprimé");
     } catch (error) {
@@ -114,6 +117,7 @@ const Parametreglobale = () => {
       const modified = await axios.post("/Parametreglobale/modif", {
         timbrefiscale: timbrefiscale,
         tauxtva: tauxtva,
+        id:id
       });
       console.log("Parametre modifié");
     } catch (error) {
@@ -165,7 +169,7 @@ const Parametreglobale = () => {
           onOk={() => {
             setIsEdit(false);
             const newlisteservice = listeservice.map((Parametre) => {
-              if (Parametre.timbrefiscale === edditingParametre.timbrefiscale) {
+              if (Parametre.id === edditingParametre.id) {
                 return edditingParametre;
               } else {
                 return Parametre;
@@ -174,7 +178,8 @@ const Parametreglobale = () => {
             setlisteservice(newlisteservice);
             editParametrerequest(
               edditingParametre.timbrefiscale,
-              edditingParametre.tauxtva
+              edditingParametre.tauxtva,
+              edditingParametre.id
             );
             resetEditing();
             toast.success("Paramètre modifié avec succès");
