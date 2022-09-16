@@ -26,7 +26,9 @@ root1.post("/parametreglobale", async (req, res) => {
 //select
 root1.get("/parametreglobale", async (req, res) => {
   try {
-    const newTodo = await pool.query("SELECT * FROM parametreglobale");
+    const newTodo = await pool.query(
+      "SELECT * FROM parametreglobale  ORDER by id asc "
+    );
     res.json(newTodo.rows);
   } catch (err) {
     console.error(err.message);
@@ -35,18 +37,18 @@ root1.get("/parametreglobale", async (req, res) => {
 //pour la modification
 root1.post("/parametreglobale/modif", async (req, res) => {
   try {
-    const { timbrefiscale, tauxtva,id } = req.body;
+    const { timbrefiscale, tauxtva, id } = req.body;
 
     const newTodo2 = await pool.query(
       "UPDATE parametreglobale SET timbrefiscale=$1,tauxtva=$2 where id=$3",
-      [timbrefiscale, tauxtva,id]
+      [timbrefiscale, tauxtva, id]
     );
     res.json(newTodo2);
   } catch (err) {
     console.error(err.message);
   }
 });
-root1.post("/parametreglobaleeff", async (req, res) => {
+root1.post("/Parametreenextra/delete", async (req, res) => {
   try {
     const { id } = req.body;
     const deleteParametre = await pool.query(

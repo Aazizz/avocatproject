@@ -111,7 +111,7 @@ const Parametreglobale = () => {
     setEdditingParametre(null);
   };
   //lien aveclback pour la modif
-  const editParametrerequest = async (timbrefiscale, tauxtva) => {
+  const editParametrerequest = async (timbrefiscale, tauxtva, id) => {
     try {
       const modified = await axios.post("/Parametreglobale/modif", {
         timbrefiscale: timbrefiscale,
