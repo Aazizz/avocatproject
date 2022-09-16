@@ -229,10 +229,11 @@ const ClientDemandeur = () => {
       </div>
 
       <Marginer direction="vertical" margin={20} />
-      <TabClient />
+
       <button className="buttonvalidate" onClick={addclientdossier}>
         Valider Dossier
       </button>
+      <TabClient />
     </div>
   );
 };
