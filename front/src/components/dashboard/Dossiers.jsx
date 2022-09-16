@@ -382,7 +382,7 @@ const Dossiers = () => {
         </div>
 
         <Modal
-          title="modifier dossier"
+          title="Changement de l'emplcement du dossier"
           visible={isEdit}
           okText="Enregistrer"
           cancelText="Annuler"
