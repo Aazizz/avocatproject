@@ -1,15 +1,12 @@
-/* This example requires Tailwind CSS v2.0+ */
-// delte and add are not an option
-// il faut changer lupdate where libelle=$1(besh nzid id wakhaw yabda unique primary key maaneha)
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { Table, Button, Modal, Input } from "antd";
+import {useState, useEffect} from "react";
+import {Table, Button, Modal, Input} from "antd";
 import "antd/dist/antd.min.css";
-import { AiFillEdit } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
-import { toast } from "react-toastify";
-import { CurrencyDollarIcon } from "@heroicons/react/outline";
+import {AiFillEdit} from "react-icons/ai";
+import {MdDeleteForever} from "react-icons/md";
+import {toast} from "react-toastify";
+import {CurrencyDollarIcon} from "@heroicons/react/outline";
 
 const Recettedufinance = () => {
   const [listeservice, setlisteservice] = useState([]);
@@ -23,9 +20,9 @@ const Recettedufinance = () => {
   });
 
   const columns = [
-    { key: "1", title: "Libelle", dataIndex: "libelle" },
-    { key: "2", title: "Montant", dataIndex: "montant" },
-    
+    {key: "1", title: "Libelle", dataIndex: "libelle"},
+    {key: "2", title: "Montant", dataIndex: "montant"},
+
     {
       key: "4",
       title: "Actions",
@@ -37,9 +34,10 @@ const Recettedufinance = () => {
                 className="edit"
                 onClick={() => {
                   editRecettedufinance(record);
-                }}
-              ></AiFillEdit>
-              <pre><p>Modifier </p></pre>
+                }}></AiFillEdit>
+              <pre>
+                <p>Modifier </p>
+              </pre>
             </div>
             {
               <div className="divdelete">
@@ -47,10 +45,11 @@ const Recettedufinance = () => {
                   className="delete"
                   onClick={() => {
                     deleteRecettedufinance(record);
-                  }}
-                ></MdDeleteForever>
+                  }}></MdDeleteForever>
 
-               <pre><p>Supprimer</p></pre>
+                <pre>
+                  <p>Supprimer</p>
+                </pre>
               </div>
             }
           </div>
@@ -105,7 +104,7 @@ const Recettedufinance = () => {
   //modifier une Recettedufinance
   const editRecettedufinance = (record) => {
     setIsEdit(true);
-    setEdditingRecettedufinance({ ...record }); //copie mel record
+    setEdditingRecettedufinance({...record}); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -141,16 +140,23 @@ const Recettedufinance = () => {
   return (
     <div className="App">
       <header className="App-header">
-      <h1>Recette du finance</h1>
-      <CurrencyDollarIcon className="dashbicons"></CurrencyDollarIcon>
-        {<button className="btnadd"  onClick={() => {
-            setIsAdd(true);
-          } }> Ajouter</button>}
+        <h1>Recette du finance</h1>
+        <CurrencyDollarIcon className="dashbicons"></CurrencyDollarIcon>
+        {
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}>
+            {" "}
+            Ajouter
+          </button>
+        }
         <div classname="tab">
           <Table
             columns={columns}
             dataSource={listeservice}
-            style={{ with: 15 }}
+            style={{with: 15}}
             bordered={true}
           />
         </div>
@@ -191,8 +197,7 @@ const Recettedufinance = () => {
                 ...edditingRecettedufinance,
                 libelle: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="montant"
             value={edditingRecettedufinance?.montant}
@@ -201,8 +206,7 @@ const Recettedufinance = () => {
                 ...edditingRecettedufinance,
                 montant: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
 
           {/*AJOUT*/}
         </Modal>
@@ -214,11 +218,11 @@ const Recettedufinance = () => {
           destroyOnClose={true}
           onCancel={() => {
             setIsAdd(false);
-              setAddingRecettedufinance({
-                id: "",
-                libelle: "",
-                montant: "",
-              });
+            setAddingRecettedufinance({
+              id: "",
+              libelle: "",
+              montant: "",
+            });
           }}
           onOk={() => {
             addRecettedufinance();
@@ -240,8 +244,7 @@ const Recettedufinance = () => {
                 ...addingRecettedufinance,
                 libelle: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="montant"
             value={addingRecettedufinance.montant}
@@ -250,8 +253,7 @@ const Recettedufinance = () => {
                 ...addingRecettedufinance,
                 montant: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
         </Modal>
       </header>
     </div>

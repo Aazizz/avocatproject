@@ -1,7 +1,11 @@
 import React from "react";
 
 import "bootstrap/dist/css/bootstrap.css";
-import {Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Button, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {useContext} from "react";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../context/AuthContext";
 import {
   PlusIcon,
   ServerIcon,
@@ -39,20 +43,7 @@ import {
   UserAddIcon,
   UserGroupIcon,
 } from "@heroicons/react/solid";
-const solutions = [
-  {
-    name: "Paramètre globale",
-    description: "",
-    href: "/home/Parametreglobale",
-    icon: CogIcon,
-  },
-  {
-    name: "honoraire en extra",
-    description: "",
-    href: "/home/honoraireenextra",
-    icon: CreditCardIcon,
-  },
-];
+
 const resourcesdebours = [
   {
     name: "timbre",
@@ -82,6 +73,18 @@ const resourcesdebours = [
 
 const solutions1 = [
   {
+    name: "Paramètre globale",
+    description: "",
+    href: "/home/Parametreglobale",
+    icon: CogIcon,
+  },
+  {
+    name: "honoraire en extra",
+    description: "",
+    href: "/home/honoraireenextra",
+    icon: CreditCardIcon,
+  },
+  {
     name: "Emplacement dossier",
     description: "",
     href: "/home/emplacementdossier",
@@ -96,7 +99,7 @@ const solutions1 = [
   {
     name: "Type dossier",
     description: " ",
-    href: "/home/underconstruction",
+    href: "/home/typedossier",
     icon: FolderIcon,
   },
   {
@@ -215,69 +218,72 @@ const resources3 = [
 ];
 
 export default function Example() {
+  const {getLoggedIn} = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  async function logOut() {
+    // await axios.get("http://localhost:5000/logout");
+    await axios.get("/logout");
+    await getLoggedIn();
+    navigate("/");
+  }
   return (
     <div className="App">
       <Navbar
-        bg="light"
+        bg="white"
         variant="black"
-        expand="sm"
-        className="flex justify-between items-center px-1 py-6 sm:px-6 md:justify-start ">
+        expand="lg"
+        className="flex justify-between items-center px-1 py-4 sm:px-6 md:justify-start ">
         <Navbar.Brand></Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav>
-            <NavDropdown
-              title="Paramètres"
-              className="relative -ml-7 mt-1 transform w-screen max-w-sm lg:max-w-3xl font-bold">
-              <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2 w-100 h-100">
-                {solutions.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="-m-1 p-1 flex items-start rounded-lg hover:bg-gray-50">
-                    <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
-                      <item.icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
-                    <div className="ml-4">
-                      <p className="text-base font-medium text-gray-900">
-                        {item.name}
-                      </p>
-                      <p className="mt-1 text-sm text-gray-500">
-                        {item.description}
-                      </p>
-                    </div>
-                  </a>
-                ))}
+            <NavDropdown title="Paramètres" className="font-bold">
+              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                <div className="relative grid gap-6 bg-white px-4 py-6 sm:gap-8 sm:p-5">
+                  {solutions1.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="-m-4 p-1 flex items-start rounded-lg hover:bg-blue-100 text-decoration-none">
+                      <div className="ml-4">
+                        <p className="text-base font-medium text-gray-900">
+                          {item.name}
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </NavDropdown>
 
-                {solutions1.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="-m-2 p-2 flex items-start rounded-lg hover:bg-gray-50">
-                    <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
-                      <item.icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
-
-                    <p className="text-base font-medium text-gray-900 p-2">
-                      {item.name}
-                    </p>
-                  </a>
-                ))}
+            <NavDropdown title="Debours" className="font-bold">
+              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden ">
+                <div className="relative grid gap-6 bg-white px-4 py-6 sm:gap-8 sm:p-5">
+                  {resourcesdebours.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="-m-4 p-1 flex items-start rounded-lg hover:bg-blue-100 text-decoration-none">
+                      <div className="ml-4">
+                        <p className="text-base font-medium text-gray-900">
+                          {item.name}
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
             </NavDropdown>
             <NavDropdown title="Clients" className="font-bold">
-              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden ">
+                <div className="relative grid gap-6 bg-white px-4 py-6 sm:gap-8 sm:p-5">
                   {client0.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
-                      className="-m-4 p-1 flex items-start rounded-lg hover:bg-gray-50">
-                      <div
-                        className="flex-shrink-0 flex items-center justify-center h-5 w-5 rounded-md bg-blue-500 
-                              text-white sm:h-12 sm:w-12">
-                        <item.icon className="h-6 w-6" aria-hidden="true" />
-                      </div>
+                      className="-m-4 p-1 flex items-start rounded-lg hover:bg-blue-100 text-decoration-none">
                       <div className="ml-4">
                         <p className="text-base font-medium text-gray-900">
                           {item.name}
@@ -295,10 +301,7 @@ export default function Example() {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="-m-4 p-2 flex items-start rounded-lg hover:bg-gray-50">
-                      <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
-                        <item.icon className="h-6 w-6" aria-hidden="true" />
-                      </div>
+                      className="-m-4 p-2 flex items-start rounded-lg hover:bg-blue-100 text-decoration-none">
                       <div className="ml-4">
                         <p className="text-base font-medium text-gray-900 p-1">
                           {item.name}
@@ -325,12 +328,10 @@ export default function Example() {
                 Etat Huissier
               </Nav.Link>
             </div>
-            <div className="flex items-center md:ml-60">
-              <a
-                href="/"
-                className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-500  ml-10">
+            <div className="flex items-center ml-200 px-20">
+              <Button title="se Déconnecter" onClick={logOut}>
                 Se déconnecter
-              </a>
+              </Button>
             </div>
           </Nav>
         </Navbar.Collapse>
