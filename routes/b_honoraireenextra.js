@@ -47,7 +47,6 @@ root2.get("/honoraireenextra", async(req, res) => {
                 " DELETE FROM public.honoraireenextra WHERE id=$1", [id]
             );
             res.json(newTodo1);
-            res.json("honoraire was deleted");
         } catch (err) {
             console.error(err.message);
         }
