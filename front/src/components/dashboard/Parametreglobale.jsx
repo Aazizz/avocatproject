@@ -39,7 +39,7 @@ const Parametreglobale = () => {
               ></AiFillEdit>
               <p>modifier</p>
             </div>
-            {/* <div className="divdelete">
+            <div className="divdelete">
           <MdDeleteForever
             className="delete"
             onClick={() => {
@@ -47,8 +47,8 @@ const Parametreglobale = () => {
             }}
           ></MdDeleteForever>
 
-          <p>supprimer</p>
-          </div>*/}
+       <pre> <p>supprimer</p> </pre>  
+          </div>
           </div>
         );
       },
@@ -137,7 +137,7 @@ const Parametreglobale = () => {
       <header className="App-header">
         <h1>Paramètres Globales</h1>
         <MdOutlineSettingsSuggest className="dashbicons"></MdOutlineSettingsSuggest>
-        {check && <button
+        { <button
           className="btnadd"
           onClick={() => {
             setIsAdd(true);
