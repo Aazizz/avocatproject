@@ -12,18 +12,18 @@ import {
   Drawer,
   Popover,
 } from "antd";
-import React, { useState, useEffect, useMemo } from "react";
+import React, {useState, useEffect, useMemo} from "react";
 import axios from "axios";
-import { AiFillBank } from "react-icons/ai";
+import {AiFillBank} from "react-icons/ai";
 import Tableau from "./service";
 import "./trib.css";
-import { GoDiffAdded } from "react-icons/go";
-import { AiFillEdit } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
-import { toast } from "react-toastify";
-import { MdHomeRepairService } from "react-icons/md";
+import {GoDiffAdded} from "react-icons/go";
+import {AiFillEdit} from "react-icons/ai";
+import {MdDeleteForever} from "react-icons/md";
+import {toast} from "react-toastify";
+import {MdHomeRepairService} from "react-icons/md";
 import Example from "../Example";
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
 const Tribunale = () => {
   const [service, setService] = useState(false);
@@ -32,7 +32,7 @@ const Tribunale = () => {
   const [nomtrib, setNomtrib] = useState("");
   const [filtredservice, setFiltredservice] = useState([]);
   const [isEdittrib, setIsEdittrib] = useState(false);
-  const [edditingtrib, setEdditingtrib] = useState({ lieu: "" });
+  const [edditingtrib, setEdditingtrib] = useState({lieu: ""});
   const [isAddtrib, setIsAddtrib] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(3);
@@ -99,7 +99,7 @@ const Tribunale = () => {
   //*************************modifier tribunale**************
   const edittrib = (id, lieu) => {
     setIsEdittrib(true);
-    setEdditingtrib({ id: id, lieu: lieu }); //copie mel record
+    setEdditingtrib({id: id, lieu: lieu}); //copie mel record
   };
   const resetEditingtrib = () => {
     setIsEdittrib(false);
@@ -172,17 +172,16 @@ const Tribunale = () => {
     jeudi: "",
     vendredi: "",
     samedi: "",
-    tribunale_id: idtrib,
   });
   const column = [
-    { key: "1", title: "ID", dataIndex: "service_id" },
-    { key: "2", title: "nom", dataIndex: "nom" },
-    { key: "3", title: "lundi", dataIndex: "lundi" },
-    { key: "4", title: "mardi", dataIndex: "mardi" },
-    { key: "5", title: "mercredi", dataIndex: "mercredi" },
-    { key: "6", title: "jeudi", dataIndex: "jeudi" },
-    { key: "7", title: "vendredi", dataIndex: "vendredi" },
-    { key: "8", title: "samedi", dataIndex: "samedi" },
+    {key: "1", title: "ID", dataIndex: "service_id"},
+    {key: "2", title: "nom", dataIndex: "nom"},
+    {key: "3", title: "lundi", dataIndex: "lundi"},
+    {key: "4", title: "mardi", dataIndex: "mardi"},
+    {key: "5", title: "mercredi", dataIndex: "mercredi"},
+    {key: "6", title: "jeudi", dataIndex: "jeudi"},
+    {key: "7", title: "vendredi", dataIndex: "vendredi"},
+    {key: "8", title: "samedi", dataIndex: "samedi"},
 
     {
       key: "9",
@@ -195,8 +194,7 @@ const Tribunale = () => {
                 className="edit"
                 onClick={() => {
                   editservice(record);
-                }}
-              ></AiFillEdit>
+                }}></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -206,8 +204,7 @@ const Tribunale = () => {
                 className="delete"
                 onClick={() => {
                   deleteservice(record);
-                }}
-              ></MdDeleteForever>
+                }}></MdDeleteForever>
               <pre>
                 <p>supprimer</p>
               </pre>
@@ -218,8 +215,8 @@ const Tribunale = () => {
     },
   ];
   const column1 = [
-    { key: "1", title: "ID", dataIndex: "id" },
-    { key: "2", title: "lieu", dataIndex: "lieu" },
+    {key: "1", title: "ID", dataIndex: "id"},
+    {key: "2", title: "lieu", dataIndex: "lieu"},
 
     {
       key: "3",
@@ -232,8 +229,7 @@ const Tribunale = () => {
                 className="edit"
                 onClick={() => {
                   edittrib(record.id, record.lieu);
-                }}
-              ></AiFillEdit>
+                }}></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -243,8 +239,7 @@ const Tribunale = () => {
                 className="delete"
                 onClick={() => {
                   deletetrib(record.id);
-                }}
-              ></MdDeleteForever>
+                }}></MdDeleteForever>
               <pre>
                 <p>supprimer </p>
               </pre>
@@ -258,13 +253,13 @@ const Tribunale = () => {
                     ...addingservice,
                     tribunale_id: record.id,
                   });
-
                   setIdtrib(record.id);
                   setNomtrib(record.lieu);
 
+                  //console.log(record.id, "idtrib");
+
                   //console.log(filtredservice, "filtred");
-                }}
-              ></MdHomeRepairService>
+                }}></MdHomeRepairService>
               <pre>
                 <p>services</p>
               </pre>
@@ -289,7 +284,6 @@ const Tribunale = () => {
     gettribunalerequest();
     getservicerequest();
     console.log(edditingservice, "kbal ma netcheki");
-    console.log(addingservice.tribunale_id, "idtrib");
   });
 
   //*****************supprimer service*****************
@@ -322,7 +316,7 @@ const Tribunale = () => {
 
   //*************************modifier un service**************
   const editservice = (record) => {
-    setEdditingservice({ ...record });
+    setEdditingservice({...record});
     setEdditingservice({
       ...edditingservice,
       tribunale_id: idtrib,
@@ -407,8 +401,7 @@ const Tribunale = () => {
                 className="btnadd"
                 onClick={() => {
                   setIsAddtrib(true);
-                }}
-              >
+                }}>
                 Ajouter une tribunale
               </button>
               <Table
@@ -424,23 +417,20 @@ const Tribunale = () => {
                     setPageSize1(pageSize);
                   },
                 }}
-                scroll={{ x: "max-content" }}
-              ></Table>
+                scroll={{x: "max-content"}}></Table>
             </>
           )}
           {service === true && (
             <>
               <h1>Liste des services</h1>
-              <h3 style={{ color: "#0583f2" }}>{nomtrib}</h3>
-              <h3 style={{ color: "#0583f2" }}>{idtrib}</h3>
+              <h3 style={{color: "#0583f2"}}>{nomtrib}</h3>
               <MdHomeRepairService className="dashbicons"></MdHomeRepairService>
 
               <button
                 className="btnadd"
                 onClick={() => {
                   setIsAddservice(true);
-                }}
-              >
+                }}>
                 Ajouter un service
               </button>
 
@@ -458,23 +448,20 @@ const Tribunale = () => {
                     setPageSize(pageSize);
                   },
                 }}
-                scroll={{ x: "max-content" }}
-              ></Table>
+                scroll={{x: "max-content"}}></Table>
               <Popover
                 placement="bottom"
                 content={
-                  <h1 style={{ fontSize: "15px", color: "#f25e5e" }}>
+                  <h1 style={{fontSize: "15px", color: "#f25e5e"}}>
                     Rendez-vous à la liste des tribunaux ,choisir une autre
                     tribunale et sélectionnez ses services
                   </h1>
-                }
-              >
+                }>
                 <button
                   className="buttonvalidate"
                   onClick={() => {
                     setService(false);
-                  }}
-                >
+                  }}>
                   Liste des tribunaux
                 </button>
               </Popover>
@@ -512,8 +499,7 @@ const Tribunale = () => {
               setListeservice(newListeservice);
               resetEditing();
               toast.success("service modifié avec succès");
-            }}
-          >
+            }}>
             <Input
               placeholder="Tapez le nom"
               value={edditingservice?.nom}
@@ -522,12 +508,11 @@ const Tribunale = () => {
                   ...edditingservice,
                   nom: e.target.value,
                 });
-              }}
-            ></Input>
+              }}></Input>
 
             <div className="audcourse">
               <div className="jours">
-                <h1 style={{ fontSize: "15px" }}>Jours de l'audience</h1>
+                <h1 style={{fontSize: "15px"}}>Jours de l'audience</h1>
 
                 <Row>
                   <Col span={6}>
@@ -541,14 +526,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             lundi: "audience",
                           });
-                          setChecked3({ ...checked3, check1: true });
-                          setDisabled4({ ...disabled4, check1: true });
+                          setChecked3({...checked3, check1: true});
+                          setDisabled4({...disabled4, check1: true});
                         } else {
-                          setChecked3({ ...checked3, check1: false });
-                          setDisabled4({ ...disabled4, check1: false });
+                          setChecked3({...checked3, check1: false});
+                          setDisabled4({...disabled4, check1: false});
                         }
-                      }}
-                    >
+                      }}>
                       Lundi
                     </Checkbox>
                   </Col>
@@ -563,14 +547,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             mardi: "audience",
                           });
-                          setChecked3({ ...checked3, check2: true });
-                          setDisabled4({ ...disabled4, check2: true });
+                          setChecked3({...checked3, check2: true});
+                          setDisabled4({...disabled4, check2: true});
                         } else {
-                          setChecked3({ ...checked3, check2: false });
-                          setDisabled4({ ...disabled4, check2: false });
+                          setChecked3({...checked3, check2: false});
+                          setDisabled4({...disabled4, check2: false});
                         }
-                      }}
-                    >
+                      }}>
                       Mardi
                     </Checkbox>
                   </Col>
@@ -585,14 +568,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             mercredi: "audience",
                           });
-                          setChecked3({ ...checked3, check3: true });
-                          setDisabled4({ ...disabled4, check3: true });
+                          setChecked3({...checked3, check3: true});
+                          setDisabled4({...disabled4, check3: true});
                         } else {
-                          setChecked3({ ...checked3, check3: false });
-                          setDisabled4({ ...disabled4, check3: false });
+                          setChecked3({...checked3, check3: false});
+                          setDisabled4({...disabled4, check3: false});
                         }
-                      }}
-                    >
+                      }}>
                       Mercredi
                     </Checkbox>
                   </Col>
@@ -607,14 +589,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             jeudi: "audience",
                           });
-                          setChecked3({ ...checked3, check4: true });
-                          setDisabled4({ ...disabled4, check4: true });
+                          setChecked3({...checked3, check4: true});
+                          setDisabled4({...disabled4, check4: true});
                         } else {
-                          setChecked3({ ...checked3, check4: false });
-                          setDisabled4({ ...disabled4, check4: false });
+                          setChecked3({...checked3, check4: false});
+                          setDisabled4({...disabled4, check4: false});
                         }
-                      }}
-                    >
+                      }}>
                       Jeudi
                     </Checkbox>
                   </Col>
@@ -629,14 +610,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             vendredi: "audience",
                           });
-                          setChecked3({ ...checked3, check5: true });
-                          setDisabled4({ ...disabled4, check5: true });
+                          setChecked3({...checked3, check5: true});
+                          setDisabled4({...disabled4, check5: true});
                         } else {
-                          setChecked3({ ...checked3, check5: false });
-                          setDisabled4({ ...disabled4, check5: false });
+                          setChecked3({...checked3, check5: false});
+                          setDisabled4({...disabled4, check5: false});
                         }
-                      }}
-                    >
+                      }}>
                       Vendredi
                     </Checkbox>
                   </Col>
@@ -651,21 +631,20 @@ const Tribunale = () => {
                             ...edditingservice,
                             samedi: "audience",
                           });
-                          setChecked3({ ...checked3, check6: true });
-                          setDisabled4({ ...disabled4, check6: true });
+                          setChecked3({...checked3, check6: true});
+                          setDisabled4({...disabled4, check6: true});
                         } else {
-                          setChecked3({ ...checked3, check6: false });
-                          setDisabled4({ ...disabled4, check6: false });
+                          setChecked3({...checked3, check6: false});
+                          setDisabled4({...disabled4, check6: false});
                         }
-                      }}
-                    >
+                      }}>
                       Samedi
                     </Checkbox>
                   </Col>
                 </Row>
               </div>
               <div className="jours">
-                <h1 style={{ fontSize: "15px" }}>Jours de course</h1>
+                <h1 style={{fontSize: "15px"}}>Jours de course</h1>
 
                 <Row>
                   <Col span={6}>
@@ -679,14 +658,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             lundi: "course",
                           });
-                          setChecked4({ ...checked4, check1: true });
-                          setDisabled3({ ...disabled3, check1: true });
+                          setChecked4({...checked4, check1: true});
+                          setDisabled3({...disabled3, check1: true});
                         } else {
-                          setChecked4({ ...checked4, check1: false });
-                          setDisabled3({ ...disabled3, check1: false });
+                          setChecked4({...checked4, check1: false});
+                          setDisabled3({...disabled3, check1: false});
                         }
-                      }}
-                    >
+                      }}>
                       Lundi
                     </Checkbox>
                   </Col>
@@ -701,14 +679,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             mardi: "course",
                           });
-                          setChecked4({ ...checked4, check2: true });
-                          setDisabled3({ ...disabled3, check2: true });
+                          setChecked4({...checked4, check2: true});
+                          setDisabled3({...disabled3, check2: true});
                         } else {
-                          setChecked4({ ...checked4, check2: false });
-                          setDisabled3({ ...disabled3, check2: false });
+                          setChecked4({...checked4, check2: false});
+                          setDisabled3({...disabled3, check2: false});
                         }
-                      }}
-                    >
+                      }}>
                       Mardi
                     </Checkbox>
                   </Col>
@@ -723,14 +700,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             mercredi: "course",
                           });
-                          setChecked4({ ...checked4, check3: true });
-                          setDisabled3({ ...disabled3, check3: true });
+                          setChecked4({...checked4, check3: true});
+                          setDisabled3({...disabled3, check3: true});
                         } else {
-                          setChecked4({ ...checked4, check3: false });
-                          setDisabled3({ ...disabled3, check3: false });
+                          setChecked4({...checked4, check3: false});
+                          setDisabled3({...disabled3, check3: false});
                         }
-                      }}
-                    >
+                      }}>
                       Mercredi
                     </Checkbox>
                   </Col>
@@ -744,14 +720,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             jeudi: "course",
                           });
-                          setChecked4({ ...checked4, check4: true });
-                          setDisabled3({ ...disabled3, check4: true });
+                          setChecked4({...checked4, check4: true});
+                          setDisabled3({...disabled3, check4: true});
                         } else {
-                          setChecked4({ ...checked4, check4: false });
-                          setDisabled3({ ...disabled3, check4: false });
+                          setChecked4({...checked4, check4: false});
+                          setDisabled3({...disabled3, check4: false});
                         }
-                      }}
-                    >
+                      }}>
                       Jeudi
                     </Checkbox>
                   </Col>
@@ -766,14 +741,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             vendredi: "course",
                           });
-                          setChecked4({ ...checked4, check5: true });
-                          setDisabled3({ ...disabled3, check5: true });
+                          setChecked4({...checked4, check5: true});
+                          setDisabled3({...disabled3, check5: true});
                         } else {
-                          setChecked4({ ...checked4, check5: false });
-                          setDisabled3({ ...disabled3, check5: false });
+                          setChecked4({...checked4, check5: false});
+                          setDisabled3({...disabled3, check5: false});
                         }
-                      }}
-                    >
+                      }}>
                       Vendredi
                     </Checkbox>
                   </Col>
@@ -788,14 +762,13 @@ const Tribunale = () => {
                             ...edditingservice,
                             samedi: "course",
                           });
-                          setChecked4({ ...checked4, check6: true });
-                          setDisabled3({ ...disabled3, check6: true });
+                          setChecked4({...checked4, check6: true});
+                          setDisabled3({...disabled3, check6: true});
                         } else {
-                          setChecked4({ ...checked4, check6: false });
-                          setDisabled3({ ...disabled3, check6: false });
+                          setChecked4({...checked4, check6: false});
+                          setDisabled3({...disabled3, check6: false});
                         }
-                      }}
-                    >
+                      }}>
                       Samedi
                     </Checkbox>
                   </Col>
@@ -839,8 +812,7 @@ const Tribunale = () => {
                     check5: false,
                     check6: false,
                   });
-                }}
-              >
+                }}>
                 {" "}
                 Réinitialiser les jours d'audience et de courses et modifier
               </Button>
@@ -871,7 +843,6 @@ const Tribunale = () => {
               setIsAddservice(false);
               toast.success("service ajouté avec succès");
               setAddingservice({
-                ...addingservice,
                 nom: "",
                 lundi: "",
                 mardi: "",
@@ -880,11 +851,9 @@ const Tribunale = () => {
                 vendredi: "",
                 samedi: "",
               });
-              console.log(addingservice, "baed el ok");
               setDisabled(false, false, false, false, false, false);
               setDisabled2(false, false, false, false, false, false);
-            }}
-          >
+            }}>
             <Input
               placeholder="tapez le nom du service"
               value={addingservice.nom}
@@ -893,11 +862,10 @@ const Tribunale = () => {
                   ...addingservice,
                   nom: e.target.value,
                 });
-              }}
-            ></Input>
+              }}></Input>
             <div className="audcourse">
               <div className="jours">
-                <h1 style={{ fontSize: "15px" }}>Jours de l'audience</h1>
+                <h1 style={{fontSize: "15px"}}>Jours de l'audience</h1>
                 <Checkbox.Group onChange={onChange}>
                   <Row>
                     <Col span={6}>
@@ -910,12 +878,11 @@ const Tribunale = () => {
                               ...addingservice,
                               lundi: "audience",
                             });
-                            setDisabled({ ...disabled, check1: true });
+                            setDisabled({...disabled, check1: true});
                           } else {
-                            setDisabled({ ...disabled, check1: false });
+                            setDisabled({...disabled, check1: false});
                           }
-                        }}
-                      >
+                        }}>
                         Lundi
                       </Checkbox>
                     </Col>
@@ -930,12 +897,11 @@ const Tribunale = () => {
                               mardi: "audience",
                             });
 
-                            setDisabled({ ...disabled, check2: true });
+                            setDisabled({...disabled, check2: true});
                           } else {
-                            setDisabled({ ...disabled, check2: false });
+                            setDisabled({...disabled, check2: false});
                           }
-                        }}
-                      >
+                        }}>
                         Mardi
                       </Checkbox>
                     </Col>
@@ -950,12 +916,11 @@ const Tribunale = () => {
                               mercredi: "audience",
                             });
 
-                            setDisabled({ ...disabled, check3: true });
+                            setDisabled({...disabled, check3: true});
                           } else {
-                            setDisabled({ ...disabled, check3: false });
+                            setDisabled({...disabled, check3: false});
                           }
-                        }}
-                      >
+                        }}>
                         Mercredi
                       </Checkbox>
                     </Col>
@@ -969,12 +934,11 @@ const Tribunale = () => {
                               ...addingservice,
                               jeudi: "audience",
                             });
-                            setDisabled({ ...disabled, check4: true });
+                            setDisabled({...disabled, check4: true});
                           } else {
-                            setDisabled({ ...disabled, check4: false });
+                            setDisabled({...disabled, check4: false});
                           }
-                        }}
-                      >
+                        }}>
                         Jeudi
                       </Checkbox>
                     </Col>
@@ -988,12 +952,11 @@ const Tribunale = () => {
                               ...addingservice,
                               vendredi: "audience",
                             });
-                            setDisabled({ ...disabled, check5: true });
+                            setDisabled({...disabled, check5: true});
                           } else {
-                            setDisabled({ ...disabled, check5: false });
+                            setDisabled({...disabled, check5: false});
                           }
-                        }}
-                      >
+                        }}>
                         Vendredi
                       </Checkbox>
                     </Col>
@@ -1007,12 +970,11 @@ const Tribunale = () => {
                               ...addingservice,
                               samedi: "audience",
                             });
-                            setDisabled({ ...disabled, check6: true });
+                            setDisabled({...disabled, check6: true});
                           } else {
-                            setDisabled({ ...disabled, check6: false });
+                            setDisabled({...disabled, check6: false});
                           }
-                        }}
-                      >
+                        }}>
                         Samedi
                       </Checkbox>
                     </Col>
@@ -1020,7 +982,7 @@ const Tribunale = () => {
                 </Checkbox.Group>
               </div>
               <div className="jours">
-                <h1 style={{ fontSize: "15px" }}>Jours de course</h1>
+                <h1 style={{fontSize: "15px"}}>Jours de course</h1>
 
                 <Checkbox.Group onChange={onChange}>
                   <Row>
@@ -1045,8 +1007,7 @@ const Tribunale = () => {
                               check1: false,
                             });
                           }
-                        }}
-                      >
+                        }}>
                         Lundi
                       </Checkbox>
                     </Col>
@@ -1071,8 +1032,7 @@ const Tribunale = () => {
                               check2: false,
                             });
                           }
-                        }}
-                      >
+                        }}>
                         Mardi
                       </Checkbox>
                     </Col>
@@ -1097,8 +1057,7 @@ const Tribunale = () => {
                               check3: false,
                             });
                           }
-                        }}
-                      >
+                        }}>
                         Mercredi
                       </Checkbox>
                     </Col>
@@ -1123,8 +1082,7 @@ const Tribunale = () => {
                               check4: false,
                             });
                           }
-                        }}
-                      >
+                        }}>
                         Jeudi
                       </Checkbox>
                     </Col>
@@ -1149,8 +1107,7 @@ const Tribunale = () => {
                               check5: false,
                             });
                           }
-                        }}
-                      >
+                        }}>
                         Vendredi
                       </Checkbox>
                     </Col>
@@ -1175,8 +1132,7 @@ const Tribunale = () => {
                               check6: false,
                             });
                           }
-                        }}
-                      >
+                        }}>
                         Samedi
                       </Checkbox>
                     </Col>
@@ -1215,8 +1171,7 @@ const Tribunale = () => {
               setListeTrib(newListe);
               resetEditingtrib();
               toast.success("Tribunale modifiée avec succès");
-            }}
-          >
+            }}>
             <Input
               placeholder="Tapez le lieu"
               value={edditingtrib?.lieu}
@@ -1225,8 +1180,7 @@ const Tribunale = () => {
                   ...edditingtrib,
                   lieu: e.target.value,
                 });
-              }}
-            ></Input>
+              }}></Input>
           </Modal>
 
           <Modal
@@ -1237,15 +1191,14 @@ const Tribunale = () => {
             destroyOnClose={true}
             onCancel={() => {
               setIsAddtrib(false);
-              setAddingtrib({ lieu: "" });
+              setAddingtrib({lieu: ""});
             }}
             onOk={() => {
               addtrib();
               setIsAddtrib(false);
               toast.success("tribunale ajoutée avec succès");
-              setAddingtrib({ lieu: "" });
-            }}
-          >
+              setAddingtrib({lieu: ""});
+            }}>
             <Input
               placeholder="tapez le lieu du tribunale"
               value={addingtrib.lieu}
@@ -1253,13 +1206,12 @@ const Tribunale = () => {
                 setAddingtrib({
                   lieu: e.target.value,
                 });
-              }}
-            ></Input>
+              }}></Input>
           </Modal>
         </header>
       </div>
     </>
   );
-};
+            }
 
 export default Tribunale;
