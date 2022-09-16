@@ -24,6 +24,7 @@ const registerroute = require("./routes/RouteRegister");
 const collabroute = require("./routes/RouteCollab");
 const typedossierroute = require("./routes/typedossier")
 const tribunaleroute = require("./routes/tribunale");
+const root14 = require("./routes/demandeur");
 const cookie = require("cookie-parser");
 
 
@@ -67,6 +68,7 @@ app.use(root10); //gestionclient
 app.use(root11); //recherchedossier
 app.use(root12); //adversaire
 app.use(root13); //tache
+app.use(root14); //demandeur
 app.use(loginroute);
 app.use(registerroute);
 app.use(collabroute);
