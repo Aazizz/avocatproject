@@ -122,17 +122,6 @@ function Taches() {
       render: (record) => {
         return (
           <div className="addicons">
-            <div className="divedit">
-              <AiFillEdit
-                className="edit"
-                onClick={() => {
-                  editTache(record);
-                }}
-              ></AiFillEdit>
-              <pre>
-                <p>modifier </p>
-              </pre>
-            </div>
             <div className="divdelete">
               <MdDeleteForever
                 className="delete"
@@ -299,17 +288,12 @@ function Taches() {
     );
   useEffect(() => {
     gettribunalerequest();
-
-    
   }, [listeTrib]);
-    useEffect(() => {
-      
-
-      getservicerequest();
-    }, [listeservice]);
+  useEffect(() => {
+    getservicerequest();
+  }, [listeservice]);
 
   useEffect(() => {
-    
     const id = localStorage.getItem("id_dossier");
     setAddinngTache({ ...addingTache, id_doss: id });
   }, [addingTache.id_doss]);
