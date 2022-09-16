@@ -1,4 +1,4 @@
-import { Cascader, Input, Radio, Button,Popover } from "antd";
+import { Cascader, Input, Radio, Button, Popover } from "antd";
 import React, { useState, useMemo } from "react";
 import "./dossier.css";
 import { Marginer } from "../marginer/marginfile";
@@ -6,8 +6,8 @@ import TabClient from "./tabclientdemandeur";
 import axios from "axios";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { Link} from "react-router-dom";
-import {FaUserPlus} from "react-icons/fa"
+import { Link } from "react-router-dom";
+import { FaUserPlus } from "react-icons/fa";
 
 const ClientDemandeur = () => {
   const [value, setValue] = useState(1);
@@ -53,7 +53,7 @@ const ClientDemandeur = () => {
       localStorage.setItem("id_dossier", id_dossier);
     }
     console.log("ena check", donnee);
-  }, [listeClient, id_dossier]);
+  });
 
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
@@ -125,8 +125,8 @@ const ClientDemandeur = () => {
         placement="bottom"
         content={
           <div>
-            <Link to="/home/gestionclient">
-              <h1 style={{ color: "#f25e5e",fontSize:"15px" }}>
+            <Link to="/home/collaborateurs">
+              <h1 style={{ fontSize: "15px", color: "#f25e5e" }}>
                 Voulez vous ajouter un client qui n'existe pas ?
               </h1>
             </Link>
@@ -134,7 +134,10 @@ const ClientDemandeur = () => {
         }
         trigger="hover"
       >
-        <FaUserPlus className="addclientdem" style={{cursor: "crosshair"}}></FaUserPlus>
+        <FaUserPlus
+          className="addclientdem"
+          style={{ cursor: "crosshair" }}
+        ></FaUserPlus>
       </Popover>
       <div className="reglementdiv1">
         <div className="div">
@@ -225,18 +228,6 @@ const ClientDemandeur = () => {
         </div>
       </div>
 
-      <Marginer direction="vertical" margin={40} />
-      <div className="boutonet">
-        <Button className="bouton" type="primary" block>
-          {" "}
-          Ajouter Demandeur
-        </Button>
-        <Marginer direction="vertical" margin={10} />
-        <Button className="bouton" type="primary" block>
-          {" "}
-          Retirer Demandeur{" "}
-        </Button>
-      </div>
       <Marginer direction="vertical" margin={20} />
       <TabClient />
       <button className="buttonvalidate" onClick={addclientdossier}>

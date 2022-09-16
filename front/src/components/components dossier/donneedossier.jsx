@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Marginer } from "../marginer/marginfile";
 import {
@@ -145,7 +146,7 @@ const DonneeDossier = () => {
   const gettribunalerequest = async () => {
     try {
       const response = await axios.get("/tribunale");
-      //console.log(response.data);
+      console.log(response.data, "tribunale");
 
       setListeTrib(response.data);
       const newliste1 = listeTrib.map((trib) => ({
@@ -371,24 +372,22 @@ const DonneeDossier = () => {
             onSearch={(value) => console.log(value)}
             value={valueservice}
           />
-          <Marginer direction="vertical" margin={35} />
-          <Button
-            type="primary"
-            style={{ width: 280 }}
-            onClick={() => {
-              setDisabledtrib(false);
-              setDisabledservice(false);
-              setValuetrib("");
-              setValueservice("");
-              const id = localStorage.getItem("id_dossier");
-              console.log(id, "ena mel local storage");
-            }}
-          >
-            resélectionner les données du tribunale
-          </Button>
         </div>
+        <Button
+          type="primary"
+          style={{ width: 300 }}
+          onClick={() => {
+            setDisabledtrib(false);
+            setDisabledservice(false);
+            setValuetrib("");
+            setValueservice("");
+            const id = localStorage.getItem("id_dossier");
+            console.log(id, "ena mel local storage");
+          }}
+        >
+          resélectionner les données du tribunale
+        </Button>
       </div>
-
       <div className="client5">
         <div className="div">
           <label>Observation(s) : </label>

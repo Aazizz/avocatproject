@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table, Modal, Input} from "antd";
+import { useState, useEffect } from "react";
+import { Table, Modal, Input, Button } from "antd";
 import "antd/dist/antd.min.css";
-import {AiFillEdit} from "react-icons/ai";
-import {MdDeleteForever} from "react-icons/md";
-import {toast} from "react-toastify";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
 const TabClient = () => {
   //declaration necessaires
   const [listeservice, setlisteservice] = useState([]);
@@ -13,26 +13,29 @@ const TabClient = () => {
   const [edditingclient, setEdditingclient] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
   const [addingclient, setAddingclient] = useState({
-    Nom: "",
-    CIN: "",
+    nom: "",
+    cin: "",
     adresse: "",
-    AdresseDesigne: "",
-      Tel: "",
-      Fax: "",
-    Email:""
+    adressedesigne: "",
+    tel: "",
+    fax: "",
+    email: "",
+    id_dossier: 0,
   });
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(4);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(4);
   const column = [
-    {key: "1", title: "Nom", dataIndex: "Nom"},
-    {key: "2", title: "CIN", dataIndex: "CIN"},
-    {key: "3", title: "adresse", dataIndex: "adresse"},
-    {key: "4", title: "Adresse Désignée", dataIndex: "AdresseDesigne"},
-    {key: "5", title: "Tel", dataIndex: "Tel"},
-    {key: "6", title: "Fax", dataIndex: "Fax"},
-    {key: "7", title: "Email", dataIndex: "Email"},
+    { key: "1", title: "id_demandeur", dataIndex: "id_demandeur" },
+    { key: "2", title: "id_dossier", dataIndex: "id_doss" },
+    { key: "3", title: "nom", dataIndex: "nom" },
+    { key: "4", title: "cin", dataIndex: "cin" },
+    { key: "5", title: "adresse", dataIndex: "adresse" },
+    { key: "6", title: "Adresse Désignée", dataIndex: "adressedesigne" },
+    { key: "7", title: "tel", dataIndex: "tel" },
+    { key: "8", title: "fax", dataIndex: "fax" },
+    { key: "9", title: "email", dataIndex: "email" },
     {
-      key: "16",
+      key: "10",
       title: "Actions",
       render: (record) => {
         return (
@@ -42,7 +45,8 @@ const TabClient = () => {
                 className="edit"
                 onClick={() => {
                   editclient(record);
-                }}></AiFillEdit>
+                }}
+              ></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -52,9 +56,11 @@ const TabClient = () => {
                 className="delete"
                 onClick={() => {
                   deleteclient(record);
-                }}></MdDeleteForever>
-
-              <p>supprimer</p>
+                }}
+              ></MdDeleteForever>
+              <pre>
+                <p>supprimer</p>
+              </pre>
             </div>
           </div>
         );
@@ -63,18 +69,22 @@ const TabClient = () => {
   ];
 
   //select client
-  /*const getclientrequest = async () => {
+  const getclientrequest = async () => {
     try {
       const response = await axios.get("/client");
       setlisteservice(response.data);
+      console.log(response.data, "demandeur");
     } catch (error) {
       console.log(error.message);
     }
   };
   useEffect(() => {
+    const id = localStorage.getItem("id_dossier");
+    console.log(id, "ena el id eli bch netbaath");
+    setAddingclient({ ...addingclient, id_dossier: id });
     getclientrequest();
-  });
-  console.log(listeservice);*/
+  }, [listeservice, addingclient.id_dossier]);
+  console.log(listeservice);
 
   //supclientr client
   const deleteclient = (record) => {
@@ -85,11 +95,11 @@ const TabClient = () => {
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (client) => client.id !== record.id
+          (client) => client.id_demandeur !== record.id_demandeur
         );
         setlisteservice(newlisteservice);
-        deleteclientrequest(record.id);
-        toast.success("client supprimée avec succés");
+        deleteclientrequest(record.id_demandeur);
+        toast.success("demandeur supprimé avec succès");
       },
     });
   };
@@ -107,7 +117,7 @@ const TabClient = () => {
   //modifier un client
   const editclient = (record) => {
     setIsEdit(true);
-    setEdditingclient({...record}); //copie mel record
+    setEdditingclient({ ...record }); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -123,179 +133,234 @@ const TabClient = () => {
     }
   };
   return (
-    <div className="container2">
-      <div className="tab">
+    <div className="back">
+      <header className="App-header">
+        <div className="boutonet">
+          <Button
+            className="bouton"
+            type="primary"
+            block
+            onClick={() => {
+              setIsAdd(true);
+            }}
+          >
+            Ajouter Demandeur
+          </Button>
+        </div>
         <Table
           columns={column}
           dataSource={listeservice}
-          size="medium"
+          size="meduim"
           bordered={true}
           style={{ display: "flex", flex: 1 }}
           scroll={{ x: "max-content" }}
+          pagination={{
+            current: page,
+            pageSize: pageSize,
+            onChange: (page, pageSize) => {
+              setPage(page);
+              setPageSize(pageSize);
+            },
+          }}
         ></Table>
-      </div>
 
-      <Modal
-        title="modifier client"
-        visible={isEdit}
-        okText="Enregistrer"
-        cancelText="Annuler"
-        onCancel={() => {
-          setIsEdit(false);
-        }}
-        onOk={async () => {
-          setIsEdit(false);
-          const newlisteservice = listeservice.map((client) => {
-            if (client.id == edditingclient.id) {
-              return edditingclient;
-            } else {
-              return client;
+        <Modal
+          title="modifier client"
+          visible={isEdit}
+          okText="Enregistrer"
+          cancelText="Annuler"
+          onCancel={() => {
+            setIsEdit(false);
+          }}
+          onOk={async () => {
+            setIsEdit(false);
+            const newlisteservice = listeservice.map((client) => {
+              if (client.id_demandeur == edditingclient.id_demandeur) {
+                return edditingclient;
+              } else {
+                return client;
+              }
+            });
+            try {
+              const addclient = await axios.post(
+                "/client/update",
+                edditingclient
+              );
+            } catch (error) {
+              console.log("error");
             }
-          });
-          try {
-            const addclient = await axios.post(
-              "/client/update",
-              edditingclient
-            );
-          } catch (error) {
-            console.log("error");
-          }
-          setlisteservice(newlisteservice);
-          resetEditing();
-          toast.success("client modifié(e) avec succès");
-        }}
-      >
-        <Input
-          placeholder="Nom du Client"
-          value={edditingclient?.Nom}
-          onChange={(e) => {
-            setEdditingclient({
-              ...edditingclient,
-              Nom: e.target.value,
-            });
+            setlisteservice(newlisteservice);
+            resetEditing();
+            toast.success("demandeur modifié avec succès");
           }}
-        ></Input>
-        {/*edditingclient? s'il n'est pas null*/}
-        <Input
-          placeholder="Tapez le CIN"
-          value={edditingclient?.CIN}
-          onChange={(e) => {
-            setEdditingclient({ ...edditingclient, CIN: e.target.value });
-          }}
-        ></Input>
-        <Input
-          placeholder="Adresse "
-          value={edditingclient?.adresse}
-          onChange={(e) => {
-            setEdditingclient({
-              ...edditingclient,
-              adresse: e.target.value,
-            });
-          }}
-        ></Input>
-        <Input
-          placeholder="Adresse Désignée"
-          value={edditingclient?.AdresseDesigne}
-          onChange={(e) => {
-            setEdditingclient({
-              ...edditingclient,
-              AdresseDesigne: e.target.value,
-            });
-          }}
-        ></Input>
-        <Input
-          placeholder="Numéro de téléphone"
-          value={edditingclient?.Tel}
-          onChange={(e) => {
-            setEdditingclient({ ...edditingclient, Tel: e.target.value });
-          }}
-        ></Input>
-      </Modal>
-      <Modal
-        title="ajouter client"
-        visible={isAdd}
-        okText="Enregistrer"
-        cancelText="Annuler"
-        onCancel={() => {
-          setIsAdd(false);
-        }}
-        onOk={() => {
-          addclient();
-          setIsAdd(false);
-          toast.success("client ajoutée avec succès");
-        }}
-      >
-        <Input
-          placeholder="Nom du client"
-          value={addingclient.Nom}
-          onChange={(e) => {
+        >
+          <Input
+            placeholder="nom du Client"
+            value={edditingclient?.nom}
+            onChange={(e) => {
+              setEdditingclient({
+                ...edditingclient,
+                nom: e.target.value,
+              });
+            }}
+          ></Input>
+          {/*edditingclient? s'il n'est pas null*/}
+          <Input
+            placeholder="Tapez le cin"
+            value={edditingclient?.cin}
+            onChange={(e) => {
+              setEdditingclient({ ...edditingclient, cin: e.target.value });
+            }}
+          ></Input>
+          <Input
+            placeholder="Adresse "
+            value={edditingclient?.adresse}
+            onChange={(e) => {
+              setEdditingclient({
+                ...edditingclient,
+                adresse: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Adresse Désignée"
+            value={edditingclient?.adressedesigne}
+            onChange={(e) => {
+              setEdditingclient({
+                ...edditingclient,
+                adressedesigne: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Numéro de téléphone"
+            value={edditingclient?.tel}
+            onChange={(e) => {
+              setEdditingclient({ ...edditingclient, tel: e.target.value });
+            }}
+          ></Input>
+          <Input
+            placeholder="fax"
+            value={edditingclient?.fax}
+            onChange={(e) => {
+              setEdditingclient({ ...edditingclient, fax: e.target.value });
+            }}
+          ></Input>
+          <Input
+            placeholder="email"
+            value={edditingclient?.email}
+            onChange={(e) => {
+              setEdditingclient({ ...edditingclient, email: e.target.value });
+            }}
+          ></Input>
+        </Modal>
+        <Modal
+          title="ajouter demandeur"
+          visible={isAdd}
+          okText="Enregistrer"
+          cancelText="Annuler"
+          destroyOnClose
+          onCancel={() => {
+            setIsAdd(false);
             setAddingclient({
-              ...addingclient,
-              Nom: e.target.value,
+              nom: "",
+              cin: "",
+              adresse: "",
+              adressedesigne: "",
+              tel: "",
+              fax: "",
+              email: "",
+              id_dossier: 0,
             });
           }}
-        ></Input>
-        <Input
-          placeholder="Tapez le CIN"
-          value={addingclient.CIN}
-          onChange={(e) => {
+          onOk={() => {
+            addclient();
+            setIsAdd(false);
+            toast.success("demandeur ajouté avec succès");
             setAddingclient({
-              ...addingclient,
-              CIN: e.target.value,
+              nom: "",
+              cin: "",
+              adresse: "",
+              adressedesigne: "",
+              tel: "",
+              fax: "",
+              email: "",
+              id_dossier: 0,
             });
           }}
-        ></Input>
-        <Input
-          placeholder="Adresse "
-          value={addingclient.adresse}
-          onChange={(e) => {
-            setAddingclient({
-              ...addingclient,
-              adresse: e.target.value,
-            });
-          }}
-        ></Input>
-        <Input
-          placeholder="Adresse Désignée "
-          value={addingclient.AdresseDesigne}
-          onChange={(e) => {
-            setAddingclient({
-              ...addingclient,
-              AdresseDesigne: e.target.value,
-            });
-          }}
-        ></Input>
-        <Input
-          placeholder="Numéro de téléphone"
-          value={addingclient.Tel}
-          onChange={(e) => {
-            setAddingclient({
-              ...addingclient,
-              Tel: e.target.value,
-            });
-          }}
-        ></Input>
-        <Input
-          placeholder="Fax"
-          value={addingclient.Fax}
-          onChange={(e) => {
-            setAddingclient({
-              ...addingclient,
-              Fax: e.target.value,
-            });
-          }}
-        ></Input>
-        <Input
-          placeholder="E-mail"
-          value={addingclient.Email}
-          onChange={(e) => {
-            setAddingclient({
-              ...addingclient,
-              Email: e.target.value,
-            });
-          }}
-        ></Input>
-      </Modal>
+        >
+          <Input
+            placeholder="nom du client"
+            value={addingclient.nom}
+            onChange={(e) => {
+              setAddingclient({
+                ...addingclient,
+                nom: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Tapez le cin"
+            value={addingclient.cin}
+            onChange={(e) => {
+              setAddingclient({
+                ...addingclient,
+                cin: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Adresse "
+            value={addingclient.adresse}
+            onChange={(e) => {
+              setAddingclient({
+                ...addingclient,
+                adresse: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Adresse Désignée "
+            value={addingclient.adressedesigne}
+            onChange={(e) => {
+              setAddingclient({
+                ...addingclient,
+                adressedesigne: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Numéro de téléphone"
+            value={addingclient.tel}
+            onChange={(e) => {
+              setAddingclient({
+                ...addingclient,
+                tel: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="fax"
+            value={addingclient.fax}
+            onChange={(e) => {
+              setAddingclient({
+                ...addingclient,
+                fax: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="E-mail"
+            value={addingclient.email}
+            onChange={(e) => {
+              setAddingclient({
+                ...addingclient,
+                email: e.target.value,
+              });
+            }}
+          ></Input>
+        </Modal>
+      </header>
     </div>
   );
 };
