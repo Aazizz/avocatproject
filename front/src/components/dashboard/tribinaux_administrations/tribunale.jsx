@@ -172,6 +172,7 @@ const Tribunale = () => {
     jeudi: "",
     vendredi: "",
     samedi: "",
+    tribunale_id: idtrib,
   });
   const column = [
     {key: "1", title: "ID", dataIndex: "service_id"},
@@ -253,10 +254,9 @@ const Tribunale = () => {
                     ...addingservice,
                     tribunale_id: record.id,
                   });
+
                   setIdtrib(record.id);
                   setNomtrib(record.lieu);
-
-                  //console.log(record.id, "idtrib");
 
                   //console.log(filtredservice, "filtred");
                 }}></MdHomeRepairService>
@@ -284,6 +284,7 @@ const Tribunale = () => {
     gettribunalerequest();
     getservicerequest();
     console.log(edditingservice, "kbal ma netcheki");
+    console.log(addingservice.tribunale_id, "idtrib");
   });
 
   //*****************supprimer service*****************
@@ -424,6 +425,7 @@ const Tribunale = () => {
             <>
               <h1>Liste des services</h1>
               <h3 style={{color: "#0583f2"}}>{nomtrib}</h3>
+              <h3 style={{color: "#0583f2"}}>{idtrib}</h3>
               <MdHomeRepairService className="dashbicons"></MdHomeRepairService>
 
               <button
@@ -843,6 +845,7 @@ const Tribunale = () => {
               setIsAddservice(false);
               toast.success("service ajouté avec succès");
               setAddingservice({
+                ...addingservice,
                 nom: "",
                 lundi: "",
                 mardi: "",
@@ -851,6 +854,7 @@ const Tribunale = () => {
                 vendredi: "",
                 samedi: "",
               });
+              console.log(addingservice, "baed el ok");
               setDisabled(false, false, false, false, false, false);
               setDisabled2(false, false, false, false, false, false);
             }}>
@@ -1212,6 +1216,6 @@ const Tribunale = () => {
       </div>
     </>
   );
-            }
+};
 
 export default Tribunale;
