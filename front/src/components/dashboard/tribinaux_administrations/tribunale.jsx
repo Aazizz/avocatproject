@@ -803,7 +803,7 @@ const Tribunale = () => {
               </div>
             </div>
             <div className="resetbutton">
-              <Button
+              <Button 
                 danger
                 dashed
                 onClick={() => {
@@ -842,7 +842,7 @@ const Tribunale = () => {
                 }}
               >
                 {" "}
-                Réinitialiser les jours d'audience et de courses et modifier
+                Réinitialiser puis modifier!!!
               </Button>
             </div>
           </Modal>
