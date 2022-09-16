@@ -399,7 +399,7 @@ const Gestionclient = () => {
             toast.success("Client modifié avec succès");
           }}>
           <Cascader
-            className="cascader2"
+            
             options={liste}
             onChange={(value) => {
               console.log("aawinekbelehy", typeof value[0]);
@@ -579,7 +579,7 @@ const Gestionclient = () => {
             console.log("vaaaaaaa", val);
           }}>
           <Cascader
-            className="cascader2"
+            
             options={liste}
             onChange={(value) => {
               console.log("aawinekbelehy", value[0]);
