@@ -43,7 +43,7 @@ export function Signup(props) {
           validate = false;
         }
         if (password.search(/[\!\@\#\$\%\^\&\*\(\)\_\+\.\,\;\:]/) == -1) {
-          toast.warning("votre mot de passe doit contenir des caracteres");
+          toast.warning("votre mot de passe doit contenir des symboles !");
           validate = false;
         }
       }
